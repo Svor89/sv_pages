@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчальний шаблон / База знань</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="sv.webp">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            purple: '#a855f7',
+                            cyan: '#06b6d4',
+                            amber: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'JetBrains Mono', 'Consolas', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #d4cecb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b837e;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a5450;
+        }
+
+        /* Accordion icon rotation */
+        details[open] .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Tab content toggle */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Glow Effects for Dark Glass Cards */
+        .glow-purple {
+            box-shadow: 0 12px 30px -5px rgba(168, 85, 247, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
+        }
+        .glow-cyan {
+            box-shadow: 0 12px 30px -5px rgba(6, 182, 212, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
+        }
+        .glow-btn-purple {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Realistic Warm Craft Paper Texture Background */
+        .bg-paper-texture {
+            background-color: #dcd6cd;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(255, 253, 248, 0.65) 0%, rgba(215, 208, 197, 0.85) 70%, rgba(170, 160, 147, 0.95) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cfilter id='paper-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='5' result='noise'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-grain)'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-paper-texture text-slate-100 font-sans min-h-screen flex flex-col relative selection:bg-purple-500 selection:text-white antialiased">
+
+    <!-- Header Navigation Bar with Logo -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/80 shadow-xl">
+        <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2">
+            
+            <!-- Левый пустой блок для точной симметрии заголовка по центру -->
+            <div class="w-8 h-8 shrink-0"></div>
+
+            <!-- Центр: Заголовок -->
+            <div class="flex items-center space-x-2 sm:space-x-2.5 min-w-0">
+                <i class="fa-solid fa-graduation-cap text-purple-400 text-xs sm:text-sm shrink-0"></i>
+                <span class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate text-center">
+                    Навчальний веб-шаблон / База знань
+                </span>
+            </div>
+
+            <!-- Правый блок: Логотип sv.webp -->
+            <div class="flex items-center shrink-0">
+                <img src="sv.webp" alt="Raven Logo" class="w-8 h-8 object-contain rounded-lg border border-slate-700/80 shadow-md transition-transform duration-200 hover:scale-110">
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 pt-5 pb-10 space-y-5 relative z-10">
+
+        <!-- ================================================================= -->
+        <!-- SECTION 1: SOFTWARE DEPLOYMENT (PURPLE THEME) -->
+        <!-- ================================================================= -->
+        <section class="bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-purple-500/40 glow-purple p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Top Light Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-400"></div>
+
+            <!-- Header Badges -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                        1
+                    </span>
+                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Розділ 1: Автоматичне розгортання ПЗ</h2>
+                </div>
+                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                    <i class="fa-solid fa-laptop-code text-purple-400"></i> ІНСТРУМЕНТИ
+                </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
+                Шаблонний модуль для завантаження та автоматичного встановлення базового робочого середовища розробника.
+            </p>
+
+            <!-- Guidelines Box -->
+            <div class="mb-3.5 p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-slate-200">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs">
+                    <div class="flex items-center gap-2 font-bold text-purple-300 shrink-0">
+                        <i class="fa-solid fa-circle-check text-purple-400"></i>
+                        Рекомендовані компоненти:
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-mono">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-brands fa-chrome text-cyan-400"></i>
+                            Браузер: <strong class="text-purple-400">Google Chrome</strong>
+                        </span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-code text-amber-400"></i>
+                            IDE: <strong class="text-purple-400">VS Code</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Antivirus / Warning Note Box -->
+            <div class="mb-3.5 p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 flex items-start sm:items-center gap-2.5 text-xs">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm shrink-0 mt-0.5 sm:mt-0"></i>
+                <div class="text-slate-200 leading-snug whitespace-normal break-words">
+                    <strong class="font-bold text-amber-300">Примітка:</strong> Для виконання пакетних команд рекомендується запускати консоль від імені адміністратора.
+                </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="max-w-lg mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mb-3.5">
+                <!-- Google Chrome Installer -->
+                <a href="https://dl.google.com/chrome/install/standalonesetup64.exe" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all glow-btn-purple active:scale-[0.98] group border border-purple-400/30">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-brands fa-chrome text-base text-purple-200 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <div class="font-bold text-white">Скачати Google Chrome</div>
+                            <div class="text-[10px] text-purple-200 font-normal">Офіційний інсталятор (64-bit)</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-download text-purple-200 text-2xl group-hover:translate-y-0.5 transition-transform shrink-0 ml-1"></i>
+                </a>
+
+                <!-- Visual Studio Code Installer -->
+                <a href="https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-between p-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-xs transition-all active:scale-[0.98] group border border-slate-600">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-code text-base text-cyan-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <div class="font-bold text-white">Скачати VS Code</div>
+                            <div class="text-[10px] text-slate-300 font-normal">Офіційний сайт Microsoft</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-download text-slate-400 text-2xl group-hover:translate-y-0.5 transition-transform shrink-0 ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Terminal Box -->
+            <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-700/80 mb-3.5 font-mono text-xs">
+                <div class="flex items-center justify-between text-slate-400 text-[11px] mb-2 pb-1.5 border-b border-slate-800/80 font-sans">
+                    <span class="flex items-center gap-2 font-semibold text-slate-300">
+                        <i class="fa-solid fa-terminal text-purple-400"></i> Встановлення через PowerShell (Winget)
+                    </span>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <code id="ps-cmd-1" class="text-purple-300 font-bold truncate text-xs">winget install --id Google.Chrome -e --accept-source-agreements</code>
+                    <button onclick="copyPsCommand('ps-cmd-1', this)" class="flex-shrink-0 px-3 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-sans text-xs font-semibold transition-all active:scale-95 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                        <i class="fa-regular fa-copy mr-1"></i> Скопіювати
+                    </button>
+                </div>
+            </div>
+
+            <!-- Collapsible Step-by-Step Accordion -->
+            <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
+                <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-purple-400"></i>
+                        Покроковий алгоритм дій
+                    </span>
+                    <div class="flex items-center gap-1.5 text-[11px]">
+                        <span class="text-purple-400 group-open:hidden">Розгорнути</span>
+                        <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
+                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
+                    </div>
+                </summary>
+
+                <div class="p-3 border-t border-slate-800 text-xs text-slate-300 bg-slate-950/80 leading-relaxed">
+                    <ol class="list-decimal list-inside space-y-1.5">
+                        <li>Завантажте необхідні інсталяційні файли або скопіюйте команду пакетного менеджера.</li>
+                        <li>Відкрийте <code class="bg-purple-950/80 text-purple-300 font-mono px-1.5 py-0.5 rounded border border-purple-500/30">PowerShell</code> від імені адміністратора.</li>
+                        <li>Вставте та виконайте команду встановлення програмного забезпечення.</li>
+                        <li>Перевірте успішність встановлення у списку програм.</li>
+                    </ol>
+                </div>
+            </details>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 2: ENVIRONMENT CONFIGURATION (CYAN THEME) -->
+        <!-- ================================================================= -->
+        <section class="bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-cyan-500/40 glow-cyan p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Top Light Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-500"></div>
+
+            <!-- Header Badges -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                        2
+                    </span>
+                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Розділ 2: Налаштування середовища розробки</h2>
+                </div>
+                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                    <i class="fa-solid fa-sliders text-cyan-400"></i> КОНФІГУРАЦІЯ
+                </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
+                Автоматизовані скрипти для швидкого налаштування оточення на Windows та Linux системах.
+            </p>
+
+            <!-- Global Note Box -->
+            <div class="mb-3.5 p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 flex items-start sm:items-center gap-2.5 text-xs">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm shrink-0 mt-0.5 sm:mt-0"></i>
+                <div class="text-slate-200 leading-snug whitespace-normal break-words">
+                    <strong class="font-bold text-amber-300">Примітка:</strong> Виконуйте команди від імені адміністратора (або sudo).
+                </div>
+            </div>
+
+            <!-- TAB SWITCHER BUTTONS -->
+            <div class="mb-3.5">
+                <div class="grid grid-cols-2 gap-2 bg-slate-950/80 p-1 rounded-xl border border-slate-700/80">
+                    <button id="tab-btn-win" onclick="switchTab('windows')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]">
+                        <i class="fa-brands fa-windows text-sm"></i>
+                        <span>Windows / PowerShell</span>
+                    </button>
+                    <button id="tab-btn-linux" onclick="switchTab('linux')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white">
+                        <i class="fa-brands fa-linux text-sm"></i>
+                        <span>Linux / Bash</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- WINDOWS TAB -->
+            <div id="tab-windows" class="tab-content active space-y-3.5">
+                <!-- Collapsible All Commands for Windows -->
+                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300 gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <i class="fa-solid fa-bolt text-cyan-400 shrink-0"></i>
+                            <span class="truncate">Усі команди для Windows</span>
+                        </span>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button id="copyScriptWinBtn" onclick="event.stopPropagation(); copyAllWinScript();" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-[11px] transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] active:scale-95">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Скопіювати всі</span>
+                            </button>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 bg-slate-950/80">
+                        <div class="relative bg-slate-950 rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-cyan-300 border border-cyan-500/30 leading-relaxed">
+                            <code>winget install --id Git.Git -e<br>winget install --id OpenJS.NodeJS.LTS -e<br>winget install --id Python.Python.3.11 -e<br>Write-Host "Середовище успішно налаштовано!" -ForegroundColor Green<br>Read-Host -Prompt "Натисніть Enter для завершення..."</code>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Separate Commands Accordion for Windows -->
+                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-cyan-400"></i>
+                            Окремі команди Windows
+                        </span>
+                        <div class="flex items-center gap-1 text-[11px]">
+                            <span class="text-cyan-400 group-open:hidden">Розгорнути</span>
+                            <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/80 text-xs">
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 1: Встановлення Git</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="win-step-1" class="truncate">winget install --id Git.Git -e</code>
+                                <button onclick="copyCommand('win-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 2: Встановлення Node.js LTS</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="win-step-2" class="truncate">winget install --id OpenJS.NodeJS.LTS -e</code>
+                                <button onclick="copyCommand('win-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 3: Встановлення Python 3.11</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="win-step-3" class="truncate">winget install --id Python.Python.3.11 -e</code>
+                                <button onclick="copyCommand('win-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- LINUX TAB -->
+            <div id="tab-linux" class="tab-content space-y-3.5">
+                <!-- Collapsible All Commands for Linux -->
+                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300 gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <i class="fa-solid fa-bolt text-amber-400 shrink-0"></i>
+                            <span class="truncate">Усі команди для Linux</span>
+                        </span>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button id="copyScriptLinuxBtn" onclick="event.stopPropagation(); copyAllLinuxScript();" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-[11px] transition-all shadow-[0_0_10px_rgba(245,158,11,0.3)] active:scale-95">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Скопіювати всі</span>
+                            </button>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 bg-slate-950/80">
+                        <div class="relative bg-slate-950 rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-amber-300 border border-amber-500/30 leading-relaxed">
+                            <code>sudo apt update && sudo apt upgrade -y<br>sudo apt install -y git curl build-essential python3 python3-pip<br>curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -<br>sudo apt install -y nodejs<br>echo "Linux середовище успішно оновлено!"</code>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Separate Commands Accordion for Linux -->
+                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-amber-400"></i>
+                            Окремі команди Linux
+                        </span>
+                        <div class="flex items-center gap-1 text-[11px]">
+                            <span class="text-amber-400 group-open:hidden">Розгорнути</span>
+                            <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/80 text-xs">
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 1: Оновлення пакетів</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="linux-step-1" class="truncate">sudo apt update && sudo apt upgrade -y</code>
+                                <button onclick="copyCommand('linux-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 2: Встановлення базових утиліт</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="linux-step-2" class="truncate">sudo apt install -y git curl build-essential python3 python3-pip</code>
+                                <button onclick="copyCommand('linux-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 3: Встановлення Node.js</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="linux-step-3" class="truncate">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install -y nodejs</code>
+                                <button onclick="copyCommand('linux-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-950 border border-purple-500/40 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] text-xs font-semibold">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toast-message">Скопійовано у буфер обміну!</span>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Tab switching logic
+        function switchTab(tabName) {
+            const winTab = document.getElementById('tab-windows');
+            const linuxTab = document.getElementById('tab-linux');
+            const winBtn = document.getElementById('tab-btn-win');
+            const linuxBtn = document.getElementById('tab-btn-linux');
+
+            if (tabName === 'windows') {
+                winTab.classList.add('active');
+                linuxTab.classList.remove('active');
+
+                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]";
+                linuxBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
+            } else {
+                linuxTab.classList.add('active');
+                winTab.classList.remove('active');
+
+                linuxBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-[0_0_12px_rgba(245,158,11,0.3)]";
+                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
+            }
+        }
+
+        // Cross-browser clipboard copy execution
+        function executeCopy(textToCopy) {
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            let successful = false;
+            try {
+                successful = document.execCommand('copy');
+            } catch (err) {
+                console.error('Помилка копіювання:', err);
+            }
+            document.body.removeChild(textarea);
+            return successful;
+        }
+
+        // Copy single command line
+        function copyCommand(elementId, buttonEl) {
+            const codeEl = document.getElementById(elementId);
+            if (!codeEl) return;
+
+            const text = codeEl.innerText.trim();
+            const success = executeCopy(text);
+
+            if (success) {
+                const originalHTML = buttonEl.innerHTML;
+                buttonEl.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
+                showToast('Команду скопійовано');
+
+                setTimeout(() => {
+                    buttonEl.innerHTML = originalHTML;
+                }, 2000);
+            }
+        }
+
+        // Copy PowerShell command line
+        function copyPsCommand(elementId, buttonEl) {
+            const codeEl = document.getElementById(elementId);
+            if (!codeEl) return;
+
+            const text = codeEl.innerText.trim();
+            const success = executeCopy(text);
+
+            if (success) {
+                const originalHTML = buttonEl.innerHTML;
+                buttonEl.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Скопійовано!`;
+                buttonEl.classList.remove('bg-purple-600', 'hover:bg-purple-500');
+                buttonEl.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+                
+                showToast('PowerShell команду скопійовано');
+
+                setTimeout(() => {
+                    buttonEl.innerHTML = originalHTML;
+                    buttonEl.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    buttonEl.classList.add('bg-purple-600', 'hover:bg-purple-500');
+                }, 2000);
+            }
+        }
+
+        // Copy batch Windows script
+        function copyAllWinScript() {
+            const commands = [
+                'winget install --id Git.Git -e',
+                'winget install --id OpenJS.NodeJS.LTS -e',
+                'winget install --id Python.Python.3.11 -e',
+                'Write-Host "Середовище успішно налаштовано!" -ForegroundColor Green',
+                'Read-Host -Prompt "Натисніть Enter для завершення..."'
+            ];
+            
+            const allCommands = commands.join('\n') + '\n';
+            const success = executeCopy(allCommands);
+
+            if (success) {
+                const btn = document.getElementById('copyScriptWinBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
+                btn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+
+                showToast('Усі команди для Windows скопійовано!');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                }, 2500);
+            }
+        }
+
+        // Copy batch Linux script
+        function copyAllLinuxScript() {
+            const commands = [
+                'sudo apt update && sudo apt upgrade -y',
+                'sudo apt install -y git curl build-essential python3 python3-pip',
+                'curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -',
+                'sudo apt install -y nodejs',
+                'echo "Linux середовище успішно оновлено!"'
+            ];
+            
+            const allCommands = commands.join('\n') + '\n';
+            const success = executeCopy(allCommands);
+
+            if (success) {
+                const btn = document.getElementById('copyScriptLinuxBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
+                btn.classList.remove('bg-amber-600', 'hover:bg-amber-500');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+
+                showToast('Усі команди для Linux скопійовано!');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btn.classList.add('bg-amber-600', 'hover:bg-amber-500');
+                }, 2500);
+            }
+        }
+
+        // Toast message display animation
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+
+            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
