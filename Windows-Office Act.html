@@ -1,637 +1,346 @@
 <!DOCTYPE html>
-<html lang="uk" class="dark">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Активація Windows & Office</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/webp" href="data:image/webp;base64,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">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        cyber: {
-                            purple: '#a855f7',
-                            cyan: '#06b6d4',
-                            amber: '#f59e0b',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'JetBrains Mono', 'Consolas', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Google Fonts & FontAwesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #d4cecb;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #8b837e;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #5a5450;
-        }
-
-        /* Accordion icon rotation */
-        details[open] .chevron-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Tab content toggle */
-        .kms-tab-content {
-            display: none;
-        }
-        .kms-tab-content.active {
-            display: block;
-        }
-
-        /* Glow Effects for Dark Glass Cards */
-        .glow-purple {
-            box-shadow: 0 12px 30px -5px rgba(168, 85, 247, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
-        }
-        .glow-cyan {
-            box-shadow: 0 12px 30px -5px rgba(6, 182, 212, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
-        }
-        .glow-btn-purple {
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-        }
-
-        /* Realistic Warm Craft Paper Texture Background */
-        .bg-paper-texture {
-            background-color: #dcd6cd;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(255, 253, 248, 0.65) 0%, rgba(215, 208, 197, 0.85) 70%, rgba(170, 160, 147, 0.95) 100%),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cfilter id='paper-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='5' result='noise'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-grain)'/%3E%3C/svg%3E");
-            background-attachment: fixed;
-            background-size: cover;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Активація Windows та Microsoft Office</title>
+<link rel="icon" id="favicon">
+<!-- Справочник по шаблону template.html: стили и скрипт общие, менять во всех страницах сразу. -->
+<style>
+:root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--mono:"Cascadia Mono",Consolas,Menlo,"Liberation Mono",monospace;--t1:#f1f5f9;--t2:#e2e8f0;--t3:#cbd5e1;--t4:#94a3b8;--ln:51 65 85}
+[data-c=purple]{--c:168 85 247;--c3:#d8b4fe;--c4:#c084fc;--c9:59 7 100;--bar:linear-gradient(90deg,#9333ea,#6366f1,#c084fc);--btn:linear-gradient(90deg,#9333ea,#4f46e5);--btnh:linear-gradient(90deg,#a855f7,#6366f1)}
+[data-c=cyan]{--c:6 182 212;--c3:#67e8f9;--c4:#22d3ee;--c9:8 51 68;--bar:linear-gradient(90deg,#06b6d4,#2dd4bf,#3b82f6);--btn:linear-gradient(90deg,#0891b2,#2563eb);--btnh:linear-gradient(90deg,#06b6d4,#3b82f6)}
+[data-c=amber]{--c:245 158 11;--c3:#fcd34d;--c4:#fbbf24;--c9:69 26 3;--bar:linear-gradient(90deg,#f59e0b,#fb923c,#ea580c);--btn:linear-gradient(90deg,#d97706,#ea580c);--btnh:linear-gradient(90deg,#f59e0b,#f97316)}
+[data-c=emerald]{--c:16 185 129;--c3:#6ee7b7;--c4:#34d399;--c9:2 44 34;--bar:linear-gradient(90deg,#10b981,#2dd4bf,#22c55e);--btn:linear-gradient(90deg,#059669,#0d9488);--btnh:linear-gradient(90deg,#10b981,#14b8a6)}
+[data-c=rose]{--c:244 63 94;--c3:#fda4af;--c4:#fb7185;--c9:76 5 25;--bar:linear-gradient(90deg,#e11d48,#ec4899,#fb7185);--btn:linear-gradient(90deg,#e11d48,#db2777);--btnh:linear-gradient(90deg,#f43f5e,#ec4899)}
+*,::before,::after{box-sizing:border-box}
+html{background:#dcd6cd;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;font:15px/1.5 var(--sans);color:var(--t1);-webkit-font-smoothing:antialiased}
+/* фон «крафт-бумага»: отдельный неподвижный слой — прокрутка его не перерисовывает */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(255,253,248,.65),rgba(215,208,197,.85) 70%,rgba(170,160,147,.95)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='5'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E") #dcd6cd}
+::selection{background:#a855f7;color:#fff}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#d4cecb}::-webkit-scrollbar-thumb{background:#8b837e;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#5a5450}
+a{color:var(--c4)}
+h2,p,ol,ul,pre{margin:0}
+.i{width:1em;height:1em;fill:currentColor;flex:none;vertical-align:-.125em}
+.wrap{max-width:56rem;width:100%;margin:0 auto;padding:0 16px}
+@media(min-width:640px){.wrap{padding:0 24px}}
+/* шапка */
+.top{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.97);border-bottom:1px solid rgb(var(--ln)/.8);box-shadow:0 10px 15px -3px rgb(0 0 0/.3)}
+.top .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.top .ph,.logo{width:32px;height:32px;flex:none}
+.top h1{margin:0;min-width:0;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:#fff}
+.top h1 .i{color:var(--c4);font-size:14px}
+.top h1 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{border-radius:8px;border:1px solid rgb(var(--ln)/.8);box-shadow:0 4px 6px -1px rgb(0 0 0/.3)}
+main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-direction:column;gap:20px}
+/* раздел */
+.card{position:relative;overflow:hidden;background:rgba(15,23,42,.93);border:1px solid rgb(var(--c)/.4);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 30px -5px rgb(var(--c)/.35),0 8px 16px -6px rgb(0 0 0/.6)}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--bar)}
+@media(min-width:640px){.card{padding:20px}}
+.head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.head>div{display:flex;align-items:center;gap:10px}
+.num{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:12px;background:rgb(var(--c)/.2);border:1px solid rgb(var(--c)/.4);color:var(--c4);font-weight:700;font-size:13px;box-shadow:0 0 10px rgb(var(--c)/.2)}
+.head h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:.01em;line-height:1.3}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:800;text-transform:uppercase;background:rgb(var(--c)/.2);color:var(--c3);border:1px solid rgb(var(--c)/.4);box-shadow:0 0 10px rgb(var(--c)/.3)}
+.badge .i{color:var(--c4)}
+.lead{color:var(--t3)}
+.lead strong{color:#fff}
+/* «фишки»: заголовок + ярлыки */
+.chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
+.chips b{display:flex;align-items:center;gap:8px;color:var(--c3)}
+.chips b .i{color:var(--c4)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
+.chip strong{color:var(--c4)}
+/* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
+.note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
+.note>.i{color:#fbbf24;font-size:15px;margin-top:2px}
+.note strong{color:#fcd34d}
+.note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
+.note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
+/* кнопки скачивания / ссылки */
+.btns{display:grid;gap:12px;max-width:32rem;width:100%;margin:0 auto}
+@media(min-width:640px){.btns{grid-template-columns:1fr 1fr;gap:20px}}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
+.btn:hover{background:#334155}.btn:active{transform:scale(.98)}
+.btn>span{display:flex;align-items:center;gap:10px;min-width:0}
+.btn>span>.i{font-size:17px;color:var(--c4)}
+.btn b{display:block;font-weight:700}
+.btn small{display:block;font-size:11.5px;color:var(--t3)}
+.btn>.i{font-size:24px;color:var(--t4);transition:transform .15s}
+.btn:hover>.i{transform:translateY(2px)}
+.btn.main{background:var(--btn);border-color:rgb(var(--c)/.4);box-shadow:0 0 15px rgb(var(--c)/.4)}
+.btn.main:hover{background:var(--btnh)}
+.btn.main small,.btn.main .i{color:rgba(255,255,255,.8)}
+/* команда: заголовок, текст (переносится, не обрезается) и «Скопіювати» */
+.cmd{background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8);border-radius:12px;padding:12px}
+.cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(30,41,59,.8);font-size:12.5px;font-weight:600;color:var(--t3)}
+.cmd-t .i{color:var(--c4)}
+.line{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+pre{flex:1;min-width:0;font:600 13px/1.55 var(--mono);color:var(--c3);white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{flex:none;display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border:0;border-radius:8px;cursor:pointer;font:600 12.5px var(--sans);color:#fff;background:rgb(var(--c)/.85);box-shadow:0 0 10px rgb(var(--c)/.3);transition:transform .1s,background .15s}
+.copy:hover{background:rgb(var(--c))}.copy:active{transform:scale(.95)}
+.copy.ok{background:#059669;box-shadow:none}
+.copy.sm{padding:3px 8px;background:#1e293b;color:var(--t3);box-shadow:none}.copy.sm:hover{background:#334155}.copy.sm.ok{color:#34d399}
+/* раскрывающийся блок */
+details{background:rgba(2,6,23,.5);border:1px solid rgb(var(--ln)/.8);border-radius:12px;overflow:hidden}
+summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;cursor:pointer;user-select:none;list-style:none;font-size:13px;font-weight:700;color:var(--t3)}
+summary::-webkit-details-marker{display:none}
+summary:hover{background:rgba(30,41,59,.5)}
+summary>span{display:flex;align-items:center;gap:8px;min-width:0}
+summary>span>.i{color:var(--c4)}
+summary>div{display:flex;align-items:center;gap:8px;flex:none;font-size:11.5px}
+.more{color:var(--c4)}.less{color:var(--t4);display:none}
+details[open] .more{display:none}details[open] .less{display:inline}
+.chev{color:var(--t4);font-size:10px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:12px;border-top:1px solid #1e293b;background:rgba(2,6,23,.8);font-size:14px;color:var(--t3)}
+.body>*+*{margin-top:10px}
+.body>pre{padding:12px;border-radius:8px;background:#020617;border:1px solid rgb(var(--c)/.3);font-size:12.5px}
+/* шаги с командами */
+.step{background:#0f172a;border:1px solid rgb(var(--ln)/.8);border-radius:8px;padding:8px}
+.step>b{display:block;margin-bottom:4px;font-size:13px;color:var(--c4)}
+.step .line{background:#020617;border-radius:6px;padding:6px 6px 6px 8px;align-items:center}
+.step pre{font-weight:400;font-size:12.5px;color:var(--t2)}
+/* нумерованная инструкция */
+ol.list{padding-left:22px;display:flex;flex-direction:column;gap:6px;line-height:1.55}
+ol.list li::marker{color:var(--c4);font-weight:700}
+.k{font:13px var(--mono);padding:1px 6px;border-radius:4px;background:rgb(var(--c9)/.8);color:var(--c3);border:1px solid rgb(var(--c)/.3)}
+.hl{color:var(--c4);font-weight:700}
+/* вкладки */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;padding:4px;border-radius:12px;background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8)}
+.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:0;border-radius:8px;background:none;cursor:pointer;font:700 13px var(--sans);color:var(--t4)}
+.tabs button:hover{color:#fff}
+.tabs button.on{background:var(--btn);color:#fff;box-shadow:0 0 12px rgb(var(--c)/.3)}
+.pane{display:flex;flex-direction:column;gap:14px}.pane[hidden]{display:none}
+/* цвет отдельной иконки */
+.fg-purple{color:#c084fc}.fg-cyan{color:#22d3ee}.fg-amber{color:#fbbf24}.fg-emerald{color:#34d399}.fg-rose{color:#fb7185}
+/* всплывающее «Скопійовано» */
+#toast{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#020617;border:1px solid rgba(168,85,247,.4);box-shadow:0 0 25px rgba(168,85,247,.4);font-size:13px;font-weight:600;opacity:0;transform:translateY(64px);transition:.3s;pointer-events:none}
+#toast.show{opacity:1;transform:none}
+#toast .i{color:#34d399;font-size:15px}
+@media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
+</style>
 </head>
-<body class="bg-paper-texture text-slate-100 font-sans min-h-screen flex flex-col relative selection:bg-purple-500 selection:text-white antialiased">
+<body data-c="purple">
 
-    <!-- Header Navigation Bar with Logo -->
-    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/80 shadow-xl">
-        <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2">
-            
-            <!-- Левый пустой блок для точной симметрии заголовка по центру -->
-            <div class="w-8 h-8 shrink-0"></div>
+<header class="top"><div class="wrap">
+  <div class="ph"></div>
+  <h1><svg class="i"><use href="#i-key"/></svg><span>Активація Windows та Microsoft Office</span></h1>
+  <img class="logo" alt="SV" src="data:image/webp;base64,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">
+</div></header>
 
-            <!-- Центр: Заголовок -->
-            <div class="flex items-center space-x-2 sm:space-x-2.5 min-w-0">
-                <i class="fa-solid fa-key text-purple-400 text-xs sm:text-sm shrink-0"></i>
-                <span class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate text-center">
-                    Активація Windows та Microsoft Office
-                </span>
-            </div>
+<main class="wrap">
 
-            <!-- Правый блок: Логотип sv.webp -->
-            <div class="flex items-center shrink-0">
-                <img src="data:image/webp;base64,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" alt="Raven Logo" class="w-8 h-8 object-contain rounded-lg border border-slate-700/80 shadow-md transition-transform duration-200 hover:scale-110">
-            </div>
-
-        </div>
-    </header>
-
-    <!-- Main Content Container -->
-    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 pt-5 pb-10 space-y-5 relative z-10">
-
-        <!-- ================================================================= -->
-        <!-- METHOD 1: MAS (PERMANENT) -->
-        <!-- ================================================================= -->
-        <section class="bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-purple-500/40 glow-purple p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
-            
-            <!-- Top Light Accent Bar -->
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-400"></div>
-
-            <!-- Header Badges -->
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(168,85,247,0.2)]">
-                        1
-                    </span>
-                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Метод 1: Скрипт MAS (Microsoft Activation Scripts)</h2>
-                </div>
-                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
-                    <i class="fa-solid fa-infinity text-purple-400"></i> НАЗАВЖДИ
-                </span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
-                Офіційний відкритий інструмент від спільноти Massgrave для швидкої та вічної активації.
-            </p>
-
-            <!-- Guidelines Box -->
-            <div class="mb-3.5 p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-slate-200">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs">
-                    <div class="flex items-center gap-2 font-bold text-purple-300 shrink-0">
-                        <i class="fa-solid fa-circle-check text-purple-400"></i>
-                        Вибір у меню MAS:
-                    </div>
-                    <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-mono">
-                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-brands fa-windows text-cyan-400"></i>
-                            Windows: <strong class="text-purple-400">1 (HWID)</strong>
-                        </span>
-                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-solid fa-file-word text-amber-400"></i>
-                            Office: <strong class="text-purple-400">2 (Ohook)</strong>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Antivirus Warning Box (Responsive text wrapping) -->
-            <div class="mb-3.5 p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 flex items-start sm:items-center gap-2.5 text-xs">
-                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm shrink-0 mt-0.5 sm:mt-0"></i>
-                <div class="text-slate-200 leading-snug whitespace-normal break-words">
-                    <strong class="font-bold text-amber-300">Примітка:</strong> Тимчасово вимкніть антивірус або «Захист у реальному часі» для роботи скрипта.
-                </div>
-            </div>
-
-            <!-- Download Buttons -->
-            <div class="max-w-lg mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mb-3.5">
-                <!-- Direct CMD Download Button -->
-                <a href="https://dev.azure.com/massgrave/Microsoft-Activation-Scripts/_apis/git/repositories/Microsoft-Activation-Scripts/items?path=/MAS/All-In-One-Version-KL/MAS_AIO.cmd&download=true" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all glow-btn-purple active:scale-[0.98] group border border-purple-400/30">
-                    <div class="flex items-center gap-2.5">
-                        <i class="fa-solid fa-file-code text-base text-purple-200 group-hover:scale-110 transition-transform"></i>
-                        <div>
-                            <div class="font-bold text-white">Скачати MAS_AIO.cmd</div>
-                            <div class="text-[10px] text-purple-200 font-normal">Пряме завантаження `.cmd`</div>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-download text-purple-200 text-2xl group-hover:translate-y-0.5 transition-transform shrink-0 ml-1"></i>
-                </a>
-
-                <!-- Direct ZIP Download Button -->
-                <a href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="flex items-center justify-between p-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-xs transition-all active:scale-[0.98] group border border-slate-600">
-                    <div class="flex items-center gap-2.5">
-                        <i class="fa-solid fa-file-zipper text-base text-amber-400 group-hover:scale-110 transition-transform"></i>
-                        <div>
-                            <div class="font-bold text-white">Скачати MAS_AIO.zip</div>
-                            <div class="text-[10px] text-slate-300 font-normal">Архів GitHub</div>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-download text-slate-400 text-2xl group-hover:translate-y-0.5 transition-transform shrink-0 ml-1"></i>
-                </a>
-            </div>
-
-            <!-- PowerShell Box -->
-            <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-700/80 mb-3.5 font-mono text-xs">
-                <div class="flex items-center justify-between text-slate-400 text-[11px] mb-2 pb-1.5 border-b border-slate-800/80 font-sans">
-                    <span class="flex items-center gap-2 font-semibold text-slate-300">
-                        <i class="fa-solid fa-terminal text-purple-400"></i> Альтернатива через PowerShell (в 1 клік)
-                    </span>
-                </div>
-                <div class="flex items-center justify-between gap-2">
-                    <code id="ps-mas-cmd" class="text-purple-300 font-bold truncate text-xs">irm https://get.activated.win | iex</code>
-                    <button onclick="copyPsCommand('ps-mas-cmd', this)" class="flex-shrink-0 px-3 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-sans text-xs font-semibold transition-all active:scale-95 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
-                        <i class="fa-regular fa-copy mr-1"></i> Скопіювати
-                    </button>
-                </div>
-            </div>
-
-            <!-- Collapsible Step-by-Step for MAS -->
-            <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
-                <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
-                    <span class="flex items-center gap-2">
-                        <i class="fa-solid fa-list-ol text-purple-400"></i>
-                        Покрокова інструкція
-                    </span>
-                    <div class="flex items-center gap-1.5 text-[11px]">
-                        <span class="text-purple-400 group-open:hidden">Розгорнути</span>
-                        <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
-                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
-                    </div>
-                </summary>
-
-                <div class="p-3 border-t border-slate-800 text-xs text-slate-300 bg-slate-950/80 leading-relaxed">
-                    <ol class="list-decimal list-inside space-y-1.5">
-                        <li>Вимкніть антивірус та скачайте <code class="bg-purple-950/80 text-purple-300 font-mono px-1.5 py-0.5 rounded border border-purple-500/30">MAS_AIO.cmd</code> або запустить PowerShell команду.</li>
-                        <li>Запустіть <code class="bg-slate-900 font-mono px-1.5 py-0.5 rounded border border-slate-700 text-slate-200">MAS_AIO.cmd</code> у Командному рядку (cmd) від імені адміністратора.</li>
-                        <li>У вікні меню виберіть:
-                            <strong class="text-purple-400">1</strong> (HWID) для Windows або <strong class="text-purple-400">2</strong> (Ohook) для Office.
-                        </li>
-                        <li>Зачекайте 5 секунд до успішного завершення.</li>
-                    </ol>
-                </div>
-            </details>
-        </section>
-
-        <!-- ================================================================= -->
-        <!-- METHOD 2: KMS (180 DAYS) -->
-        <!-- ================================================================= -->
-        <section class="bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-cyan-500/40 glow-cyan p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
-            
-            <!-- Top Light Accent Bar -->
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-500"></div>
-
-            <!-- Header Badges -->
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-                        2
-                    </span>
-                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Метод 2: KMS-сервер через Командний рядок (cmd)</h2>
-                </div>
-                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
-                    <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i> На 180 днів
-                </span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
-                Безпечна активація в Командному рядку (cmd) без зміни системних файлів. Антивірус вимикати <strong class="text-white">не потрібно</strong>.
-            </p>
-
-            <!-- Global KMS Note Box (Responsive text wrapping) -->
-            <div class="mb-3.5 p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 flex items-start sm:items-center gap-2.5 text-xs">
-                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm shrink-0 mt-0.5 sm:mt-0"></i>
-                <div class="text-slate-200 leading-snug whitespace-normal break-words">
-                    <strong class="font-bold text-amber-300">Примітка:</strong> Запустіть Командний рядок (cmd) від імені адміністратора.
-                </div>
-            </div>
-
-            <!-- TAB SWITCHER BUTTONS -->
-            <div class="mb-3.5">
-                <div class="grid grid-cols-2 gap-2 bg-slate-950/80 p-1 rounded-xl border border-slate-700/80">
-                    <button id="tab-btn-win" onclick="switchKmsTab('windows')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]">
-                        <i class="fa-brands fa-windows text-sm"></i>
-                        <span>Windows</span>
-                    </button>
-                    <button id="tab-btn-office" onclick="switchKmsTab('office')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white">
-                        <i class="fa-solid fa-box text-sm"></i>
-                        <span>Microsoft Office</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- WINDOWS KMS TAB -->
-            <div id="kms-tab-windows" class="kms-tab-content active space-y-3.5">
-                <!-- Collapsible All Commands for Windows -->
-                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
-                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300 gap-2">
-                        <span class="flex items-center gap-2 min-w-0">
-                            <i class="fa-solid fa-bolt text-cyan-400 shrink-0"></i>
-                            <span class="truncate">Усі команди для Windows</span>
-                        </span>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <button id="copyKmsWinBtn" onclick="event.stopPropagation(); copyAllKmsWinScript();" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-[11px] transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] active:scale-95">
-                                <i class="fa-regular fa-copy"></i>
-                                <span>Скопіювати всі</span>
-                            </button>
-                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
-                        </div>
-                    </summary>
-
-                    <div class="p-3 border-t border-slate-800 bg-slate-950/80">
-                        <div class="relative bg-slate-950 rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-cyan-300 border border-cyan-500/30 leading-relaxed">
-                            <code>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com<br>cscript //nologo %windir%\system32\slmgr.vbs /ato<br>cscript //nologo %windir%\system32\slmgr.vbs /ckms<br>cscript //nologo %windir%\system32\slmgr.vbs /dli<br>echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit</code>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Separate Commands Accordion for Windows -->
-                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
-                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
-                        <span class="flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-cyan-400"></i>
-                            Окремі команди Windows
-                        </span>
-                        <div class="flex items-center gap-1 text-[11px]">
-                            <span class="text-cyan-400 group-open:hidden">Розгорнути</span>
-                            <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
-                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
-                        </div>
-                    </summary>
-
-                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/80 text-xs">
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-cyan-400 mb-0.5">Крок 1: Встановлення сервера</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-win-step-1" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com</code>
-                                <button onclick="copyCommand('kms-win-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-cyan-400 mb-0.5">Крок 2: Запуск активації</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-win-step-2" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /ato</code>
-                                <button onclick="copyCommand('kms-win-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-cyan-400 mb-0.5">Крок 3: Очищення конфігурації</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-win-step-3" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /ckms</code>
-                                <button onclick="copyCommand('kms-win-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-cyan-400 mb-0.5">Крок 4: Перевірка статусу</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-win-step-4" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /dli</code>
-                                <button onclick="copyCommand('kms-win-step-4', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-            </div>
-
-            <!-- OFFICE KMS TAB -->
-            <div id="kms-tab-office" class="kms-tab-content space-y-3.5">
-                <!-- Collapsible All Commands for Office -->
-                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
-                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300 gap-2">
-                        <span class="flex items-center gap-2 min-w-0">
-                            <i class="fa-solid fa-bolt text-amber-400 shrink-0"></i>
-                            <span class="truncate">Усі команди для Office</span>
-                        </span>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <button id="copyKmsOfficeBtn" onclick="event.stopPropagation(); copyAllKmsOfficeScript();" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-[11px] transition-all shadow-[0_0_10px_rgba(245,158,11,0.3)] active:scale-95">
-                                <i class="fa-regular fa-copy"></i>
-                                <span>Скопіювати всі</span>
-                            </button>
-                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
-                        </div>
-                    </summary>
-
-                    <div class="p-3 border-t border-slate-800 bg-slate-950/80">
-                        <div class="relative bg-slate-950 rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-amber-300 border border-amber-500/30 leading-relaxed">
-                            <code>cd /d "C:\Program Files\Microsoft Office\Office16"<br>cscript //nologo ospp.vbs /sethst:kms.msguides.com<br>cscript //nologo ospp.vbs /act<br>cscript //nologo ospp.vbs /remhst<br>cscript //nologo ospp.vbs /dstatus<br>echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit</code>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Separate Commands Accordion for Office -->
-                <details class="group bg-slate-950/50 rounded-xl border border-slate-700/80 overflow-hidden transition-all">
-                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
-                        <span class="flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-amber-400"></i>
-                            Окремі команди Office
-                        </span>
-                        <div class="flex items-center gap-1 text-[11px]">
-                            <span class="text-amber-400 group-open:hidden">Розгорнути</span>
-                            <span class="text-slate-400 hidden group-open:inline">Згорнути</span>
-                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-400 text-[10px] transition-transform duration-200"></i>
-                        </div>
-                    </summary>
-
-                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/80 text-xs">
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-amber-400 mb-0.5">Крок 1: Каталог Office</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-off-step-1" class="truncate">cd /d "C:\Program Files\Microsoft Office\Office16"</code>
-                                <button onclick="copyCommand('kms-off-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-amber-400 mb-0.5">Крок 2: Встановлення сервера</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-off-step-2" class="truncate">cscript //nologo ospp.vbs /sethst:kms.msguides.com</code>
-                                <button onclick="copyCommand('kms-off-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-amber-400 mb-0.5">Крок 3: Активація</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-off-step-3" class="truncate">cscript //nologo ospp.vbs /act</code>
-                                <button onclick="copyCommand('kms-off-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-amber-400 mb-0.5">Крок 4: Очищення конфігурації</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-off-step-4" class="truncate">cscript //nologo ospp.vbs /remhst</code>
-                                <button onclick="copyCommand('kms-off-step-4', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-700/80">
-                            <div class="font-bold text-amber-400 mb-0.5">Крок 5: Перевірка статусу</div>
-                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
-                                <code id="kms-off-step-5" class="truncate">cscript //nologo ospp.vbs /dstatus</code>
-                                <button onclick="copyCommand('kms-off-step-5', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-950 border border-purple-500/40 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] text-xs font-semibold">
-        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
-        <span id="toast-message">Скопійовано у буфер обміну!</span>
+  <!-- ===== Метод 1: MAS (назавжди) ===== -->
+  <section class="card" data-c="purple">
+    <div class="head">
+      <div><span class="num">1</span><h2>Метод 1: Скрипт MAS (Microsoft Activation Scripts)</h2></div>
+      <span class="badge"><svg class="i"><use href="#i-infinity"/></svg>Назавжди</span>
     </div>
 
-    <!-- Interactive Scripts -->
-    <script>
-        function switchKmsTab(tabName) {
-            const winTab = document.getElementById('kms-tab-windows');
-            const officeTab = document.getElementById('kms-tab-office');
-            const winBtn = document.getElementById('tab-btn-win');
-            const officeBtn = document.getElementById('tab-btn-office');
+    <p class="lead">Відкритий інструмент від спільноти Massgrave для швидкої та вічної активації.</p>
 
-            if (tabName === 'windows') {
-                winTab.classList.add('active');
-                officeTab.classList.remove('active');
+    <div class="chips">
+      <b><svg class="i"><use href="#i-circle-check"/></svg>Вибір у меню MAS:</b>
+      <span class="chip"><svg class="i fg-cyan"><use href="#i-windows"/></svg>Windows: <strong>1 (HWID)</strong></span>
+      <span class="chip"><svg class="i fg-amber"><use href="#i-file-word"/></svg>Office: <strong>2 (Ohook)</strong></span>
+    </div>
 
-                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]";
-                officeBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
-            } else {
-                officeTab.classList.add('active');
-                winTab.classList.remove('active');
+    <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
+      <div><strong>Примітка:</strong> Тимчасово вимкніть антивірус або «Захист у реальному часі» для роботи скрипта.</div></div>
 
-                officeBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-[0_0_12px_rgba(245,158,11,0.3)]";
-                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
-            }
-        }
+    <div class="btns">
+      <a class="btn main" href="https://dev.azure.com/massgrave/Microsoft-Activation-Scripts/_apis/git/repositories/Microsoft-Activation-Scripts/items?path=/MAS/All-In-One-Version-KL/MAS_AIO.cmd&amp;download=true" target="_blank" rel="noopener">
+        <span><svg class="i"><use href="#i-file-code"/></svg><span><b>Скачати MAS_AIO.cmd</b><small>Пряме завантаження .cmd</small></span></span>
+        <svg class="i"><use href="#i-download"/></svg></a>
+      <a class="btn" href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip" target="_blank" rel="noopener">
+        <span><svg class="i fg-amber"><use href="#i-file-zipper"/></svg><span><b>Скачати MAS_AIO.zip</b><small>Архів GitHub</small></span></span>
+        <svg class="i"><use href="#i-download"/></svg></a>
+    </div>
 
-        function executeCopy(textToCopy) {
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Альтернатива через PowerShell (в 1 клік)</div>
+      <div class="line"><pre>irm https://get.activated.win | iex</pre>
+        <button class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
 
-            let successful = false;
-            try {
-                successful = document.execCommand('copy');
-            } catch (err) {
-                console.error('Помилка копіювання:', err);
-            }
-            document.body.removeChild(textarea);
-            return successful;
-        }
+    <details>
+      <summary><span><svg class="i"><use href="#i-list-ol"/></svg>Покрокова інструкція</span>
+        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+      <div class="body"><ol class="list">
+        <li>Вимкніть антивірус та скачайте <code class="k">MAS_AIO.cmd</code> або запустіть PowerShell команду.</li>
+        <li>Запустіть <code class="k">MAS_AIO.cmd</code> у Командному рядку (cmd) від імені адміністратора.</li>
+        <li>У вікні меню виберіть: <span class="hl">1</span> (HWID) для Windows або <span class="hl">2</span> (Ohook) для Office.</li>
+        <li>Зачекайте 5 секунд до успішного завершення.</li>
+      </ol></div>
+    </details>
+  </section>
 
-        function copyCommand(elementId, buttonEl) {
-            const codeEl = document.getElementById(elementId);
-            if (!codeEl) return;
+  <!-- ===== Метод 2: KMS (180 днів) ===== -->
+  <section class="card" data-c="cyan">
+    <div class="head">
+      <div><span class="num">2</span><h2>Метод 2: KMS-сервер через Командний рядок (cmd)</h2></div>
+      <span class="badge"><svg class="i"><use href="#i-clock-rotate-left"/></svg>На 180 днів</span>
+    </div>
 
-            const text = codeEl.innerText.trim();
-            const success = executeCopy(text);
+    <p class="lead">Безпечна активація в Командному рядку (cmd) без зміни системних файлів. Антивірус вимикати <strong>не потрібно</strong>.</p>
 
-            if (success) {
-                const originalHTML = buttonEl.innerHTML;
-                buttonEl.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
-                showToast('Команду скопійовано');
+    <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
+      <div><strong>Примітка:</strong> Запустіть Командний рядок (cmd) від імені адміністратора.</div></div>
 
-                setTimeout(() => {
-                    buttonEl.innerHTML = originalHTML;
-                }, 2000);
-            }
-        }
+    <div class="tabs">
+      <button class="on" data-tab="kms-win" data-c="cyan"><svg class="i"><use href="#i-windows"/></svg>Windows</button>
+      <button data-tab="kms-office" data-c="amber"><svg class="i"><use href="#i-box"/></svg>Microsoft Office</button>
+    </div>
 
-        function copyPsCommand(elementId, buttonEl) {
-            const codeEl = document.getElementById(elementId);
-            if (!codeEl) return;
+    <div class="pane" id="kms-win" data-c="cyan">
+      <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+        <div><strong>Ключ:</strong> KMS активує лише корпоративну (Volume) редакцію — крок 1 ставить ключ KMS-клієнта для
+          Windows 10/11 <strong>Pro</strong>. Для Enterprise, Education та інших — ключ з
+          <a href="https://learn.microsoft.com/uk-ua/windows-server/get-started/kms-client-activation-keys" target="_blank" rel="noopener">таблиці Microsoft</a>.</div></div>
 
-            const text = codeEl.innerText.trim();
-            const success = executeCopy(text);
+      <details>
+        <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Windows</span>
+          <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body"><pre data-collect="kms-win-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
+      </details>
 
-            if (success) {
-                const originalHTML = buttonEl.innerHTML;
-                buttonEl.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Скопійовано!`;
-                buttonEl.classList.remove('bg-purple-600', 'hover:bg-purple-500');
-                buttonEl.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
-                
-                showToast('PowerShell команду скопійовано');
+      <details>
+        <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Windows</span>
+          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body" id="kms-win-steps">
+          <div class="step"><b>Крок 1: Ключ KMS-клієнта (Windows 10/11 Pro)</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 3: Запуск активації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ato</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ckms</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /dli</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+        </div>
+      </details>
+    </div>
 
-                setTimeout(() => {
-                    buttonEl.innerHTML = originalHTML;
-                    buttonEl.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
-                    buttonEl.classList.add('bg-purple-600', 'hover:bg-purple-500');
-                }, 2000);
-            }
-        }
+    <div class="pane" id="kms-office" data-c="amber" hidden>
+      <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+        <div><strong>Версія:</strong> лише корпоративний (Volume) Office, наприклад LTSC 2021 ProPlus; Microsoft 365 та
+          роздрібні (Retail) версії KMS не активує. Крок 1 сам знаходить 64- або 32-бітний Office.</div></div>
 
-        function copyAllKmsWinScript() {
-            const commands = [
-                'cscript //nologo %windir%\\system32\\slmgr.vbs /skms kms.msguides.com',
-                'cscript //nologo %windir%\\system32\\slmgr.vbs /ato',
-                'cscript //nologo %windir%\\system32\\slmgr.vbs /ckms',
-                'cscript //nologo %windir%\\system32\\slmgr.vbs /dli',
-                'echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit'
-            ];
-            
-            const allCommands = commands.join('\n') + '\n';
-            const success = executeCopy(allCommands);
+      <details>
+        <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Office</span>
+          <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body"><pre data-collect="kms-office-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
+      </details>
 
-            if (success) {
-                const btn = document.getElementById('copyKmsWinBtn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
-                btn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
-                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+      <details>
+        <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Office</span>
+          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body" id="kms-office-steps">
+          <div class="step"><b>Крок 1: Каталог Office</b><div class="line"><pre>if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (cd /d "%ProgramFiles%\Microsoft Office\Office16") else (cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16")</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo ospp.vbs /sethst:kms.msguides.com</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 3: Активація</b><div class="line"><pre>cscript //nologo ospp.vbs /act</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo ospp.vbs /remhst</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo ospp.vbs /dstatus</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+        </div>
+      </details>
+    </div>
+  </section>
 
-                showToast('Усі KMS команди Windows скопійовано!');
+</main>
 
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
-                    btn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
-                }, 2500);
-            }
-        }
+<div id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-circle-check"/></svg><span></span></div>
 
-        function copyAllKmsOfficeScript() {
-            const commands = [
-                'cd /d "C:\\Program Files\\Microsoft Office\\Office16"',
-                'cscript //nologo ospp.vbs /sethst:kms.msguides.com',
-                'cscript //nologo ospp.vbs /act',
-                'cscript //nologo ospp.vbs /remhst',
-                'cscript //nologo ospp.vbs /dstatus',
-                'echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit'
-            ];
-            
-            const allCommands = commands.join('\n') + '\n';
-            const success = executeCopy(allCommands);
+<!--icons--><svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Font Awesome Free 6.4.0 by @fontawesome, CC BY 4.0 -->
+<symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/></symbol>
+<symbol id="i-box" viewBox="0 0 448 512"><path d="M50.7 58.5L0 160H208V32H93.7C75.5 32 58.9 42.3 50.7 58.5zM240 160H448L397.3 58.5C389.1 42.3 372.5 32 354.3 32H240V160zm208 32H0V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192z"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></symbol>
+<symbol id="i-circle-info" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol>
+<symbol id="i-clock-rotate-left" viewBox="0 0 512 512"><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 512 512"><path d="M448 384H256c-35.3 0-64-28.7-64-64V64c0-35.3 28.7-64 64-64H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V320c0 35.3-28.7 64-64 64zM64 128h96v48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H256c8.8 0 16-7.2 16-16V416h48v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64z"/></symbol>
+<symbol id="i-download" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></symbol>
+<symbol id="i-file-code" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM153 289l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L71 337c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM265 255l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
+<symbol id="i-file-word" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM111 257.1l26.8 89.2 31.6-90.3c3.4-9.6 12.5-16.1 22.7-16.1s19.3 6.4 22.7 16.1l31.6 90.3L273 257.1c3.8-12.7 17.2-19.9 29.9-16.1s19.9 17.2 16.1 29.9l-48 160c-3 10-12 16.9-22.4 17.1s-19.8-6.2-23.2-16.1L192 336.6l-33.3 95.3c-3.4 9.8-12.8 16.3-23.2 16.1s-19.5-7.1-22.4-17.1l-48-160c-3.8-12.7 3.4-26.1 16.1-29.9s26.1 3.4 29.9 16.1z"/></symbol>
+<symbol id="i-file-zipper" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM96 48c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm-6.3 71.8c3.7-14 16.4-23.8 30.9-23.8h14.8c14.5 0 27.2 9.7 30.9 23.8l23.5 88.2c1.4 5.4 2.1 10.9 2.1 16.4c0 35.2-28.8 63.7-64 63.7s-64-28.5-64-63.7c0-5.5 .7-11.1 2.1-16.4l23.5-88.2zM112 336c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H112z"/></symbol>
+<symbol id="i-infinity" viewBox="0 0 640 512"><path d="M0 241.1C0 161 65 96 145.1 96c38.5 0 75.4 15.3 102.6 42.5L320 210.7l72.2-72.2C419.5 111.3 456.4 96 494.9 96C575 96 640 161 640 241.1v29.7C640 351 575 416 494.9 416c-38.5 0-75.4-15.3-102.6-42.5L320 301.3l-72.2 72.2C220.5 400.7 183.6 416 145.1 416C65 416 0 351 0 270.9V241.1zM274.7 256l-72.2-72.2c-15.2-15.2-35.9-23.8-57.4-23.8C100.3 160 64 196.3 64 241.1v29.7c0 44.8 36.3 81.1 81.1 81.1c21.5 0 42.2-8.5 57.4-23.8L274.7 256zm90.5 0l72.2 72.2c15.2 15.2 35.9 23.8 57.4 23.8c44.8 0 81.1-36.3 81.1-81.1V241.1c0-44.8-36.3-81.1-81.1-81.1c-21.5 0-42.2 8.5-57.4 23.8L365.3 256z"/></symbol>
+<symbol id="i-key" viewBox="0 0 512 512"><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></symbol>
+<symbol id="i-list-check" viewBox="0 0 512 512"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></symbol>
+<symbol id="i-list-ol" viewBox="0 0 512 512"><path d="M24 56c0-13.3 10.7-24 24-24H80c13.3 0 24 10.7 24 24V176h16c13.3 0 24 10.7 24 24s-10.7 24-24 24H40c-13.3 0-24-10.7-24-24s10.7-24 24-24H56V80H48C34.7 80 24 69.3 24 56zM86.7 341.2c-6.5-7.4-18.3-6.9-24 1.2L51.5 357.9c-7.7 10.8-22.7 13.3-33.5 5.6s-13.3-22.7-5.6-33.5l11.1-15.6c23.7-33.2 72.3-35.6 99.2-4.9c21.3 24.4 20.8 60.9-1.1 84.7L86.8 432H120c13.3 0 24 10.7 24 24s-10.7 24-24 24H32c-9.5 0-18.2-5.6-22-14.4s-2.1-18.9 4.3-25.9l72-78c5.3-5.8 5.4-14.6 .3-20.5zM224 64H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 576 512"><path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-triangle-exclamation" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></symbol>
+<symbol id="i-windows" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/></symbol>
+</svg><!--/icons-->
 
-            if (success) {
-                const btn = document.getElementById('copyKmsOfficeBtn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
-                btn.classList.remove('bg-amber-600', 'hover:bg-amber-500');
-                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+<script>
+/* Общий скрипт всех страниц: копирование, вкладки, сборка «Усі команди», значок вкладки браузера. */
+(function () {
+  var d = document, toastTimer;
+  [].forEach.call(d.querySelectorAll('pre[data-collect]'), function (p) {
+    var src = d.getElementById(p.getAttribute('data-collect')), lines = [];
+    [].forEach.call(src.querySelectorAll('pre'), function (x) { lines.push(x.textContent.trim()); });
+    if (p.getAttribute('data-after')) lines.push(p.getAttribute('data-after'));
+    p.textContent = lines.join('\n');
+  });
+  var logo = d.querySelector('.logo');
+  if (logo) d.getElementById('favicon').href = logo.src;
 
-                showToast('Усі KMS команди Office скопійовано!');
+  function toast(msg) {
+    var t = d.getElementById('toast');
+    t.lastChild.textContent = msg;
+    t.className = 'show';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = ''; }, 2500);
+  }
+  function fallback(text) {
+    var ta = d.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    d.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = d.execCommand('copy'); } catch (e) {}
+    d.body.removeChild(ta);
+    return ok;
+  }
+  function copy(text, done) {
+    if (navigator.clipboard && window.isSecureContext)
+      navigator.clipboard.writeText(text).then(done, function () { if (fallback(text)) done(); });
+    else if (fallback(text)) done();
+  }
 
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
-                    btn.classList.add('bg-amber-600', 'hover:bg-amber-500');
-                }, 2500);
-            }
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-message');
-            toastMsg.innerText = message;
-
-            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
-            }, 2500);
-        }
-    </script>
+  d.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]');
+    if (b) {
+      e.preventDefault(); e.stopPropagation();   // кнопка в <summary> не сворачивает блок
+      var all = b.getAttribute('data-copy') === 'all';
+      var pre = (all ? b.closest('details') : b.closest('.line')).querySelector('pre');
+      copy(pre.textContent.trim() + (all ? '\n' : ''), function () {
+        var use = b.querySelector('use'), span = b.querySelector('span'), text = span && span.textContent;
+        use.setAttribute('href', '#i-check'); b.classList.add('ok');
+        if (span) span.textContent = 'Скопійовано!';
+        toast(all ? 'Усі команди скопійовано' : 'Команду скопійовано');
+        setTimeout(function () {
+          use.setAttribute('href', '#i-copy'); b.classList.remove('ok');
+          if (span) span.textContent = text;
+        }, 2000);
+      });
+      return;
+    }
+    var t = e.target.closest('[data-tab]');
+    if (t) {
+      [].forEach.call(t.parentNode.children, function (x) {
+        x.classList.toggle('on', x === t);
+        d.getElementById(x.getAttribute('data-tab')).hidden = x !== t;
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>

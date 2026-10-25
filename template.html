@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Назва довідника</title>
+<link rel="icon" id="favicon">
+<!--
+  ШАБЛОН СПРАВОЧНИКА «Dark Cyber». Страница самодостаточна: без интернета, без CDN, без внешних файлов.
+  Новая страница: скопировать этот файл, поменять <title>, заголовок в шапке и содержимое <main>.
+  Блоки ниже — образцы, ненужные удалить. Цвет раздела — data-c: purple | cyan | amber | emerald | rose.
+  Иконки: <svg class="i"><use href="#i-ИМЯ"/></svg>; после правок — python tools/icons.py (набор иконок в конце <body>).
+  Стили и скрипт ниже одинаковы во всех страницах — менять сразу везде.
+-->
+<style>
+:root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--mono:"Cascadia Mono",Consolas,Menlo,"Liberation Mono",monospace;--t1:#f1f5f9;--t2:#e2e8f0;--t3:#cbd5e1;--t4:#94a3b8;--ln:51 65 85}
+[data-c=purple]{--c:168 85 247;--c3:#d8b4fe;--c4:#c084fc;--c9:59 7 100;--bar:linear-gradient(90deg,#9333ea,#6366f1,#c084fc);--btn:linear-gradient(90deg,#9333ea,#4f46e5);--btnh:linear-gradient(90deg,#a855f7,#6366f1)}
+[data-c=cyan]{--c:6 182 212;--c3:#67e8f9;--c4:#22d3ee;--c9:8 51 68;--bar:linear-gradient(90deg,#06b6d4,#2dd4bf,#3b82f6);--btn:linear-gradient(90deg,#0891b2,#2563eb);--btnh:linear-gradient(90deg,#06b6d4,#3b82f6)}
+[data-c=amber]{--c:245 158 11;--c3:#fcd34d;--c4:#fbbf24;--c9:69 26 3;--bar:linear-gradient(90deg,#f59e0b,#fb923c,#ea580c);--btn:linear-gradient(90deg,#d97706,#ea580c);--btnh:linear-gradient(90deg,#f59e0b,#f97316)}
+[data-c=emerald]{--c:16 185 129;--c3:#6ee7b7;--c4:#34d399;--c9:2 44 34;--bar:linear-gradient(90deg,#10b981,#2dd4bf,#22c55e);--btn:linear-gradient(90deg,#059669,#0d9488);--btnh:linear-gradient(90deg,#10b981,#14b8a6)}
+[data-c=rose]{--c:244 63 94;--c3:#fda4af;--c4:#fb7185;--c9:76 5 25;--bar:linear-gradient(90deg,#e11d48,#ec4899,#fb7185);--btn:linear-gradient(90deg,#e11d48,#db2777);--btnh:linear-gradient(90deg,#f43f5e,#ec4899)}
+*,::before,::after{box-sizing:border-box}
+html{background:#dcd6cd;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;font:15px/1.5 var(--sans);color:var(--t1);-webkit-font-smoothing:antialiased}
+/* фон «крафт-бумага»: отдельный неподвижный слой — прокрутка его не перерисовывает */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(255,253,248,.65),rgba(215,208,197,.85) 70%,rgba(170,160,147,.95)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='5'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E") #dcd6cd}
+::selection{background:#a855f7;color:#fff}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#d4cecb}::-webkit-scrollbar-thumb{background:#8b837e;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#5a5450}
+a{color:var(--c4)}
+h2,p,ol,ul,pre{margin:0}
+.i{width:1em;height:1em;fill:currentColor;flex:none;vertical-align:-.125em}
+.wrap{max-width:56rem;width:100%;margin:0 auto;padding:0 16px}
+@media(min-width:640px){.wrap{padding:0 24px}}
+/* шапка */
+.top{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.97);border-bottom:1px solid rgb(var(--ln)/.8);box-shadow:0 10px 15px -3px rgb(0 0 0/.3)}
+.top .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.top .ph,.logo{width:32px;height:32px;flex:none}
+.top h1{margin:0;min-width:0;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:#fff}
+.top h1 .i{color:var(--c4);font-size:14px}
+.top h1 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{border-radius:8px;border:1px solid rgb(var(--ln)/.8);box-shadow:0 4px 6px -1px rgb(0 0 0/.3)}
+main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-direction:column;gap:20px}
+/* раздел */
+.card{position:relative;overflow:hidden;background:rgba(15,23,42,.93);border:1px solid rgb(var(--c)/.4);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 30px -5px rgb(var(--c)/.35),0 8px 16px -6px rgb(0 0 0/.6)}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--bar)}
+@media(min-width:640px){.card{padding:20px}}
+.head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.head>div{display:flex;align-items:center;gap:10px}
+.num{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:12px;background:rgb(var(--c)/.2);border:1px solid rgb(var(--c)/.4);color:var(--c4);font-weight:700;font-size:13px;box-shadow:0 0 10px rgb(var(--c)/.2)}
+.head h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:.01em;line-height:1.3}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:800;text-transform:uppercase;background:rgb(var(--c)/.2);color:var(--c3);border:1px solid rgb(var(--c)/.4);box-shadow:0 0 10px rgb(var(--c)/.3)}
+.badge .i{color:var(--c4)}
+.lead{color:var(--t3)}
+.lead strong{color:#fff}
+/* «фишки»: заголовок + ярлыки */
+.chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
+.chips b{display:flex;align-items:center;gap:8px;color:var(--c3)}
+.chips b .i{color:var(--c4)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
+.chip strong{color:var(--c4)}
+/* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
+.note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
+.note>.i{color:#fbbf24;font-size:15px;margin-top:2px}
+.note strong{color:#fcd34d}
+.note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
+.note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
+/* кнопки скачивания / ссылки */
+.btns{display:grid;gap:12px;max-width:32rem;width:100%;margin:0 auto}
+@media(min-width:640px){.btns{grid-template-columns:1fr 1fr;gap:20px}}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
+.btn:hover{background:#334155}.btn:active{transform:scale(.98)}
+.btn>span{display:flex;align-items:center;gap:10px;min-width:0}
+.btn>span>.i{font-size:17px;color:var(--c4)}
+.btn b{display:block;font-weight:700}
+.btn small{display:block;font-size:11.5px;color:var(--t3)}
+.btn>.i{font-size:24px;color:var(--t4);transition:transform .15s}
+.btn:hover>.i{transform:translateY(2px)}
+.btn.main{background:var(--btn);border-color:rgb(var(--c)/.4);box-shadow:0 0 15px rgb(var(--c)/.4)}
+.btn.main:hover{background:var(--btnh)}
+.btn.main small,.btn.main .i{color:rgba(255,255,255,.8)}
+/* команда: заголовок, текст (переносится, не обрезается) и «Скопіювати» */
+.cmd{background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8);border-radius:12px;padding:12px}
+.cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(30,41,59,.8);font-size:12.5px;font-weight:600;color:var(--t3)}
+.cmd-t .i{color:var(--c4)}
+.line{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+pre{flex:1;min-width:0;font:600 13px/1.55 var(--mono);color:var(--c3);white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{flex:none;display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border:0;border-radius:8px;cursor:pointer;font:600 12.5px var(--sans);color:#fff;background:rgb(var(--c)/.85);box-shadow:0 0 10px rgb(var(--c)/.3);transition:transform .1s,background .15s}
+.copy:hover{background:rgb(var(--c))}.copy:active{transform:scale(.95)}
+.copy.ok{background:#059669;box-shadow:none}
+.copy.sm{padding:3px 8px;background:#1e293b;color:var(--t3);box-shadow:none}.copy.sm:hover{background:#334155}.copy.sm.ok{color:#34d399}
+/* раскрывающийся блок */
+details{background:rgba(2,6,23,.5);border:1px solid rgb(var(--ln)/.8);border-radius:12px;overflow:hidden}
+summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;cursor:pointer;user-select:none;list-style:none;font-size:13px;font-weight:700;color:var(--t3)}
+summary::-webkit-details-marker{display:none}
+summary:hover{background:rgba(30,41,59,.5)}
+summary>span{display:flex;align-items:center;gap:8px;min-width:0}
+summary>span>.i{color:var(--c4)}
+summary>div{display:flex;align-items:center;gap:8px;flex:none;font-size:11.5px}
+.more{color:var(--c4)}.less{color:var(--t4);display:none}
+details[open] .more{display:none}details[open] .less{display:inline}
+.chev{color:var(--t4);font-size:10px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:12px;border-top:1px solid #1e293b;background:rgba(2,6,23,.8);font-size:14px;color:var(--t3)}
+.body>*+*{margin-top:10px}
+.body>pre{padding:12px;border-radius:8px;background:#020617;border:1px solid rgb(var(--c)/.3);font-size:12.5px}
+/* шаги с командами */
+.step{background:#0f172a;border:1px solid rgb(var(--ln)/.8);border-radius:8px;padding:8px}
+.step>b{display:block;margin-bottom:4px;font-size:13px;color:var(--c4)}
+.step .line{background:#020617;border-radius:6px;padding:6px 6px 6px 8px;align-items:center}
+.step pre{font-weight:400;font-size:12.5px;color:var(--t2)}
+/* нумерованная инструкция */
+ol.list{padding-left:22px;display:flex;flex-direction:column;gap:6px;line-height:1.55}
+ol.list li::marker{color:var(--c4);font-weight:700}
+.k{font:13px var(--mono);padding:1px 6px;border-radius:4px;background:rgb(var(--c9)/.8);color:var(--c3);border:1px solid rgb(var(--c)/.3)}
+.hl{color:var(--c4);font-weight:700}
+/* вкладки */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;padding:4px;border-radius:12px;background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8)}
+.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:0;border-radius:8px;background:none;cursor:pointer;font:700 13px var(--sans);color:var(--t4)}
+.tabs button:hover{color:#fff}
+.tabs button.on{background:var(--btn);color:#fff;box-shadow:0 0 12px rgb(var(--c)/.3)}
+.pane{display:flex;flex-direction:column;gap:14px}.pane[hidden]{display:none}
+/* цвет отдельной иконки */
+.fg-purple{color:#c084fc}.fg-cyan{color:#22d3ee}.fg-amber{color:#fbbf24}.fg-emerald{color:#34d399}.fg-rose{color:#fb7185}
+/* всплывающее «Скопійовано» */
+#toast{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#020617;border:1px solid rgba(168,85,247,.4);box-shadow:0 0 25px rgba(168,85,247,.4);font-size:13px;font-weight:600;opacity:0;transform:translateY(64px);transition:.3s;pointer-events:none}
+#toast.show{opacity:1;transform:none}
+#toast .i{color:#34d399;font-size:15px}
+@media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
+</style>
+</head>
+<body data-c="purple">
+
+<header class="top"><div class="wrap">
+  <div class="ph"></div>
+  <h1><svg class="i"><use href="#i-book"/></svg><span>Назва довідника</span></h1>
+  <img class="logo" alt="SV" src="data:image/webp;base64,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">
+</div></header>
+
+<main class="wrap">
+
+  <!-- ===== Раздел (цвет — data-c) ===== -->
+  <section class="card" data-c="purple">
+    <div class="head">
+      <div><span class="num">1</span><h2>Розділ 1: Назва розділу</h2></div>
+      <span class="badge"><svg class="i"><use href="#i-laptop-code"/></svg>Мітка</span>
+    </div>
+
+    <p class="lead">Короткий опис розділу. <strong>Важливе</strong> — виділяйте так.</p>
+
+    <!-- Ярлыки: что выбрать / рекомендуемые значения -->
+    <div class="chips">
+      <b><svg class="i"><use href="#i-circle-check"/></svg>Рекомендовано:</b>
+      <span class="chip"><svg class="i fg-cyan"><use href="#i-windows"/></svg>Windows: <strong>1 (HWID)</strong></span>
+      <span class="chip"><svg class="i fg-amber"><use href="#i-file-word"/></svg>Office: <strong>2</strong></span>
+    </div>
+
+    <!-- Примечания: обычное (жёлтое), class="note info" (голубое), class="note bad" (красное) -->
+    <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
+      <div><strong>Примітка:</strong> Запустіть Командний рядок від імені адміністратора.</div></div>
+    <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+      <div><strong>Порада:</strong> Довідкова інформація.</div></div>
+    <div class="note bad"><svg class="i"><use href="#i-circle-xmark"/></svg>
+      <div><strong>Увага:</strong> Дія незворотна.</div></div>
+
+    <!-- Кнопки: class="btn main" — главная (цветная), class="btn" — обычная -->
+    <div class="btns">
+      <a class="btn main" href="https://example.com/file.exe" target="_blank" rel="noopener">
+        <span><svg class="i"><use href="#i-file-code"/></svg><span><b>Скачати file.exe</b><small>Пряме завантаження</small></span></span>
+        <svg class="i"><use href="#i-download"/></svg></a>
+      <a class="btn" href="https://example.com/" target="_blank" rel="noopener">
+        <span><svg class="i fg-cyan"><use href="#i-link"/></svg><span><b>Офіційний сайт</b><small>example.com</small></span></span>
+        <svg class="i"><use href="#i-arrow-up-right-from-square"/></svg></a>
+    </div>
+
+    <!-- Команда с кнопкой «Скопіювати» (копируется текст <pre>; несколько строк — можно) -->
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>PowerShell</div>
+      <div class="line"><pre>winget install --id Google.Chrome -e</pre>
+        <button class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+
+    <!-- Раскрывающаяся инструкция -->
+    <details>
+      <summary><span><svg class="i"><use href="#i-list-ol"/></svg>Покрокова інструкція</span>
+        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+      <div class="body"><ol class="list">
+        <li>Відкрийте <code class="k">cmd</code> від імені адміністратора.</li>
+        <li>Виберіть <span class="hl">1</span> у меню.</li>
+      </ol></div>
+    </details>
+  </section>
+
+  <!-- ===== Раздел с вкладками. Кнопка data-tab="id панели"; data-c на кнопке и панели — их цвет ===== -->
+  <section class="card" data-c="cyan">
+    <div class="head">
+      <div><span class="num">2</span><h2>Розділ 2: Команди по кроках</h2></div>
+      <span class="badge"><svg class="i"><use href="#i-sliders"/></svg>Мітка</span>
+    </div>
+
+    <div class="tabs">
+      <button class="on" data-tab="t-a" data-c="cyan"><svg class="i"><use href="#i-windows"/></svg>Вкладка A</button>
+      <button data-tab="t-b" data-c="amber"><svg class="i"><use href="#i-box"/></svg>Вкладка B</button>
+    </div>
+
+    <div class="pane" id="t-a" data-c="cyan">
+      <!-- «Усі команди»: <pre data-collect="id"> сам собирает команды шагов блока id
+           (+ data-after — строки в конец). Кнопка копирует всё с переводом строки в конце. -->
+      <details>
+        <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди</span>
+          <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body"><pre data-collect="steps-a" data-after="echo Готово &amp; pause"></pre></div>
+      </details>
+
+      <details>
+        <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди</span>
+          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <div class="body" id="steps-a">
+          <div class="step"><b>Крок 1: Опис</b><div class="line"><pre>команда 1</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          <div class="step"><b>Крок 2: Опис</b><div class="line"><pre>команда 2</pre>
+            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="pane" id="t-b" data-c="amber" hidden>
+      <p class="lead">Вміст вкладки B.</p>
+    </div>
+  </section>
+
+</main>
+
+<div id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-circle-check"/></svg><span></span></div>
+
+<!--icons--><svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Font Awesome Free 6.4.0 by @fontawesome, CC BY 4.0 -->
+<symbol id="i-arrow-up-right-from-square" viewBox="0 0 512 512"><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/></symbol>
+<symbol id="i-book" viewBox="0 0 448 512"><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></symbol>
+<symbol id="i-box" viewBox="0 0 448 512"><path d="M50.7 58.5L0 160H208V32H93.7C75.5 32 58.9 42.3 50.7 58.5zM240 160H448L397.3 58.5C389.1 42.3 372.5 32 354.3 32H240V160zm208 32H0V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192z"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></symbol>
+<symbol id="i-circle-info" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol>
+<symbol id="i-circle-xmark" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 512 512"><path d="M448 384H256c-35.3 0-64-28.7-64-64V64c0-35.3 28.7-64 64-64H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V320c0 35.3-28.7 64-64 64zM64 128h96v48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H256c8.8 0 16-7.2 16-16V416h48v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64z"/></symbol>
+<symbol id="i-download" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></symbol>
+<symbol id="i-file-code" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM153 289l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L71 337c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM265 255l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
+<symbol id="i-file-word" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM111 257.1l26.8 89.2 31.6-90.3c3.4-9.6 12.5-16.1 22.7-16.1s19.3 6.4 22.7 16.1l31.6 90.3L273 257.1c3.8-12.7 17.2-19.9 29.9-16.1s19.9 17.2 16.1 29.9l-48 160c-3 10-12 16.9-22.4 17.1s-19.8-6.2-23.2-16.1L192 336.6l-33.3 95.3c-3.4 9.8-12.8 16.3-23.2 16.1s-19.5-7.1-22.4-17.1l-48-160c-3.8-12.7 3.4-26.1 16.1-29.9s26.1 3.4 29.9 16.1z"/></symbol>
+<symbol id="i-laptop-code" viewBox="0 0 640 512"><path d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
+<symbol id="i-link" viewBox="0 0 640 512"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></symbol>
+<symbol id="i-list-check" viewBox="0 0 512 512"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></symbol>
+<symbol id="i-list-ol" viewBox="0 0 512 512"><path d="M24 56c0-13.3 10.7-24 24-24H80c13.3 0 24 10.7 24 24V176h16c13.3 0 24 10.7 24 24s-10.7 24-24 24H40c-13.3 0-24-10.7-24-24s10.7-24 24-24H56V80H48C34.7 80 24 69.3 24 56zM86.7 341.2c-6.5-7.4-18.3-6.9-24 1.2L51.5 357.9c-7.7 10.8-22.7 13.3-33.5 5.6s-13.3-22.7-5.6-33.5l11.1-15.6c23.7-33.2 72.3-35.6 99.2-4.9c21.3 24.4 20.8 60.9-1.1 84.7L86.8 432H120c13.3 0 24 10.7 24 24s-10.7 24-24 24H32c-9.5 0-18.2-5.6-22-14.4s-2.1-18.9 4.3-25.9l72-78c5.3-5.8 5.4-14.6 .3-20.5zM224 64H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 512 512"><path d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 576 512"><path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-triangle-exclamation" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></symbol>
+<symbol id="i-windows" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/></symbol>
+</svg><!--/icons-->
+
+<script>
+/* Общий скрипт всех страниц: копирование, вкладки, сборка «Усі команди», значок вкладки браузера. */
+(function () {
+  var d = document, toastTimer;
+  [].forEach.call(d.querySelectorAll('pre[data-collect]'), function (p) {
+    var src = d.getElementById(p.getAttribute('data-collect')), lines = [];
+    [].forEach.call(src.querySelectorAll('pre'), function (x) { lines.push(x.textContent.trim()); });
+    if (p.getAttribute('data-after')) lines.push(p.getAttribute('data-after'));
+    p.textContent = lines.join('\n');
+  });
+  var logo = d.querySelector('.logo');
+  if (logo) d.getElementById('favicon').href = logo.src;
+
+  function toast(msg) {
+    var t = d.getElementById('toast');
+    t.lastChild.textContent = msg;
+    t.className = 'show';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = ''; }, 2500);
+  }
+  function fallback(text) {
+    var ta = d.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    d.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = d.execCommand('copy'); } catch (e) {}
+    d.body.removeChild(ta);
+    return ok;
+  }
+  function copy(text, done) {
+    if (navigator.clipboard && window.isSecureContext)
+      navigator.clipboard.writeText(text).then(done, function () { if (fallback(text)) done(); });
+    else if (fallback(text)) done();
+  }
+
+  d.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]');
+    if (b) {
+      e.preventDefault(); e.stopPropagation();   // кнопка в <summary> не сворачивает блок
+      var all = b.getAttribute('data-copy') === 'all';
+      var pre = (all ? b.closest('details') : b.closest('.line')).querySelector('pre');
+      copy(pre.textContent.trim() + (all ? '\n' : ''), function () {
+        var use = b.querySelector('use'), span = b.querySelector('span'), text = span && span.textContent;
+        use.setAttribute('href', '#i-check'); b.classList.add('ok');
+        if (span) span.textContent = 'Скопійовано!';
+        toast(all ? 'Усі команди скопійовано' : 'Команду скопійовано');
+        setTimeout(function () {
+          use.setAttribute('href', '#i-copy'); b.classList.remove('ok');
+          if (span) span.textContent = text;
+        }, 2000);
+      });
+      return;
+    }
+    var t = e.target.closest('[data-tab]');
+    if (t) {
+      [].forEach.call(t.parentNode.children, function (x) {
+        x.classList.toggle('on', x === t);
+        d.getElementById(x.getAttribute('data-tab')).hidden = x !== t;
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
