@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Активація Windows & Office</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            purple: '#a855f7',
+                            cyan: '#06b6d4',
+                            amber: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'JetBrains Mono', 'Consolas', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #d4cecb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b837e;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a5450;
+        }
+
+        /* Accordion icon rotation */
+        details[open] .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Tab content toggle */
+        .kms-tab-content {
+            display: none;
+        }
+        .kms-tab-content.active {
+            display: block;
+        }
+
+        /* Glow Effects for Dark Glass Cards */
+        .glow-purple {
+            box-shadow: 0 12px 30px -5px rgba(168, 85, 247, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
+        }
+        .glow-cyan {
+            box-shadow: 0 12px 30px -5px rgba(6, 182, 212, 0.35), 0 8px 16px -6px rgba(0, 0, 0, 0.6);
+        }
+        .glow-btn-purple {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Realistic Warm Craft Paper Texture Background */
+        .bg-paper-texture {
+            background-color: #dcd6cd;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(255, 253, 248, 0.65) 0%, rgba(215, 208, 197, 0.85) 70%, rgba(170, 160, 147, 0.95) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cfilter id='paper-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='5' result='noise'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-grain)'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-paper-texture text-slate-100 font-sans min-h-screen flex flex-col relative selection:bg-purple-500 selection:text-white antialiased">
+
+    <!-- Header Navigation Bar (Alignment strictly matches <main> container px-4 sm:px-6 max-w-4xl) -->
+    <header class="sticky top-0 z-50 bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
+        <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2 sm:space-x-2.5 min-w-0">
+                <!-- Compact key icon -->
+                <i class="fa-solid fa-key text-purple-400 text-xs sm:text-sm shrink-0"></i>
+                <span class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate">
+                    Активація Windows та Microsoft Office
+                </span>
+            </div>
+
+            <div class="flex items-center gap-1.5 shrink-0">
+                <span class="text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-slate-800/90 text-cyan-400 border border-cyan-500/30 flex items-center gap-1 sm:gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                    <i class="fa-solid fa-shield-halved text-cyan-400 text-[10px] sm:text-xs"></i>
+                    <span class="whitespace-nowrap">Win 10/11 & Office</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 pt-5 pb-10 space-y-5 relative z-10">
+
+        <!-- ================================================================= -->
+        <!-- METHOD 1: MAS (PERMANENT) -->
+        <!-- ================================================================= -->
+        <section class="bg-[#0b0f19]/90 backdrop-blur-xl rounded-2xl border border-purple-500/40 glow-purple p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Top Light Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-400"></div>
+
+            <!-- Header Badges -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                        1
+                    </span>
+                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Метод 1: Скрипт MAS (Microsoft Activation Scripts)</h2>
+                </div>
+                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                    <i class="fa-solid fa-infinity text-purple-400"></i> НАЗАВЖДИ
+                </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
+                Офіційний відкритий інструмент від спільноти Massgrave для швидкої та вічної активації.
+            </p>
+
+            <!-- Guidelines Box -->
+            <div class="mb-3.5 p-3 rounded-xl bg-purple-950/50 border border-purple-500/30 text-slate-200">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs">
+                    <div class="flex items-center gap-2 font-bold text-purple-300 shrink-0">
+                        <i class="fa-solid fa-circle-check text-purple-400"></i>
+                        Вибір у меню MAS:
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-mono">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-brands fa-windows text-cyan-400"></i>
+                            Windows: <strong class="text-purple-400">1 (HWID)</strong>
+                        </span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-purple-500/30 text-slate-200 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-file-word text-amber-400"></i>
+                            Office: <strong class="text-purple-400">2 (Ohook)</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Antivirus Warning Box (STRICTLY ONE LINE) -->
+            <div class="mb-3.5 p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/40 text-amber-200 flex items-center gap-2.5 text-xs truncate">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm shrink-0"></i>
+                <div class="truncate text-slate-200">
+                    <strong class="font-bold text-amber-300">Примітка:</strong> Тимчасово вимкніть антивірус або «Захист у реальному часі» для роботи скрипта.
+                </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+                <!-- Direct CMD Download Button -->
+                <a href="https://dev.azure.com/massgrave/Microsoft-Activation-Scripts/_apis/git/repositories/Microsoft-Activation-Scripts/items?path=/MAS/All-In-One-Version-KL/MAS_AIO.cmd&download=true" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all glow-btn-purple active:scale-[0.98] group border border-purple-400/30">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-file-code text-lg text-purple-200 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <div class="font-bold text-white">Скачати MAS_AIO.cmd</div>
+                            <div class="text-[10px] text-purple-200 font-normal">Пряме завантаження `.cmd`</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-download text-purple-200 text-xs group-hover:translate-y-0.5 transition-transform"></i>
+                </a>
+
+                <!-- Direct ZIP Download Button -->
+                <a href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white font-semibold text-xs transition-all active:scale-[0.98] group border border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-file-zipper text-lg text-amber-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <div class="font-bold text-white">Скачати MAS_AIO.zip</div>
+                            <div class="text-[10px] text-slate-300 font-normal">Архів GitHub</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-download text-slate-400 text-xs group-hover:translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- PowerShell Box -->
+            <div class="bg-slate-950/90 rounded-xl p-3 border border-slate-800 mb-3.5 font-mono text-xs">
+                <div class="flex items-center justify-between text-slate-400 text-[11px] mb-2 pb-1.5 border-b border-slate-800/80 font-sans">
+                    <span class="flex items-center gap-2 font-semibold text-slate-300">
+                        <i class="fa-solid fa-terminal text-purple-400"></i> Альтернатива через PowerShell (в 1 клік)
+                    </span>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <code id="ps-mas-cmd" class="text-purple-300 font-bold truncate text-xs">irm https://get.activated.win | iex</code>
+                    <button onclick="copyPsCommand('ps-mas-cmd', this)" class="flex-shrink-0 px-3 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-sans text-xs font-semibold transition-all active:scale-95 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                        <i class="fa-regular fa-copy mr-1"></i> Скопіювати
+                    </button>
+                </div>
+            </div>
+
+            <!-- Collapsible Step-by-Step for MAS -->
+            <details class="group bg-slate-950/70 rounded-xl border border-slate-800 overflow-hidden transition-all">
+                <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-purple-400"></i>
+                        Покрокова інструкція
+                    </span>
+                    <div class="flex items-center gap-1.5 text-[11px]">
+                        <span class="text-purple-400 group-open:hidden">Розгорнути</span>
+                        <span class="text-slate-500 hidden group-open:inline">Згорнути</span>
+                        <i class="fa-solid fa-chevron-down chevron-icon text-slate-500 text-[10px] transition-transform duration-200"></i>
+                    </div>
+                </summary>
+
+                <div class="p-3 border-t border-slate-800 text-xs text-slate-300 bg-slate-950/90 leading-relaxed">
+                    <ol class="list-decimal list-inside space-y-1.5">
+                        <li>Вимкніть антивірус та скачайте <code class="bg-purple-950 text-purple-300 font-mono px-1.5 py-0.5 rounded border border-purple-500/30">MAS_AIO.cmd</code> або запустить PowerShell команду.</li>
+                        <li>Запустіть <code class="bg-slate-900 font-mono px-1.5 py-0.5 rounded border border-slate-700 text-slate-200">MAS_AIO.cmd</code> у Командному рядку (cmd) від імені адміністратора.</li>
+                        <li>У вікні меню виберіть:
+                            <strong class="text-purple-400">1</strong> (HWID) для Windows або <strong class="text-purple-400">2</strong> (Ohook) для Office.
+                        </li>
+                        <li>Зачекайте 5 секунд до успішного завершення.</li>
+                    </ol>
+                </div>
+            </details>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- METHOD 2: KMS (180 DAYS) -->
+        <!-- ================================================================= -->
+        <section class="bg-[#0b0f19]/90 backdrop-blur-xl rounded-2xl border border-cyan-500/40 glow-cyan p-4 sm:p-5 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Top Light Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-500"></div>
+
+            <!-- Header Badges -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-bold flex items-center justify-center text-xs shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                        2
+                    </span>
+                    <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">Метод 2: KMS-сервер через Командний рядок (cmd)</h2>
+                </div>
+                <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                    <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i> На 180 днів
+                </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 mb-3.5 leading-relaxed">
+                Безпечна активація в Командному рядку (cmd) без зміни системних файлів. Антивірус вимикати <strong class="text-white">не потрібно</strong>.
+            </p>
+
+            <!-- TAB SWITCHER BUTTONS -->
+            <div class="mb-3.5">
+                <div class="grid grid-cols-2 gap-2 bg-slate-950/90 p-1 rounded-xl border border-slate-800">
+                    <button id="tab-btn-win" onclick="switchKmsTab('windows')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]">
+                        <i class="fa-brands fa-windows text-sm"></i>
+                        <span>Windows</span>
+                    </button>
+                    <button id="tab-btn-office" onclick="switchKmsTab('office')" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-box text-sm"></i>
+                        <span>Microsoft Office</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- WINDOWS KMS TAB -->
+            <div id="kms-tab-windows" class="kms-tab-content active space-y-3.5">
+                <div class="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-cyan-200 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-cyan-400 text-sm shrink-0"></i>
+                    <span>Запустіть <strong>Командний рядок (cmd) від імені адміністратора</strong>.</span>
+                </div>
+
+                <div class="bg-slate-950/90 rounded-xl p-3.5 border border-slate-800">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
+                        <div>
+                            <h3 class="text-xs font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-cyan-400"></i> Усі команди для Windows (Автовідкриття та закриття)
+                            </h3>
+                        </div>
+                        <button id="copyKmsWinBtn" onclick="copyAllKmsWinScript()" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition-all shadow-[0_0_12px_rgba(6,182,212,0.3)] active:scale-95">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Скопіювати всі</span>
+                        </button>
+                    </div>
+
+                    <div class="relative bg-[#05080f] rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-cyan-300 border border-slate-800/80 leading-relaxed">
+                        <code>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com<br>cscript //nologo %windir%\system32\slmgr.vbs /ato<br>cscript //nologo %windir%\system32\slmgr.vbs /ckms<br>cscript //nologo %windir%\system32\slmgr.vbs /dli<br>echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit</code>
+                    </div>
+                </div>
+
+                <details class="group bg-slate-950/70 rounded-xl border border-slate-800 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-cyan-400"></i>
+                            Окремі команди Windows
+                        </span>
+                        <div class="flex items-center gap-1 text-[11px]">
+                            <span class="text-cyan-400 group-open:hidden">Розгорнути</span>
+                            <span class="text-slate-500 hidden group-open:inline">Згорнути</span>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-500 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/90 text-xs">
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 1: Встановлення сервера</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-win-step-1" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com</code>
+                                <button onclick="copyCommand('kms-win-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 2: Запуск активації</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-win-step-2" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /ato</code>
+                                <button onclick="copyCommand('kms-win-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 3: Очищення конфігурації</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-win-step-3" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /ckms</code>
+                                <button onclick="copyCommand('kms-win-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-cyan-400 mb-0.5">Крок 4: Перевірка статусу</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-win-step-4" class="truncate">cscript //nologo %windir%\system32\slmgr.vbs /dli</code>
+                                <button onclick="copyCommand('kms-win-step-4', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- OFFICE KMS TAB -->
+            <div id="kms-tab-office" class="kms-tab-content space-y-3.5">
+                <div class="p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-amber-400 text-sm shrink-0"></i>
+                    <span>Запустіть <strong>Командний рядок (cmd) від імені адміністратора</strong> (Office 2016 / 2019 / 2021 / 2024).</span>
+                </div>
+
+                <div class="bg-slate-950/90 rounded-xl p-3.5 border border-slate-800">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
+                        <div>
+                            <h3 class="text-xs font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-amber-400"></i> Усі команди для Office
+                            </h3>
+                        </div>
+                        <button id="copyKmsOfficeBtn" onclick="copyAllKmsOfficeScript()" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs transition-all shadow-[0_0_12px_rgba(245,158,11,0.3)] active:scale-95">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Скопіювати всі</span>
+                        </button>
+                    </div>
+
+                    <div class="relative bg-[#0f0a05] rounded-lg p-3 overflow-x-auto font-mono text-[11px] sm:text-xs text-amber-300 border border-slate-800/80 leading-relaxed">
+                        <code>cd /d "C:\Program Files\Microsoft Office\Office16"<br>cscript //nologo ospp.vbs /sethst:kms.msguides.com<br>cscript //nologo ospp.vbs /act<br>cscript //nologo ospp.vbs /remhst<br>cscript //nologo ospp.vbs /dstatus<br>echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit</code>
+                    </div>
+                </div>
+
+                <details class="group bg-slate-950/70 rounded-xl border border-slate-800 overflow-hidden transition-all">
+                    <summary class="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors select-none text-xs font-bold text-slate-300">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-amber-400"></i>
+                            Окремі команди Office
+                        </span>
+                        <div class="flex items-center gap-1 text-[11px]">
+                            <span class="text-amber-400 group-open:hidden">Розгорнути</span>
+                            <span class="text-slate-500 hidden group-open:inline">Згорнути</span>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-slate-500 text-[10px] transition-transform duration-200"></i>
+                        </div>
+                    </summary>
+
+                    <div class="p-3 border-t border-slate-800 space-y-2.5 bg-slate-950/90 text-xs">
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 1: Каталог Office</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-off-step-1" class="truncate">cd /d "C:\Program Files\Microsoft Office\Office16"</code>
+                                <button onclick="copyCommand('kms-off-step-1', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 2: Встановлення сервера</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-off-step-2" class="truncate">cscript //nologo ospp.vbs /sethst:kms.msguides.com</code>
+                                <button onclick="copyCommand('kms-off-step-2', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 3: Активація</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-off-step-3" class="truncate">cscript //nologo ospp.vbs /act</code>
+                                <button onclick="copyCommand('kms-off-step-3', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 4: Очищення конфігурації</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-off-step-4" class="truncate">cscript //nologo ospp.vbs /remhst</code>
+                                <button onclick="copyCommand('kms-off-step-4', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-lg p-2 border border-slate-800">
+                            <div class="font-bold text-amber-400 mb-0.5">Крок 5: Перевірка статусу</div>
+                            <div class="relative bg-slate-950 rounded p-1.5 font-mono text-[11px] text-slate-200 flex items-center justify-between gap-2">
+                                <code id="kms-off-step-5" class="truncate">cscript //nologo ospp.vbs /dstatus</code>
+                                <button onclick="copyCommand('kms-off-step-5', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-all">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-950 border border-purple-500/40 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] text-xs font-semibold">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toast-message">Скопійовано у буфер обміну!</span>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        function switchKmsTab(tabName) {
+            const winTab = document.getElementById('kms-tab-windows');
+            const officeTab = document.getElementById('kms-tab-office');
+            const winBtn = document.getElementById('tab-btn-win');
+            const officeBtn = document.getElementById('tab-btn-office');
+
+            if (tabName === 'windows') {
+                winTab.classList.add('active');
+                officeTab.classList.remove('active');
+
+                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_12px_rgba(6,182,212,0.3)]";
+                officeBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
+            } else {
+                officeTab.classList.add('active');
+                winTab.classList.remove('active');
+
+                officeBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-[0_0_12px_rgba(245,158,11,0.3)]";
+                winBtn.className = "flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-bold text-xs transition-all text-slate-400 hover:text-white";
+            }
+        }
+
+        function executeCopy(textToCopy) {
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            let successful = false;
+            try {
+                successful = document.execCommand('copy');
+            } catch (err) {
+                console.error('Помилка копіювання:', err);
+            }
+            document.body.removeChild(textarea);
+            return successful;
+        }
+
+        function copyCommand(elementId, buttonEl) {
+            const codeEl = document.getElementById(elementId);
+            if (!codeEl) return;
+
+            const text = codeEl.innerText.trim();
+            const success = executeCopy(text);
+
+            if (success) {
+                const originalHTML = buttonEl.innerHTML;
+                buttonEl.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
+                showToast('Команду скопійовано');
+
+                setTimeout(() => {
+                    buttonEl.innerHTML = originalHTML;
+                }, 2000);
+            }
+        }
+
+        function copyPsCommand(elementId, buttonEl) {
+            const codeEl = document.getElementById(elementId);
+            if (!codeEl) return;
+
+            const text = codeEl.innerText.trim();
+            const success = executeCopy(text);
+
+            if (success) {
+                const originalHTML = buttonEl.innerHTML;
+                buttonEl.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Скопійовано!`;
+                buttonEl.classList.remove('bg-purple-600', 'hover:bg-purple-500');
+                buttonEl.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+                
+                showToast('PowerShell команду скопійовано');
+
+                setTimeout(() => {
+                    buttonEl.innerHTML = originalHTML;
+                    buttonEl.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    buttonEl.classList.add('bg-purple-600', 'hover:bg-purple-500');
+                }, 2000);
+            }
+        }
+
+        function copyAllKmsWinScript() {
+            const commands = [
+                'cscript //nologo %windir%\\system32\\slmgr.vbs /skms kms.msguides.com',
+                'cscript //nologo %windir%\\system32\\slmgr.vbs /ato',
+                'cscript //nologo %windir%\\system32\\slmgr.vbs /ckms',
+                'cscript //nologo %windir%\\system32\\slmgr.vbs /dli',
+                'echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit'
+            ];
+            
+            const allCommands = commands.join('\n') + '\n';
+            const success = executeCopy(allCommands);
+
+            if (success) {
+                const btn = document.getElementById('copyKmsWinBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
+                btn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+
+                showToast('Усі KMS команди Windows скопійовано!');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                }, 2500);
+            }
+        }
+
+        function copyAllKmsOfficeScript() {
+            const commands = [
+                'cd /d "C:\\Program Files\\Microsoft Office\\Office16"',
+                'cscript //nologo ospp.vbs /sethst:kms.msguides.com',
+                'cscript //nologo ospp.vbs /act',
+                'cscript //nologo ospp.vbs /remhst',
+                'cscript //nologo ospp.vbs /dstatus',
+                'echo. & echo Натисніть будь-яку клавішу для виходу... & pause > nul & exit'
+            ];
+            
+            const allCommands = commands.join('\n') + '\n';
+            const success = executeCopy(allCommands);
+
+            if (success) {
+                const btn = document.getElementById('copyKmsOfficeBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Скопійовано!</span>`;
+                btn.classList.remove('bg-amber-600', 'hover:bg-amber-500');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+
+                showToast('Усі KMS команди Office скопійовано!');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btn.classList.add('bg-amber-600', 'hover:bg-amber-500');
+                }, 2500);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+
+            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
