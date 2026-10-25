@@ -91,9 +91,9 @@ summary>span{display:flex;align-items:center;gap:8px;min-width:0}
 summary>span>.i{color:var(--c4)}
 summary>div{display:flex;align-items:center;gap:8px;flex:none;font-size:11.5px}
 .more{color:var(--c4)}.less{color:var(--t4);display:none}
-details[open] .more{display:none}details[open] .less{display:inline}
+details[open]>summary .more{display:none}details[open]>summary .less{display:inline}
 .chev{color:var(--t4);font-size:10px;transition:transform .2s}
-details[open] .chev{transform:rotate(180deg)}
+details[open]>summary .chev{transform:rotate(180deg)}
 .body{padding:12px;border-top:1px solid #1e293b;background:rgba(2,6,23,.8);font-size:14px;color:var(--t3)}
 .body>*+*{margin-top:10px}
 .body>pre{padding:12px;border-radius:8px;background:#020617;border:1px solid rgb(var(--c)/.3);font-size:12.5px}
@@ -186,72 +186,78 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 
     <p class="lead">Безпечна активація в Командному рядку (cmd) без зміни системних файлів. Антивірус вимикати <strong>не потрібно</strong>.</p>
 
-    <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
-      <div><strong>Примітка:</strong> Запустіть Командний рядок (cmd) від імені адміністратора.</div></div>
+    <details>
+      <summary><span><svg class="i"><use href="#i-terminal"/></svg>Команди та інструкція</span>
+        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+      <div class="body">
+      <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
+        <div><strong>Примітка:</strong> Запустіть Командний рядок (cmd) від імені адміністратора.</div></div>
 
-    <div class="tabs">
-      <button class="on" data-tab="kms-win" data-c="cyan"><svg class="i"><use href="#i-windows"/></svg>Windows</button>
-      <button data-tab="kms-office" data-c="amber"><svg class="i"><use href="#i-box"/></svg>Microsoft Office</button>
-    </div>
+      <div class="tabs">
+        <button class="on" data-tab="kms-win" data-c="cyan"><svg class="i"><use href="#i-windows"/></svg>Windows</button>
+        <button data-tab="kms-office" data-c="amber"><svg class="i"><use href="#i-box"/></svg>Microsoft Office</button>
+      </div>
 
-    <div class="pane" id="kms-win" data-c="cyan">
-      <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
-        <div><strong>Ключ:</strong> KMS активує лише корпоративну (Volume) редакцію — крок 1 ставить ключ KMS-клієнта для
-          Windows 10/11 <strong>Pro</strong>. Для Enterprise, Education та інших — ключ з
-          <a href="https://learn.microsoft.com/uk-ua/windows-server/get-started/kms-client-activation-keys" target="_blank" rel="noopener">таблиці Microsoft</a>.</div></div>
+      <div class="pane" id="kms-win" data-c="cyan">
+        <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+          <div><strong>Ключ:</strong> KMS активує лише корпоративну (Volume) редакцію — крок 1 ставить ключ KMS-клієнта для
+            Windows 10/11 <strong>Pro</strong>. Для Enterprise, Education та інших — ключ з
+            <a href="https://learn.microsoft.com/uk-ua/windows-server/get-started/kms-client-activation-keys" target="_blank" rel="noopener">таблиці Microsoft</a>.</div></div>
 
-      <details>
-        <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Windows</span>
-          <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
-        <div class="body"><pre data-collect="kms-win-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
-      </details>
+        <details>
+          <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Windows</span>
+            <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+          <div class="body"><pre data-collect="kms-win-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
+        </details>
 
-      <details>
-        <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Windows</span>
-          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
-        <div class="body" id="kms-win-steps">
-          <div class="step"><b>Крок 1: Ключ KMS-клієнта (Windows 10/11 Pro)</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 3: Запуск активації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ato</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ckms</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /dli</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-        </div>
-      </details>
-    </div>
+        <details>
+          <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Windows</span>
+            <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+          <div class="body" id="kms-win-steps">
+            <div class="step"><b>Крок 1: Ключ KMS-клієнта (Windows 10/11 Pro)</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.msguides.com</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 3: Запуск активації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ato</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ckms</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /dli</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          </div>
+        </details>
+      </div>
 
-    <div class="pane" id="kms-office" data-c="amber" hidden>
-      <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
-        <div><strong>Версія:</strong> лише корпоративний (Volume) Office, наприклад LTSC 2021 ProPlus; Microsoft 365 та
-          роздрібні (Retail) версії KMS не активує. Крок 1 сам знаходить 64- або 32-бітний Office.</div></div>
+      <div class="pane" id="kms-office" data-c="amber" hidden>
+        <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+          <div><strong>Версія:</strong> лише корпоративний (Volume) Office, наприклад LTSC 2021 ProPlus; Microsoft 365 та
+            роздрібні (Retail) версії KMS не активує. Крок 1 сам знаходить 64- або 32-бітний Office.</div></div>
 
-      <details>
-        <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Office</span>
-          <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
-        <div class="body"><pre data-collect="kms-office-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
-      </details>
+        <details>
+          <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Office</span>
+            <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати всі</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+          <div class="body"><pre data-collect="kms-office-steps" data-after="echo. &amp; echo Натисніть будь-яку клавішу для виходу... &amp; pause &gt; nul &amp; exit"></pre></div>
+        </details>
 
-      <details>
-        <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Office</span>
-          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
-        <div class="body" id="kms-office-steps">
-          <div class="step"><b>Крок 1: Каталог Office</b><div class="line"><pre>if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (cd /d "%ProgramFiles%\Microsoft Office\Office16") else (cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16")</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo ospp.vbs /sethst:kms.msguides.com</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 3: Активація</b><div class="line"><pre>cscript //nologo ospp.vbs /act</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo ospp.vbs /remhst</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-          <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo ospp.vbs /dstatus</pre>
-            <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
-        </div>
-      </details>
-    </div>
+        <details>
+          <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Office</span>
+            <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+          <div class="body" id="kms-office-steps">
+            <div class="step"><b>Крок 1: Каталог Office</b><div class="line"><pre>if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (cd /d "%ProgramFiles%\Microsoft Office\Office16") else (cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16")</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 2: Встановлення сервера</b><div class="line"><pre>cscript //nologo ospp.vbs /sethst:kms.msguides.com</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 3: Активація</b><div class="line"><pre>cscript //nologo ospp.vbs /act</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 4: Очищення конфігурації</b><div class="line"><pre>cscript //nologo ospp.vbs /remhst</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+            <div class="step"><b>Крок 5: Перевірка статусу</b><div class="line"><pre>cscript //nologo ospp.vbs /dstatus</pre>
+              <button class="copy sm" data-copy title="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
+          </div>
+        </details>
+      </div>
+      </div>
+    </details>
   </section>
 
 </main>
