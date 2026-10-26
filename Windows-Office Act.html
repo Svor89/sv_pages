@@ -127,11 +127,14 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 #toast .i{color:#34d399;font-size:15px}
 @media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
 @media(min-width:900px){
-main.wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+main.wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;align-content:start}
 .btns{gap:8px}
 .cols-open>summary{display:none}
 .cols-open{background:none;border:0}
-.cols-open>.body{padding:0;border:0;background:none}
+.cols-open{flex:1;display:flex;flex-direction:column}
+.cols-open>.body{padding:0;border:0;background:none;flex:1;display:flex;flex-direction:column}
+.cols-open>.body>.pane:not([hidden]){flex:1}
+.cols-open>.body>.pane>details:last-child{margin-top:auto}
 }
 </style>
 </head>
