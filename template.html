@@ -58,6 +58,9 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .chips b .i{color:var(--c4)}
 .chip{display:inline-flex;white-space:nowrap;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
 .chip strong{color:var(--c4)}
+.term{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;padding:8px 10px;border-radius:12px;background:#0c0c0c;border:1px solid rgb(var(--ln)/.8);font:12.5px/1.5 var(--mono);color:#ccc}
+.term>b{flex-basis:100%;text-align:center;font-weight:400;color:#ccc}
+.term span{white-space:nowrap}.term .n{color:#ccc}.term .g{color:#16c60c}.term .d{color:#767676}
 /* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
 .note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
 .note>.i{color:#fbbf24;font-size:15px;margin-top:2px}
@@ -69,7 +72,8 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 @media(min-width:640px){.btns{gap:20px}}
 @media(max-width:420px){.btn{padding:10px;gap:6px;font-size:13px}}
 .btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
-.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:14px;flex:none}.btns .btn b{white-space:nowrap}
+.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:22px;flex:none;color:var(--c4);transition:color .15s}
+@media(hover:hover){.btns .btn:hover{border-color:rgb(var(--c)/.7);box-shadow:0 0 10px rgb(var(--c)/.25)}.btns .btn:hover>.i{color:var(--c3)}}.btns .btn b{white-space:nowrap}
 .btn:hover{background:#334155}.btn:active{transform:scale(.98)}
 .btn>span{display:flex;align-items:center;gap:10px;min-width:0}
 .btn>span>.i{font-size:17px;color:var(--c4)}
