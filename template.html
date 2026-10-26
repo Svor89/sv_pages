@@ -13,6 +13,7 @@
   Блоки ниже — образцы, ненужные удалить. Цвет раздела — data-c: purple | cyan | amber | emerald | rose.
   Иконки: <svg class="i"><use href="#i-ИМЯ"/></svg>; после правок — python tools/icons.py (набор иконок в конце <body>).
   Стили и скрипт ниже одинаковы во всех страницах — менять сразу везде.
+  Таблица данных (коды, адреса) — образец «Розділ 3»: .tw > table.tbl, значения button.v data-v (клик копирует).
   Светлая тема «Light» — класс light у <html> (кнопка в шапке, ?theme=light); новые цвета в тёмных стилях — добавить и в блок Light.
 -->
 <style>
@@ -134,6 +135,23 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 #toast{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#020617;border:1px solid rgba(168,85,247,.4);box-shadow:0 0 25px rgba(168,85,247,.4);font-size:13px;font-weight:600;opacity:0;transform:translateY(64px);transition:.3s;pointer-events:none}
 #toast.show{opacity:1;transform:none}
 #toast .i{color:#34d399;font-size:15px}
+/* таблиці даних (коди, адреси): рядки «зеброю» без ліній, значення — «таблетки» button.v data-v (клік копіює).
+   Перша колонка — назва, притиснута до даних; колонка іншого кольору — data-c на th і td; група колонок — th.grp + tr.sub */
+.tw{padding:6px;border-radius:12px;background:rgba(2,6,23,.5);border:1px solid rgb(var(--ln)/.8)}
+.card>.tw{flex:1}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.tbl th{padding:6px 6px 8px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--c4);text-align:center}
+.tbl td{padding:5px 6px;text-align:center}
+.tbl th:first-child,.tbl td:first-child{text-align:left;padding-left:10px}
+.tbl td:first-child{color:var(--t2);border-radius:8px 0 0 8px}.tbl td:last-child{border-radius:0 8px 8px 0}
+.tbl .grp{padding-bottom:4px;border-bottom:1px solid rgb(var(--c)/.35)}
+.tbl .sub th{padding:2px 6px 6px;color:var(--t4)}
+.tbl tbody tr:nth-child(odd) td{background:rgb(var(--ln)/.18)}
+.tbl tbody tr:hover td{background:rgb(var(--c)/.10)}
+.v{padding:3px 9px;border:0;border-radius:7px;background:rgb(var(--c)/.12);box-shadow:inset 0 0 0 1px rgb(var(--c)/.28);cursor:pointer;font:600 14.5px var(--mono);color:var(--c3);transition:background .15s}
+.v:hover{background:rgb(var(--c)/.26)}.v:active{transform:scale(.95)}
+@media(min-width:481px){.tbl th:first-child,.tbl td:first-child{width:1%;white-space:nowrap;padding-right:18px}}
+@media(max-width:480px){.tw{padding:4px}.tbl{font-size:13.5px}.tbl td,.tbl th{padding:4px 2px}.tbl th:first-child,.tbl td:first-child{padding-left:6px}.v{padding:2px 4px;font-size:12.5px}}
 /* переключатель темы — кнопка слева в шапке */
 .theme{display:grid;place-items:center;padding:0;border-radius:8px;border:1px solid rgb(var(--ln)/.8);background:none;color:var(--t4);font-size:15px;cursor:pointer;transition:color .15s,background .15s}
 .theme:hover{color:#fff;background:rgb(var(--ln)/.5)}
@@ -188,6 +206,9 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 :where(.light) .tabs button.on{box-shadow:0 2px 6px -2px rgb(var(--c)/.6)}
 :where(.light) .fg-purple{color:#0284c7}:where(.light) .fg-cyan{color:#0891b2}:where(.light) .fg-amber{color:#d97706}:where(.light) .fg-emerald{color:#059669}:where(.light) .fg-rose{color:#e11d48}
 :where(.light) #toast{background:#182b42;color:#fff;border-color:#0369a1;box-shadow:0 8px 24px -6px rgb(15 34 54/.5)}:where(.light) #toast .i{color:#4ade80}
+:where(.light) .tw{background:#d2dae3;border-color:#bac6d3}
+:where(.light) .tbl tbody tr:nth-child(odd) td{background:rgb(255 255 255/.55)}
+:where(.light) .tbl tbody tr:hover td{background:rgb(var(--c)/.12)}
 @media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
 </style>
 </head>
@@ -290,6 +311,24 @@ ol.list li::marker{color:var(--c4);font-weight:700}
     </div>
   </section>
 
+  <!-- ===== Таблиця даних: назва + значення-«таблетки» (клік копіює). Колонка іншого кольору — data-c на th і td.
+       Група колонок: th.grp colspan + рядок tr.sub з підзаголовками; решта th — rowspan="2". ===== -->
+  <section class="card" data-c="purple">
+    <div class="head">
+      <div><span class="num">3</span><h2>Розділ 3: Таблиця кодів</h2></div>
+      <span class="badge"><svg class="i"><use href="#i-book"/></svg>Довідка</span>
+    </div>
+    <p class="lead">Натисніть на код — він скопіюється.</p>
+    <div class="tw"><table class="tbl">
+      <thead><tr><th rowspan="2">Назва</th><th colspan="2" class="grp">Група</th><th rowspan="2" data-c="emerald">Код</th></tr>
+      <tr class="sub"><th>А</th><th>Б</th></tr></thead>
+      <tbody>
+        <tr><td>Підрозділ 1</td><td><button class="v" data-v="0101" title="Скопіювати">0101</button></td><td><button class="v" data-v="0201" title="Скопіювати">0201</button></td><td data-c="emerald"><button class="v" data-v="100001" title="Скопіювати">100001</button></td></tr>
+        <tr><td>Підрозділ 2</td><td><button class="v" data-v="0102" title="Скопіювати">0102</button></td><td><button class="v" data-v="0202" title="Скопіювати">0202</button></td><td data-c="emerald"><button class="v" data-v="100002" title="Скопіювати">100002</button></td></tr>
+        <tr><td>Підрозділ 3</td><td><button class="v" data-v="0103" title="Скопіювати">0103</button></td><td><button class="v" data-v="0203" title="Скопіювати">0203</button></td><td data-c="emerald"><button class="v" data-v="100003" title="Скопіювати">100003</button></td></tr>
+      </tbody></table></div>
+  </section>
+
 </main>
 
 <div id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-circle-check"/></svg><span></span></div>
@@ -376,6 +415,8 @@ ol.list li::marker{color:var(--c4);font-weight:700}
       try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (er) {}
       return;
     }
+    var v = e.target.closest('[data-v]');
+    if (v) { copy(v.getAttribute('data-v'), function () { toast('Скопійовано: ' + v.getAttribute('data-v')); }); return; }
     var t = e.target.closest('[data-tab]');
     if (t) {
       [].forEach.call(t.parentNode.children, function (x) {
