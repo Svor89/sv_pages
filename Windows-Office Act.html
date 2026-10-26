@@ -420,6 +420,16 @@ main.wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;
   });
 })();
 </script>
-<script>if(innerWidth<900)document.querySelector('.cols-open').open=false;  // на вузькому екрані Метод 2 згорнуто</script>
+<script>
+/* на вузькому екрані Метод 2 згорнуто; на широкому дві картки стартують однієї висоти (більшої з двох),
+   а далі кожна росте сама — розкриття в одній не розтягує другу */
+(function () {
+  var m = document.querySelector('.cols-open'), cards = [].slice.call(document.querySelectorAll('main > .card'));
+  if (innerWidth < 900) { m.open = false; return; }
+  var h = 0;
+  cards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
+  cards.forEach(function (c) { c.style.minHeight = h + 'px'; });
+})();
+</script>
 </body>
 </html>
