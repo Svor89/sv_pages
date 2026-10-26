@@ -54,9 +54,9 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .lead strong{color:#fff}
 /* «фишки»: заголовок + ярлыки */
 .chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
-.chips b{display:flex;align-items:center;gap:8px;color:var(--c3)}
+.chips b{display:flex;align-items:center;gap:8px;color:var(--c3);flex-basis:100%;justify-content:center}
 .chips b .i{color:var(--c4)}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
+.chip{display:inline-flex;white-space:nowrap;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
 .chip strong{color:var(--c4)}
 /* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
 .note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
@@ -65,9 +65,11 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
 .note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
 /* кнопки скачивания / ссылки */
-.btns{display:grid;gap:12px;max-width:32rem;width:100%;margin:0 auto}
-@media(min-width:640px){.btns{grid-template-columns:1fr 1fr;gap:20px}}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:32rem;width:100%;margin:0 auto}
+@media(min-width:640px){.btns{gap:20px}}
+@media(max-width:420px){.btn{padding:10px;gap:6px;font-size:13px}}
 .btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
+.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:14px;flex:none}.btns .btn b{white-space:nowrap}
 .btn:hover{background:#334155}.btn:active{transform:scale(.98)}
 .btn>span{display:flex;align-items:center;gap:10px;min-width:0}
 .btn>span>.i{font-size:17px;color:var(--c4)}
@@ -165,8 +167,7 @@ ol.list li::marker{color:var(--c4);font-weight:700}
     <!-- Кнопки: class="btn main" — главная (цветная), class="btn" — обычная -->
     <div class="btns">
       <a class="btn main" href="https://example.com/file.exe" target="_blank" rel="noopener">
-        <span><svg class="i"><use href="#i-file-code"/></svg><span><b>Скачати file.exe</b><small>Пряме завантаження</small></span></span>
-        <svg class="i"><use href="#i-download"/></svg></a>
+        <svg class="i"><use href="#i-download"/></svg><span><span><b>Скачати</b><b>file.exe</b><small>Пряме завантаження</small></span></span></a>
       <a class="btn" href="https://example.com/" target="_blank" rel="noopener">
         <span><svg class="i fg-cyan"><use href="#i-link"/></svg><span><b>Офіційний сайт</b><small>example.com</small></span></span>
         <svg class="i"><use href="#i-arrow-up-right-from-square"/></svg></a>
@@ -244,7 +245,6 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 <symbol id="i-circle-xmark" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></symbol>
 <symbol id="i-copy" viewBox="0 0 512 512"><path d="M448 384H256c-35.3 0-64-28.7-64-64V64c0-35.3 28.7-64 64-64H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V320c0 35.3-28.7 64-64 64zM64 128h96v48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H256c8.8 0 16-7.2 16-16V416h48v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64z"/></symbol>
 <symbol id="i-download" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></symbol>
-<symbol id="i-file-code" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM153 289l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L71 337c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM265 255l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
 <symbol id="i-file-word" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM111 257.1l26.8 89.2 31.6-90.3c3.4-9.6 12.5-16.1 22.7-16.1s19.3 6.4 22.7 16.1l31.6 90.3L273 257.1c3.8-12.7 17.2-19.9 29.9-16.1s19.9 17.2 16.1 29.9l-48 160c-3 10-12 16.9-22.4 17.1s-19.8-6.2-23.2-16.1L192 336.6l-33.3 95.3c-3.4 9.8-12.8 16.3-23.2 16.1s-19.5-7.1-22.4-17.1l-48-160c-3.8-12.7 3.4-26.1 16.1-29.9s26.1 3.4 29.9 16.1z"/></symbol>
 <symbol id="i-laptop-code" viewBox="0 0 640 512"><path d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
 <symbol id="i-link" viewBox="0 0 640 512"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></symbol>

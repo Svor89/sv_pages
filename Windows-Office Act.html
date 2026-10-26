@@ -48,9 +48,9 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .lead strong{color:#fff}
 /* «фишки»: заголовок + ярлыки */
 .chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
-.chips b{display:flex;align-items:center;gap:8px;color:var(--c3)}
+.chips b{display:flex;align-items:center;gap:8px;color:var(--c3);flex-basis:100%;justify-content:center}
 .chips b .i{color:var(--c4)}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
+.chip{display:inline-flex;white-space:nowrap;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
 .chip strong{color:var(--c4)}
 /* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
 .note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
@@ -59,9 +59,11 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
 .note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
 /* кнопки скачивания / ссылки */
-.btns{display:grid;gap:12px;max-width:32rem;width:100%;margin:0 auto}
-@media(min-width:640px){.btns{grid-template-columns:1fr 1fr;gap:20px}}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:32rem;width:100%;margin:0 auto}
+@media(min-width:640px){.btns{gap:20px}}
+
 .btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
+.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:14px;flex:none}.btns .btn b{white-space:nowrap}
 .btn:hover{background:#334155}.btn:active{transform:scale(.98)}
 .btn>span{display:flex;align-items:center;gap:10px;min-width:0}
 .btn>span>.i{font-size:17px;color:var(--c4)}
@@ -120,6 +122,13 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 #toast.show{opacity:1;transform:none}
 #toast .i{color:#34d399;font-size:15px}
 @media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
+@media(min-width:900px){
+main.wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.btns{gap:8px}
+.cols-open>summary{display:none}
+.cols-open{background:none;border:0}
+.cols-open>.body{padding:0;border:0;background:none}
+}
 </style>
 </head>
 <body data-c="purple">
@@ -142,7 +151,6 @@ ol.list li::marker{color:var(--c4);font-weight:700}
     <p class="lead">Відкритий інструмент від спільноти Massgrave для швидкої та вічної активації.</p>
 
     <div class="chips">
-      <b><svg class="i"><use href="#i-circle-check"/></svg>Вибір у меню MAS:</b>
       <span class="chip"><svg class="i fg-cyan"><use href="#i-windows"/></svg>Windows: <strong>1 (HWID)</strong></span>
       <span class="chip"><svg class="i fg-amber"><use href="#i-file-word"/></svg>Office: <strong>2 (Ohook)</strong></span>
     </div>
@@ -152,18 +160,16 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 
     <div class="btns">
       <a class="btn main" href="https://dev.azure.com/massgrave/Microsoft-Activation-Scripts/_apis/git/repositories/Microsoft-Activation-Scripts/items?path=/MAS/All-In-One-Version-KL/MAS_AIO.cmd&amp;download=true" target="_blank" rel="noopener">
-        <span><svg class="i"><use href="#i-file-code"/></svg><span><b>Скачати MAS_AIO.cmd</b><small>Пряме завантаження .cmd</small></span></span>
-        <svg class="i"><use href="#i-download"/></svg></a>
+        <svg class="i"><use href="#i-download"/></svg><span><span><b>Скачати MAS_AIO.cmd</b><small>Пряме завантаження</small></span></span></a>
       <a class="btn" href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip" target="_blank" rel="noopener">
-        <span><svg class="i fg-amber"><use href="#i-file-zipper"/></svg><span><b>Скачати MAS_AIO.zip</b><small>Архів GitHub</small></span></span>
-        <svg class="i"><use href="#i-download"/></svg></a>
+        <svg class="i"><use href="#i-download"/></svg><span><span><b>Скачати MAS_AIO.zip</b><small>Архів GitHub</small></span></span></a>
     </div>
 
-    <div class="cmd">
-      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Альтернатива через PowerShell (в 1 клік)</div>
-      <div class="line"><pre>irm https://get.activated.win | iex</pre>
-        <button class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
-    </div>
+    <details>
+      <summary><span><svg class="i"><use href="#i-terminal"/></svg>Альтернатива через PowerShell</span>
+        <div><button class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+      <div class="body"><pre>irm https://get.activated.win | iex</pre></div>
+    </details>
 
     <details>
       <summary><span><svg class="i"><use href="#i-list-ol"/></svg>Покрокова інструкція</span>
@@ -184,9 +190,9 @@ ol.list li::marker{color:var(--c4);font-weight:700}
       <span class="badge"><svg class="i"><use href="#i-clock-rotate-left"/></svg>На 180 днів</span>
     </div>
 
-    <p class="lead">Безпечна активація в Командному рядку (cmd) без зміни системних файлів. Антивірус вимикати <strong>не потрібно</strong>.</p>
+    <p class="lead">Безпечна активація в Командному рядку (cmd) без зміни системних файлів.<br>Антивірус вимикати <strong>не потрібно</strong>.</p>
 
-    <details>
+    <details open class="cols-open">
       <summary><span><svg class="i"><use href="#i-terminal"/></svg>Команди та інструкція</span>
         <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
       <div class="body">
@@ -200,9 +206,8 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 
       <div class="pane" id="kms-win" data-c="cyan">
         <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
-          <div><strong>Ключ:</strong> KMS активує лише корпоративну (Volume) редакцію — крок 1 ставить ключ KMS-клієнта для
-            Windows 10/11 <strong>Pro</strong>. Для Enterprise, Education та інших — ключ з
-            <a href="https://learn.microsoft.com/uk-ua/windows-server/get-started/kms-client-activation-keys" target="_blank" rel="noopener">таблиці Microsoft</a>.</div></div>
+          <div>Для Enterprise, Education та інших — ключ з
+          <a href="https://learn.microsoft.com/uk-ua/windows-server/get-started/kms-client-activation-keys" target="_blank" rel="noopener">таблиці Microsoft</a>.</div></div>
 
         <details>
           <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Windows</span>
@@ -230,8 +235,7 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 
       <div class="pane" id="kms-office" data-c="amber" hidden>
         <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
-          <div><strong>Версія:</strong> лише корпоративний (Volume) Office, наприклад LTSC 2021 ProPlus; Microsoft 365 та
-            роздрібні (Retail) версії KMS не активує. Крок 1 сам знаходить 64- або 32-бітний Office.</div></div>
+          <div>Microsoft 365 та роздрібні (Retail) версії KMS не активує.</div></div>
 
         <details>
           <summary><span><svg class="i"><use href="#i-bolt"/></svg>Усі команди для Office</span>
@@ -274,9 +278,7 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 <symbol id="i-clock-rotate-left" viewBox="0 0 512 512"><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></symbol>
 <symbol id="i-copy" viewBox="0 0 512 512"><path d="M448 384H256c-35.3 0-64-28.7-64-64V64c0-35.3 28.7-64 64-64H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V320c0 35.3-28.7 64-64 64zM64 128h96v48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H256c8.8 0 16-7.2 16-16V416h48v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64z"/></symbol>
 <symbol id="i-download" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></symbol>
-<symbol id="i-file-code" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM153 289l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L71 337c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM265 255l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></symbol>
 <symbol id="i-file-word" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM111 257.1l26.8 89.2 31.6-90.3c3.4-9.6 12.5-16.1 22.7-16.1s19.3 6.4 22.7 16.1l31.6 90.3L273 257.1c3.8-12.7 17.2-19.9 29.9-16.1s19.9 17.2 16.1 29.9l-48 160c-3 10-12 16.9-22.4 17.1s-19.8-6.2-23.2-16.1L192 336.6l-33.3 95.3c-3.4 9.8-12.8 16.3-23.2 16.1s-19.5-7.1-22.4-17.1l-48-160c-3.8-12.7 3.4-26.1 16.1-29.9s26.1 3.4 29.9 16.1z"/></symbol>
-<symbol id="i-file-zipper" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM96 48c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zm-6.3 71.8c3.7-14 16.4-23.8 30.9-23.8h14.8c14.5 0 27.2 9.7 30.9 23.8l23.5 88.2c1.4 5.4 2.1 10.9 2.1 16.4c0 35.2-28.8 63.7-64 63.7s-64-28.5-64-63.7c0-5.5 .7-11.1 2.1-16.4l23.5-88.2zM112 336c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H112z"/></symbol>
 <symbol id="i-infinity" viewBox="0 0 640 512"><path d="M0 241.1C0 161 65 96 145.1 96c38.5 0 75.4 15.3 102.6 42.5L320 210.7l72.2-72.2C419.5 111.3 456.4 96 494.9 96C575 96 640 161 640 241.1v29.7C640 351 575 416 494.9 416c-38.5 0-75.4-15.3-102.6-42.5L320 301.3l-72.2 72.2C220.5 400.7 183.6 416 145.1 416C65 416 0 351 0 270.9V241.1zM274.7 256l-72.2-72.2c-15.2-15.2-35.9-23.8-57.4-23.8C100.3 160 64 196.3 64 241.1v29.7c0 44.8 36.3 81.1 81.1 81.1c21.5 0 42.2-8.5 57.4-23.8L274.7 256zm90.5 0l72.2 72.2c15.2 15.2 35.9 23.8 57.4 23.8c44.8 0 81.1-36.3 81.1-81.1V241.1c0-44.8-36.3-81.1-81.1-81.1c-21.5 0-42.2 8.5-57.4 23.8L365.3 256z"/></symbol>
 <symbol id="i-key" viewBox="0 0 512 512"><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></symbol>
 <symbol id="i-list-check" viewBox="0 0 512 512"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></symbol>
@@ -348,5 +350,6 @@ ol.list li::marker{color:var(--c4);font-weight:700}
   });
 })();
 </script>
+<script>if(innerWidth<900)document.querySelector('.cols-open').open=false;  // на вузькому екрані Метод 2 згорнуто</script>
 </body>
 </html>

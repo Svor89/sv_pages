@@ -48,9 +48,9 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .lead strong{color:#fff}
 /* «фишки»: заголовок + ярлыки */
 .chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
-.chips b{display:flex;align-items:center;gap:8px;color:var(--c3)}
+.chips b{display:flex;align-items:center;gap:8px;color:var(--c3);flex-basis:100%;justify-content:center}
 .chips b .i{color:var(--c4)}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
+.chip{display:inline-flex;white-space:nowrap;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
 .chip strong{color:var(--c4)}
 /* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
 .note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
@@ -59,9 +59,11 @@ main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-directio
 .note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
 .note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
 /* кнопки скачивания / ссылки */
-.btns{display:grid;gap:12px;max-width:32rem;width:100%;margin:0 auto}
-@media(min-width:640px){.btns{grid-template-columns:1fr 1fr;gap:20px}}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:32rem;width:100%;margin:0 auto}
+@media(min-width:640px){.btns{gap:20px}}
+@media(max-width:420px){.btn{padding:10px;gap:6px;font-size:13px}}
 .btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
+.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:14px;flex:none}.btns .btn b{white-space:nowrap}
 .btn:hover{background:#334155}.btn:active{transform:scale(.98)}
 .btn>span{display:flex;align-items:center;gap:10px;min-width:0}
 .btn>span>.i{font-size:17px;color:var(--c4)}
