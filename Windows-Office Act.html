@@ -115,6 +115,7 @@ ol.list{padding-left:22px;display:flex;flex-direction:column;gap:6px;line-height
 ol.list li::marker{color:var(--c4);font-weight:700}
 .k{font:13px var(--mono);padding:1px 6px;border-radius:4px;background:rgb(var(--c9)/.8);color:var(--c3);border:1px solid rgb(var(--c)/.3)}
 .hl{color:var(--c4);font-weight:700}
+.gr{color:#16c60c;font-weight:700}
 /* вкладки */
 .tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;padding:4px;border-radius:12px;background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8)}
 .tabs button{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:0;border-radius:8px;background:none;cursor:pointer;font:700 13px var(--sans);color:var(--t4)}
@@ -179,6 +180,7 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 :where(.light) .tabs{background:#ccd5df;border-color:#bac6d3}
 :where(.light) .tabs button:hover{color:var(--t1)}
 :where(.light) .tabs button.on{box-shadow:0 2px 6px -2px rgb(var(--c)/.6)}
+:where(.light) .gr{color:#15803d}
 :where(.light) .fg-purple{color:#0284c7}:where(.light) .fg-cyan{color:#0891b2}:where(.light) .fg-amber{color:#d97706}:where(.light) .fg-emerald{color:#059669}:where(.light) .fg-rose{color:#e11d48}
 :where(.light) #toast{background:#182b42;color:#fff;border-color:#0369a1;box-shadow:0 8px 24px -6px rgb(15 34 54/.5)}:where(.light) #toast .i{color:#4ade80}
 @media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
@@ -241,7 +243,7 @@ main.wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;
       <div class="body"><ol class="list">
         <li>Вимкніть антивірус та скачайте <code class="k">MAS_AIO.cmd</code> або запустіть PowerShell команду.</li>
         <li>Запустіть <code class="k">MAS_AIO.cmd</code> у Командному рядку (cmd) від імені адміністратора.</li>
-        <li>У вікні меню виберіть: <span class="hl">1</span> (HWID) для Windows або <span class="hl">2</span> (Ohook) для Office.</li>
+        <li>У вікні меню виберіть: <span class="gr">1 (HWID)</span> для Windows або <span class="gr">2 (Ohook)</span> для Office.</li>
         <li>Зачекайте 5 секунд до успішного завершення.</li>
       </ol></div>
     </details>
