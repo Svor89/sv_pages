@@ -4,236 +4,212 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Кодування органів</title>
+<meta name="description" content="Коди органів для ЄРДР (СВ, СД) та ЖЄО: натисніть на код — він скопіюється.">
 <link rel="icon" id="favicon">
-<script>/* тема до отрисовки: выбор кнопкой в шапке (localStorage) → ?theme=light|dark (так её задаёт SV) → тёмная */
+<!-- Справочник по шаблону template.html, система — design.md. Общие стили и скрипт — tools/, python tools/build.py. -->
+<!--base--><script>/* тема до отрисовки: выбор кнопкой в шапке (localStorage) → ?theme=light|dark (так её задаёт SV) → тёмная */
 (function(){var t;try{t=localStorage.getItem('theme')}catch(e){}t=t||(/[?&]theme=(\w+)/.exec(location.search)||[])[1];if(t==='light')document.documentElement.className='light'})();</script>
-<!-- Справочник по шаблону template.html: стили и скрипт общие, менять во всех страницах сразу. -->
 <style>
-:root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--mono:"Cascadia Mono",Consolas,Menlo,"Liberation Mono",monospace;--t1:#f1f5f9;--t2:#e2e8f0;--t3:#cbd5e1;--t4:#94a3b8;--ln:51 65 85}
-[data-c=purple]{--c:168 85 247;--c3:#d8b4fe;--c4:#c084fc;--c9:59 7 100;--bar:linear-gradient(90deg,#9333ea,#6366f1,#c084fc);--btn:linear-gradient(90deg,#9333ea,#4f46e5);--btnh:linear-gradient(90deg,#a855f7,#6366f1)}
-[data-c=cyan]{--c:6 182 212;--c3:#67e8f9;--c4:#22d3ee;--c9:8 51 68;--bar:linear-gradient(90deg,#06b6d4,#2dd4bf,#3b82f6);--btn:linear-gradient(90deg,#0891b2,#2563eb);--btnh:linear-gradient(90deg,#06b6d4,#3b82f6)}
-[data-c=amber]{--c:245 158 11;--c3:#fcd34d;--c4:#fbbf24;--c9:69 26 3;--bar:linear-gradient(90deg,#f59e0b,#fb923c,#ea580c);--btn:linear-gradient(90deg,#d97706,#ea580c);--btnh:linear-gradient(90deg,#f59e0b,#f97316)}
-[data-c=emerald]{--c:16 185 129;--c3:#6ee7b7;--c4:#34d399;--c9:2 44 34;--bar:linear-gradient(90deg,#10b981,#2dd4bf,#22c55e);--btn:linear-gradient(90deg,#059669,#0d9488);--btnh:linear-gradient(90deg,#10b981,#14b8a6)}
-[data-c=rose]{--c:244 63 94;--c3:#fda4af;--c4:#fb7185;--c9:76 5 25;--bar:linear-gradient(90deg,#e11d48,#ec4899,#fb7185);--btn:linear-gradient(90deg,#e11d48,#db2777);--btnh:linear-gradient(90deg,#f43f5e,#ec4899)}
+/* SV Довідники · система: design.md · основа: Hallmark app scope, тема Almanac (офлайн, системні шрифти, синій акцент)
+ * Общие стили всех страниц: правка здесь → python tools/build.py. Цвета и шрифты — только токены ниже.
+ * waive: системные шрифты (правило проекта: 0 байт, без CDN) · несколько залитых «Скопіювати» (копирование — главное действие) */
+:root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;--display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;--mono:"Cascadia Mono",Consolas,"Liberation Mono",Menlo,monospace;
+--r:2px;--bar:2px;--dur:.15s;
+--paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#b1b8bf;
+--band:#03080f;--band-ink:#e6ecf2;--band-muted:#9aa6b2;--band-rule:#1f2a35;--band-accent:#67aaed;
+--code:#04080d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25303b;--code-ok:#79ca8b;
+--term:#0c0c0c;--term-ink:#cccccc;--term-g:#16c60c;--term-d:#767676;
+--accent:#67aaed;--accent-2:#85bcf5;--accent-ink:#03080f;--focus:#85bcf5;
+--blue:#73b0ee;--teal:#64c3c8;--amber:#e7b369;--green:#79ca8b;--red:#eb817f;
+--t-blue:#1a2d41;--t-teal:#143034;--t-amber:#3a2b16;--t-green:#1c3121;--t-red:#3f2222;
+--tone:var(--accent);--tint:var(--t-blue);color-scheme:dark}
+:root.light{--paper:#c4cbd2;--sheet:#e7ecf0;--well:#dae0e5;--hover:#cbd3da;--ink:#09131b;--ink-2:#1e2830;--muted:#454e56;--rule:#b8bfc5;--rule-2:#262f37;
+--band:#14283c;--band-ink:#e6ecf2;--band-muted:#a9bacb;--band-rule:#2a4058;--band-accent:#8cc0f0;
+--code:#0b141d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25313d;
+--accent:#0058a3;--accent-2:#004587;--accent-ink:#f4f6f8;--focus:#0058a3;
+--blue:#0058a3;--teal:#00656e;--amber:#925000;--green:#0f6a31;--red:#a5292b;
+--t-blue:#cbddf2;--t-teal:#c8e4e7;--t-amber:#f1dfc0;--t-green:#cee5d2;--t-red:#f5d5d4;
+--tone:var(--accent);--tint:var(--t-blue);color-scheme:light}
+/* тон раздела / колонки / вкладки: маркеры, не заливка */
+[data-c=blue]{--tone:var(--blue);--tint:var(--t-blue)}[data-c=teal]{--tone:var(--teal);--tint:var(--t-teal)}[data-c=amber]{--tone:var(--amber);--tint:var(--t-amber)}
+[data-c=green]{--tone:var(--green);--tint:var(--t-green)}[data-c=red]{--tone:var(--red);--tint:var(--t-red)}
 *,::before,::after{box-sizing:border-box}
-html{background:#dcd6cd;-webkit-text-size-adjust:100%}
-body{margin:0;min-height:100vh;display:flex;flex-direction:column;font:15px/1.5 var(--sans);color:var(--t1);-webkit-font-smoothing:antialiased}
-/* фон «крафт-бумага»: отдельный неподвижный слой — прокрутка его не перерисовывает */
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(255,253,248,.65),rgba(215,208,197,.85) 70%,rgba(170,160,147,.95)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='5'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E") #dcd6cd}
-::selection{background:#a855f7;color:#fff}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#d4cecb}::-webkit-scrollbar-thumb{background:#8b837e;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#5a5450}
-a{color:var(--c4)}
-h2,p,ol,ul,pre{margin:0}
+[hidden]{display:none!important}
+html{overflow-x:clip;background:var(--paper);-webkit-text-size-adjust:100%;scroll-padding-top:68px}
+body{margin:0;overflow-x:clip;min-height:100vh;display:flex;flex-direction:column;font:16px/1.55 var(--sans);color:var(--ink-2);background:var(--paper);-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:var(--paper)}::-webkit-scrollbar-thumb{background:var(--muted);border:3px solid var(--paper);border-radius:5px}
+a{color:inherit;text-decoration:underline 1px var(--accent);text-underline-offset:.15em}a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3,p,ol,ul,pre,dl,dd{margin:0}
+button{font:inherit;color:inherit}
 .i{width:1em;height:1em;fill:currentColor;flex:none;vertical-align:-.125em}
 .wrap{max-width:56rem;width:100%;margin:0 auto;padding:0 16px}
 @media(min-width:640px){.wrap{padding:0 24px}}
-/* шапка */
-.top{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.97);border-bottom:1px solid rgb(var(--ln)/.8);box-shadow:0 10px 15px -3px rgb(0 0 0/.3)}
-.top .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.top .ph,.logo{width:32px;height:32px;flex:none}
-.top h1{margin:0;min-width:0;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:#fff}
-.top h1 .i{color:var(--c4);font-size:14px}
+/* шапка — тёмная полоса */
+.top{position:sticky;top:0;z-index:50;background:var(--band);color:var(--band-ink);border-bottom:1px solid var(--band-rule)}
+.top .wrap{height:52px;display:flex;align-items:center;gap:12px}
+.top h1{flex:1;min-width:0;display:flex;align-items:center;gap:10px;font:600 17px/1.2 var(--display);letter-spacing:-.01em}
+.top h1 .i{color:var(--band-accent);font-size:15px}
 .top h1 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.logo{border-radius:8px;border:1px solid rgb(var(--ln)/.8);box-shadow:0 4px 6px -1px rgb(0 0 0/.3)}
-main.wrap{flex:1;padding-top:20px;padding-bottom:40px;display:flex;flex-direction:column;gap:20px}
-/* раздел */
-.card{position:relative;overflow:hidden;background:rgba(15,23,42,.93);border:1px solid rgb(var(--c)/.4);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 30px -5px rgb(var(--c)/.35),0 8px 16px -6px rgb(0 0 0/.6)}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--bar)}
-@media(min-width:640px){.card{padding:20px}}
-.head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
-.head>div{display:flex;align-items:center;gap:10px}
-.num{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:12px;background:rgb(var(--c)/.2);border:1px solid rgb(var(--c)/.4);color:var(--c4);font-weight:700;font-size:13px;box-shadow:0 0 10px rgb(var(--c)/.2)}
-.head h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:.01em;line-height:1.3}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:800;text-transform:uppercase;background:rgb(var(--c)/.2);color:var(--c3);border:1px solid rgb(var(--c)/.4);box-shadow:0 0 10px rgb(var(--c)/.3)}
-.badge .i{color:var(--c4)}
-.lead{color:var(--t3)}
-.lead strong{color:#fff}
-/* «фишки»: заголовок + ярлыки */
-.chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:12px;border-radius:12px;background:rgb(var(--c9)/.4);border:1px solid rgb(var(--c)/.3);font-size:13px}
-.chips b{display:flex;align-items:center;gap:8px;color:var(--c3);flex-basis:100%;justify-content:center}
-.chips b .i{color:var(--c4)}
-.chip{display:inline-flex;white-space:nowrap;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:rgba(2,6,23,.7);border:1px solid rgb(var(--c)/.3);font:12.5px var(--mono);color:var(--t2)}
-.chip strong{color:var(--c4)}
-.term{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;padding:8px 10px;border-radius:12px;background:#0c0c0c;border:1px solid rgb(var(--ln)/.8);font:12.5px/1.5 var(--mono);color:#ccc}
-.term>b{flex-basis:100%;text-align:center;font-weight:400;color:#ccc}
-.term span{white-space:nowrap}.term .n{color:#ccc}.term .g{color:#16c60c}.term .d{color:#767676}
-/* примечание: обычное — жёлтое; .info — голубое, .bad — красное */
-.note{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(69,26,3,.3);border:1px solid rgba(245,158,11,.4);color:var(--t2);font-size:14px;line-height:1.45}
-.note>.i{color:#fbbf24;font-size:15px;margin-top:2px}
-.note strong{color:#fcd34d}
-.note.info{background:rgba(8,51,68,.35);border-color:rgba(6,182,212,.4)}.note.info>.i{color:#22d3ee}.note.info strong{color:#67e8f9}
-.note.bad{background:rgba(76,5,25,.35);border-color:rgba(244,63,94,.45)}.note.bad>.i{color:#fb7185}.note.bad strong{color:#fda4af}
-/* кнопки скачивания / ссылки */
-.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:32rem;width:100%;margin:0 auto}
-@media(min-width:640px){.btns{gap:20px}}
-@media(max-width:420px){.btn{padding:10px;gap:6px;font-size:13px}}
-.btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(30,41,59,.9);border:1px solid #475569;font-size:14px;transition:transform .1s,background .15s}
-.btns .btn{padding:8px 10px;gap:6px;font-size:12.5px}.btns .btn{justify-content:flex-start}.btns .btn>.i{font-size:22px;flex:none;color:var(--c4);transition:color .15s}
-@media(hover:hover){.btns .btn:hover{border-color:rgb(var(--c)/.7);box-shadow:0 0 10px rgb(var(--c)/.25)}.btns .btn:hover>.i{color:var(--c3)}}.btns .btn b{white-space:nowrap}
-.btn:hover{background:#334155}.btn:active{transform:scale(.98)}
-.btn>span{display:flex;align-items:center;gap:10px;min-width:0}
-.btn>span>.i{font-size:17px;color:var(--c4)}
-.btn b{display:block;font-weight:700}
-.btn small{display:block;font-size:11.5px;color:var(--t3)}
-.btn>.i{font-size:24px;color:var(--t4);transition:transform .15s}
-.btn:hover>.i{transform:translateY(2px)}
-.btn.main{background:var(--btn);border-color:rgb(var(--c)/.4);box-shadow:0 0 15px rgb(var(--c)/.4)}
-.btn.main:hover{background:var(--btnh)}
-.btn.main small,.btn.main .i{color:rgba(255,255,255,.8)}
-/* команда: заголовок, текст (переносится, не обрезается) и «Скопіювати» */
-.cmd{background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8);border-radius:12px;padding:12px}
-.cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(30,41,59,.8);font-size:12.5px;font-weight:600;color:var(--t3)}
-.cmd-t .i{color:var(--c4)}
-.line{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-pre{flex:1;min-width:0;font:600 13px/1.55 var(--mono);color:var(--c3);white-space:pre-wrap;overflow-wrap:anywhere}
-.copy{flex:none;display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border:0;border-radius:8px;cursor:pointer;font:600 12.5px var(--sans);color:#fff;background:rgb(var(--c)/.85);box-shadow:0 0 10px rgb(var(--c)/.3);transition:transform .1s,background .15s}
-.copy:hover{background:rgb(var(--c))}.copy:active{transform:scale(.95)}
-.copy.ok{background:#059669;box-shadow:none}
-.copy.sm{padding:3px 8px;background:#1e293b;color:var(--t3);box-shadow:none}.copy.sm:hover{background:#334155}.copy.sm.ok{color:#34d399}
-/* раскрывающийся блок */
-details{background:rgba(2,6,23,.5);border:1px solid rgb(var(--ln)/.8);border-radius:12px;overflow:hidden}
-summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;cursor:pointer;user-select:none;list-style:none;font-size:13px;font-weight:700;color:var(--t3)}
-summary::-webkit-details-marker{display:none}
-summary:hover{background:rgba(30,41,59,.5)}
-summary>span{display:flex;align-items:center;gap:8px;min-width:0}
-summary>span>.i{color:var(--c4)}
-summary>div{display:flex;align-items:center;gap:8px;flex:none;font-size:11.5px}
-.more{color:var(--c4)}.less{color:var(--t4);display:none}
-details[open]>summary .more{display:none}details[open]>summary .less{display:inline}
-.chev{color:var(--t4);font-size:10px;transition:transform .2s}
-details[open]>summary .chev{transform:rotate(180deg)}
-.body{padding:12px;border-top:1px solid #1e293b;background:rgba(2,6,23,.8);font-size:14px;color:var(--t3)}
-.body>*+*{margin-top:10px}
-.body>pre{padding:12px;border-radius:8px;background:#020617;border:1px solid rgb(var(--c)/.3);font-size:12.5px}
-/* шаги с командами */
-.step{background:#0f172a;border:1px solid rgb(var(--ln)/.8);border-radius:8px;padding:8px}
-.step>b{display:block;margin-bottom:4px;font-size:13px;color:var(--c4)}
-.step .line{background:#020617;border-radius:6px;padding:6px 6px 6px 8px;align-items:center}
-.step pre{font-weight:400;font-size:12.5px;color:var(--t2)}
-/* нумерованная инструкция */
-ol.list{padding-left:22px;display:flex;flex-direction:column;gap:6px;line-height:1.55}
-ol.list li::marker{color:var(--c4);font-weight:700}
-.k{font:13px var(--mono);padding:1px 6px;border-radius:4px;background:rgb(var(--c9)/.8);color:var(--c3);border:1px solid rgb(var(--c)/.3)}
-.hl{color:var(--c4);font-weight:700}
-/* вкладки */
-.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;padding:4px;border-radius:12px;background:rgba(2,6,23,.8);border:1px solid rgb(var(--ln)/.8)}
-.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:0;border-radius:8px;background:none;cursor:pointer;font:700 13px var(--sans);color:var(--t4)}
-.tabs button:hover{color:#fff}
-.tabs button.on{background:var(--btn);color:#fff;box-shadow:0 0 12px rgb(var(--c)/.3)}
-.pane{display:flex;flex-direction:column;gap:14px}.pane[hidden]{display:none}
-/* цвет отдельной иконки */
-.fg-purple{color:#c084fc}.fg-cyan{color:#22d3ee}.fg-amber{color:#fbbf24}.fg-emerald{color:#34d399}.fg-rose{color:#fb7185}
-/* всплывающее «Скопійовано» */
-#toast{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#020617;border:1px solid rgba(168,85,247,.4);box-shadow:0 0 25px rgba(168,85,247,.4);font-size:13px;font-weight:600;opacity:0;transform:translateY(64px);transition:.3s;pointer-events:none}
-#toast.show{opacity:1;transform:none}
-#toast .i{color:#34d399;font-size:15px}
-/* таблиці даних (коди, адреси): рядки «зеброю» без ліній, значення — «таблетки» button.v data-v (клік копіює).
-   Перша колонка — назва, притиснута до даних; колонка іншого кольору — data-c на th і td; група колонок — th.grp + tr.sub */
-.tw{padding:6px;border-radius:12px;background:rgba(2,6,23,.5);border:1px solid rgb(var(--ln)/.8)}
-.card>.tw{flex:1}
-.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
-.tbl th{padding:6px 6px 8px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--c4);text-align:center}
-.tbl td{padding:5px 6px;text-align:center}
-.tbl th:first-child,.tbl td:first-child{text-align:left;padding-left:10px}
-.tbl td:first-child{color:var(--t2);border-radius:8px 0 0 8px}.tbl td:last-child{border-radius:0 8px 8px 0}
-.tbl .grp{padding-bottom:4px;border-bottom:1px solid rgb(var(--c)/.35)}
-.tbl .sub th{padding:2px 6px 6px;color:var(--t4)}
-.tbl tbody tr:nth-child(odd) td{background:rgb(var(--ln)/.18)}
-.tbl tbody tr:hover td{background:rgb(var(--c)/.10)}
-.v{padding:3px 9px;border:0;border-radius:7px;background:rgb(var(--c)/.12);box-shadow:inset 0 0 0 1px rgb(var(--c)/.28);cursor:pointer;font:600 14.5px var(--mono);color:var(--c3);transition:background .15s}
-.v:hover{background:rgb(var(--c)/.26)}.v:active{transform:scale(.95)}
-@media(min-width:481px){.tbl th:first-child,.tbl td:first-child{width:1%;white-space:nowrap;padding-right:18px}}
-@media(max-width:480px){.tw{padding:4px}.tbl{font-size:13.5px}.tbl td,.tbl th{padding:4px 2px}.tbl th:first-child,.tbl td:first-child{padding-left:6px}.v{padding:2px 4px;font-size:12.5px}}
-/* переключатель темы — кнопка слева в шапке */
-.theme{display:grid;place-items:center;padding:0;border-radius:8px;border:1px solid rgb(var(--ln)/.8);background:none;color:var(--t4);font-size:15px;cursor:pointer;transition:color .15s,background .15s}
-.theme:hover{color:#fff;background:rgb(var(--ln)/.5)}
+.logo{width:32px;height:32px;flex:none;border-radius:var(--r)}
+.theme{width:32px;height:32px;flex:none;display:grid;place-items:center;padding:0;border:1px solid var(--band-rule);border-radius:var(--r);background:none;color:var(--band-muted);font-size:15px;cursor:pointer;transition:color var(--dur),background-color var(--dur)}
+.theme:hover{color:var(--band-ink);background:var(--band-rule)}
 .theme .moon,.light .theme .sun{display:none}.light .theme .moon{display:block}
-/* ===== Тема «Light» (html.light): средние сине-серые тона, тёмно-синяя шапка, упор на голубой (вместо фиолетового — синий).
-   :where() не добавляет веса — правила ниже перекрывают тёмные только за счёт порядка, а правила страниц после них работают как раньше. */
-:root:where(.light){--t1:#16212d;--t2:#233140;--t3:#3a4a5c;--t4:#5b6b7d;--ln:148 166 186;color-scheme:light}
-:where(.light) [data-c=purple]{--c:2 132 199;--c3:#0c4a6e;--c4:#0369a1;--c9:205 229 246;--bar:linear-gradient(90deg,#0284c7,#38bdf8);--btn:#0369a1;--btnh:#075985}
-:where(.light) [data-c=cyan]{--c3:#134e5e;--c4:#0e7490;--c9:205 239 244;--bar:linear-gradient(90deg,#0891b2,#22d3ee);--btn:#0e7490;--btnh:#155e75}
-:where(.light) [data-c=amber]{--c3:#7c3a0a;--c4:#b45309;--c9:250 236 200;--bar:linear-gradient(90deg,#d97706,#f59e0b);--btn:#b45309;--btnh:#92400e}
-:where(.light) [data-c=emerald]{--c3:#065f46;--c4:#047857;--c9:208 240 226;--bar:linear-gradient(90deg,#059669,#34d399);--btn:#047857;--btnh:#065f46}
-:where(.light) [data-c=rose]{--c3:#9f1239;--c4:#be123c;--c9:250 220 226;--bar:linear-gradient(90deg,#e11d48,#fb7185);--btn:#be123c;--btnh:#9f1239}
-:root:where(.light){background:#bcc7d4}
-:where(.light) body::before{background:linear-gradient(180deg,#c6d0db,#b2bfcd)}
-:where(.light) body{line-height:1.6}
-:where(.light) ::selection{background:#7dd3fc;color:#0c1a26}
-:where(.light) ::-webkit-scrollbar-track{background:#bcc7d4}:where(.light) ::-webkit-scrollbar-thumb{background:#8496aa}:where(.light) ::-webkit-scrollbar-thumb:hover{background:#5b6b7d}
-:where(.light) .top{background:rgba(24,43,66,.97);border-bottom-color:#0f2236;box-shadow:0 4px 12px -4px rgb(15 34 54/.45)}
-:where(.light) .top h1 .i{color:#7dd3fc}
-:where(.light) .logo,:where(.light) .theme{border-color:rgb(148 166 186/.45);box-shadow:none}
-:where(.light) .theme{color:#bfd3e6}:where(.light) .theme:hover{color:#fff;background:rgb(148 166 186/.25)}
-:where(.light) .card{background:#dde3ea;border-color:#aebccb;border-radius:14px;box-shadow:0 1px 2px rgb(15 34 54/.08),0 8px 22px -10px rgb(15 34 54/.35)}
-:where(.light) .card::before{height:3px}
-:where(.light) .num{background:rgb(var(--c9));border-color:rgb(var(--c)/.35);box-shadow:none;border-radius:10px}
-:where(.light) .head h2,:where(.light) .lead strong{color:var(--t1)}
-:where(.light) .badge{background:rgb(var(--c9));border-color:rgb(var(--c)/.35);box-shadow:none;color:var(--c3)}
-:where(.light) .chips{background:#d2dae3;border-color:#bac6d3}
-:where(.light) .chip{background:#eef2f6;border-color:#bac6d3}
-:where(.light) .note{background:#f6ecd2;border-color:#dfc27e}:where(.light) .note>.i{color:#b45309}:where(.light) .note strong{color:#7c3a0a}
-:where(.light) .note.info{background:#dcecf6;border-color:#9cc7e2}:where(.light) .note.info>.i{color:#0369a1}:where(.light) .note.info strong{color:#0c4a6e}
-:where(.light) .note.bad{background:#f5e0e0;border-color:#e0a9a9}:where(.light) .note.bad>.i{color:#b42318}:where(.light) .note.bad strong{color:#912018}
-:where(.light) .btn{background:#eef2f6;border-color:#aebccb;color:var(--t1)}
-:where(.light) .btn:hover{background:#fff;border-color:#8496aa}
-:where(.light) .btns .btn:hover{box-shadow:0 2px 8px -2px rgb(var(--c)/.35);border-color:rgb(var(--c)/.6)}:where(.light) .btns .btn:hover>.i{color:var(--c3)}
-:where(.light) .btn small{color:var(--t4)}
-:where(.light) .btn.main{background:var(--btn);border-color:transparent;box-shadow:0 2px 8px -2px rgb(var(--c)/.5);color:#fff}:where(.light) .btn.main:hover{background:var(--btnh)}
-:where(.light) .btn.main small,:where(.light) .btn.main .i{color:rgba(255,255,255,.85)}
-:where(.light) .cmd{background:#d2dae3;border-color:#bac6d3}
-:where(.light) .cmd-t{border-bottom-color:#bac6d3;color:var(--t4)}
-:where(.light) .copy{background:var(--btn);box-shadow:none}:where(.light) .copy:hover{background:var(--btnh)}
-:where(.light) .copy.ok{background:#1a7f37}
-:where(.light) .copy.sm{background:#c8d2dc;color:var(--t3)}:where(.light) .copy.sm:hover{background:#b8c4d1}:where(.light) .copy.sm.ok{color:#1a7f37}
-:where(.light) details{background:#d2dae3;border-color:#bac6d3}
-:where(.light) summary:hover{background:#c9d3dd}
-:where(.light) .body{background:#e8edf2;border-top-color:#bac6d3;color:var(--t2)}
-:where(.light) .body>pre{background:#dce3ea;border-color:#bac6d3}
-:where(.light) .step{background:#dce3ea;border-color:#bac6d3}
-:where(.light) .step .line{background:#eef2f6;box-shadow:inset 0 0 0 1px #bac6d3}
-:where(.light) .k{background:rgb(var(--c9));border-color:rgb(var(--c)/.3)}
-:where(.light) .tabs{background:#ccd5df;border-color:#bac6d3}
-:where(.light) .tabs button:hover{color:var(--t1)}
-:where(.light) .tabs button.on{box-shadow:0 2px 6px -2px rgb(var(--c)/.6)}
-:where(.light) .fg-purple{color:#0284c7}:where(.light) .fg-cyan{color:#0891b2}:where(.light) .fg-amber{color:#d97706}:where(.light) .fg-emerald{color:#059669}:where(.light) .fg-rose{color:#e11d48}
-:where(.light) #toast{background:#182b42;color:#fff;border-color:#0369a1;box-shadow:0 8px 24px -6px rgb(15 34 54/.5)}:where(.light) #toast .i{color:#4ade80}
-:where(.light) .tw{background:#d2dae3;border-color:#bac6d3}
-:where(.light) .tbl tbody tr:nth-child(odd) td{background:rgb(255 255 255/.55)}
-:where(.light) .tbl tbody tr:hover td{background:rgb(var(--c)/.12)}
-@media print{body::before,.top,.copy,#toast{display:none}html,body{background:#fff}.card{box-shadow:none}details>.body{display:block}}
+main.wrap{flex:1;padding-top:24px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
+/* раздел — лист с жирной линейкой сверху */
+.sec{min-width:0;background:var(--sheet);border-top:var(--bar) solid var(--rule-2);padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
+@media(min-width:640px){.sec{padding:20px 24px 24px}}
+/* шапка раздела: номер | заголовок, подпись — строкой ниже под заголовком */
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:2px 12px}
+.head:not(:has(.num)){grid-template-columns:minmax(0,1fr)}
+.num{font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone)}
+.head h2{min-width:0;font:600 21px/1.25 var(--display);letter-spacing:-.01em;color:var(--ink);overflow-wrap:break-word}
+.tag{grid-column:-2;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}.tag .i{color:var(--tone)}
+.lead{max-width:70ch;color:var(--ink-2)}.lead strong{color:var(--ink)}
+/* статья и факты */
+.prose{max-width:70ch;display:flex;flex-direction:column;gap:12px;line-height:1.65}
+.prose h3{margin-top:8px;font:600 18px/1.35 var(--display);color:var(--ink)}
+.prose ul,.prose ol{padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.prose li::marker{color:var(--tone)}
+.facts{display:grid;grid-template-columns:minmax(8rem,max-content) minmax(0,1fr)}
+.facts dt,.facts dd{padding:8px 0;border-top:1px solid var(--rule)}
+.facts dt{padding-right:20px;font-weight:600;color:var(--ink)}
+@media(max-width:480px){.facts{grid-template-columns:minmax(0,1fr)}.facts dd{padding-top:0;border-top:0}}
+/* «фишки»: заголовок + ярлыки */
+.chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:12px 14px;background:var(--well);border-left:3px solid var(--tone)}
+.chips b{flex-basis:100%;display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink)}.chips b .i{color:var(--tone)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;white-space:nowrap;border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet);font-size:14px}
+.chip strong{font:500 14px var(--mono);color:var(--tone)}
+.fg-blue{color:var(--blue)}.fg-teal{color:var(--teal)}.fg-amber{color:var(--amber)}.fg-green{color:var(--green)}.fg-red{color:var(--red)}
+/* имитация консоли Windows — чёрная в обеих темах */
+.term{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;padding:8px 12px;border-radius:var(--r);background:var(--term);font:13.5px/1.5 var(--mono);color:var(--term-ink)}
+.term>b{flex-basis:100%;text-align:center;font-weight:400}
+.term span{white-space:nowrap}.term .g{color:var(--term-g)}.term .d{color:var(--term-d)}
+/* примечание: обычное — жёлтое; .info — синее, .bad — красное */
+.note{--tone:var(--amber);--tint:var(--t-amber);display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--tint);border-left:3px solid var(--tone);font-size:15px;line-height:1.5}
+.note.info{--tone:var(--blue);--tint:var(--t-blue)}.note.bad{--tone:var(--red);--tint:var(--t-red)}
+.note>.i{margin-top:3px;color:var(--tone)}.note strong{color:var(--ink)}
+/* кнопки-ссылки: контурные, .main — одна залитая */
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:34rem}
+.btn{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 10px;border:1px solid var(--muted);border-radius:var(--r);color:var(--ink);text-decoration:none;transition:background-color var(--dur),border-color var(--dur)}
+.btn:hover{background:var(--well);border-color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn>.i{font-size:20px;color:var(--tone)}.btn>.ext{margin-left:auto;font-size:14px;color:var(--muted)}
+.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);white-space:nowrap}
+.btn.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.btn.main:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.main>.i,.btn.main small{color:inherit}
+@media(max-width:420px){.btns{gap:8px}.btn{padding:8px;gap:8px}.btn b{font-size:14px}}
+/* команды — тёмная консольная полоса в обеих темах */
+.cmd{padding:10px 12px 12px;border-radius:var(--r);background:var(--code);color:var(--code-ink)}
+.cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;color:var(--code-muted)}
+.line{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+pre{flex:1;min-width:0;font:14px/1.55 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border:0;border-radius:var(--r);background:var(--accent);color:var(--accent-ink);font:600 14px var(--sans);cursor:pointer;transition:background-color var(--dur),color var(--dur)}
+.copy:hover{background:var(--accent-2)}.copy.ok{background:var(--green)}
+.copy.sm{width:32px;min-height:28px;padding:0;justify-content:center;background:none;color:var(--code-muted);box-shadow:inset 0 0 0 1px var(--code-rule)}
+.copy.sm:hover{background:var(--code-rule);color:var(--code-ink)}.copy.sm.ok{background:none;color:var(--code-ok)}
+/* раскрывающийся блок: линейки сверху и снизу, без рамки */
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+details+details{border-top:0}
+summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;margin:0 -8px;padding:6px 8px;cursor:pointer;user-select:none;list-style:none;font-size:15px;font-weight:600;color:var(--ink);transition:background-color var(--dur)}
+summary::-webkit-details-marker{display:none}
+summary:hover{background:var(--well)}
+summary>span{display:flex;align-items:center;gap:8px;min-width:0}summary>span>.i{color:var(--tone)}
+summary>div{display:flex;align-items:center;gap:10px;flex:none;font-size:13px;font-weight:400;color:var(--muted)}
+.less{display:none}details[open]>summary .more{display:none}details[open]>summary .less{display:inline}
+.chev{font-size:11px;color:var(--muted);transition:transform var(--dur)}
+details[open]>summary .chev{transform:rotate(180deg)}
+.body{display:flex;flex-direction:column;gap:12px;padding:10px 0 16px;font-size:15px}
+.body>pre{padding:12px;border-radius:var(--r);background:var(--code);color:var(--code-ink);font-size:13.5px}
+/* вопрос FAQ */
+details.q>summary{font-size:16px;line-height:1.4;padding-top:10px;padding-bottom:10px}
+details.q>.body{max-width:70ch;line-height:1.65}
+/* шаги с командами */
+.step{display:flex;flex-direction:column;gap:6px}
+.step>b{font-size:14px;font-weight:600;color:var(--ink-2)}
+.step .line{align-items:center;padding:6px 6px 6px 12px;border-radius:var(--r);background:var(--code)}
+.step pre{font-size:13.5px;color:var(--code-ink)}
+/* списки: нумерованный и шаги инструкции */
+ol.list{padding-left:24px;display:flex;flex-direction:column;gap:6px}
+ol.list li::marker{font:600 15px var(--mono);color:var(--tone)}
+ol.how{list-style:none;padding:0;counter-reset:how}
+ol.how>li{position:relative;counter-increment:how;display:flex;flex-direction:column;gap:6px;padding:14px 0 14px 3rem;border-top:1px solid var(--rule)}
+ol.how>li::before{content:counter(how,decimal-leading-zero);position:absolute;left:0;top:14px;font:500 18px/1.3 var(--mono);color:var(--tone)}
+ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
+.k{padding:1px 6px;border:1px solid var(--rule);border-radius:var(--r);background:var(--well);font:.9em var(--mono);color:var(--ink)}
+.hl{font-weight:600;color:var(--tone)}
+/* вкладки: подчёркивание тоном */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;margin-bottom:-1px;padding:8px 12px;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;font-weight:600;font-size:15px;color:var(--muted);transition:color var(--dur),border-color var(--dur)}
+.tabs button .i{color:var(--tone)}
+.tabs button:hover{color:var(--ink)}.tabs button.on{color:var(--ink);border-bottom-color:var(--tone)}
+.pane{display:flex;flex-direction:column;gap:14px}
+/* оглавление (скрипт собирает из разделов) */
+.toc{padding:14px 16px;background:var(--sheet);border-top:var(--bar) solid var(--rule-2)}
+.toc>b{display:block;margin-bottom:4px;font:600 16px var(--display);color:var(--ink)}
+.toc ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));column-gap:24px}
+.toc a{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink-2);transition:color var(--dur)}
+.toc a:hover{color:var(--ink)}.toc a>span:first-child{font:500 14px/1.6 var(--mono);color:var(--accent)}
+/* поиск */
+.search{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;background:var(--sheet);border:1px solid var(--muted);border-radius:var(--r)}
+.search:focus-within{outline:2px solid var(--focus);outline-offset:1px}
+.search>.i{color:var(--muted)}
+.search input{flex:1;min-width:0;height:42px;border:0;background:none;font:16px var(--sans);color:var(--ink);outline:0}
+.empty{padding:12px 16px;background:var(--sheet);color:var(--muted)}
+/* всплывающее «Скопійовано» */
+#toast{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r);background:var(--band);color:var(--band-ink);border-left:3px solid var(--code-ok);font-size:14px;font-weight:600;opacity:0;transform:translateY(16px);transition:opacity .2s,transform .2s;pointer-events:none}
+#toast.show{opacity:1;transform:none}#toast .i{color:var(--code-ok)}
+/* таблицы данных: зебра без линий, значения — «таблетки» button.v data-v (клик копирует).
+   Первая колонка — название, прижата к данным; колонка другого смысла — data-c на th и td; группа колонок — th.grp + tr.sub */
+.tw{min-width:0;overflow-x:auto}
+.sec>.tw{flex:1}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.tbl th{padding:6px 8px 8px;border-bottom:var(--bar) solid var(--rule-2);font-size:14px;font-weight:600;line-height:1.3;color:var(--muted);text-align:center;white-space:nowrap}
+.tbl th[data-c]{color:var(--tone)}
+.tbl .grp{padding-bottom:4px;border-bottom:1px solid var(--rule);color:var(--ink-2)}
+.tbl .sub th{padding-top:4px}
+.tbl td{padding:4px 8px;text-align:center}
+.tbl tr:not(.sub)>:first-child{text-align:left;padding-left:10px}
+.tbl td:first-child{color:var(--ink)}
+.tbl tbody tr:nth-child(even) td{background:var(--well)}
+.tbl tbody tr:hover td{background:var(--hover)}
+.v{min-height:30px;padding:2px 9px;border:0;border-radius:var(--r);background:var(--tint);box-shadow:inset 0 0 0 1px transparent;cursor:pointer;font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone);transition:box-shadow var(--dur)}
+.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}.v:active{transform:scale(.96)}
+@media(min-width:481px){.tbl tr:not(.sub)>:first-child{width:1%;white-space:nowrap;padding-right:20px}}
+@media(max-width:480px){.tbl{font-size:14px}.tbl td,.tbl th{padding:4px 3px}.tbl tr:not(.sub)>:first-child{padding-left:6px}.v{padding:2px 5px;font-size:13.5px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:0s!important;animation-duration:0s!important}}
+@media print{.top,.copy,.theme,.search,#toast{display:none}html,body{background:none}.sec{border-top-color:currentColor}details>.body{display:flex}}
+</style><!--/base-->
+<style>
 /* эта страница: одна таблица — узкая колонка */
 .wrap{max-width:36rem}
 </style>
 </head>
-<body data-c="purple">
+<body>
 
 <header class="top"><div class="wrap">
-  <button class="ph theme" title="Світла / темна тема" aria-label="Світла / темна тема"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+  <button type="button" class="theme" title="Світла / темна тема" aria-label="Світла / темна тема"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
   <h1><svg class="i"><use href="#i-book"/></svg><span>Кодування органів</span></h1>
-  <img class="logo" alt="SV" src="data:image/webp;base64,UklGRlgGAABXRUJQVlA4WAoAAAAQAAAAPwAAPwAAQUxQSAgBAAABgB3Jtmpl7cOJBLfU3CEVd3eJxknhvQfcY3vhcvc/FRETIB890D50dN2oQi2rxvXxcAfg5Uvn0L32zJo/b/TCuU8cMPpMply0tiUn8mUCcCLigAUyKWuuiVwG3IclRqVBjVyDE49xRqXNyGl4dFdZabTk0AtsM9Fs4h7aK1U7qqFrlImGEydObGVe3LJYKnxoUC0pW5W18P+ThrWnOxZLhY9nzJYyr8aZLCVOdQZVO6qxB/tMdhKPgN5Q1IrmOACPGUYrgfPw4rDOqBY0chsi4oA1MmndNCk3ASciDpgOZMpFa1tyIuMs0CYCQAT9OxVrHvYGIYIvPdA1fv7wHGr69HAx0Q14fARWUDggKgUAALAZAJ0BKkAAQAA+MRaIQyIhIRUJnXQgAwSzgGAQCceAK991Sdn2ToQfAPqx+LOiW+uP3H8iuQHeI/xb+kfktwQXIf55/hfzM/s3OB8mfqZ/mf+H/LjmBvmP+W9gD+K/0L/Q+kv/i/3Hzd/l397/3f93+AP+Qfzv/H/2n90P8x///C7+3vsR/rCbXw2mpkcF/U6Ekdw3T2Lm5w0wzhw6roh7OeNSuLiun6LNYFAbsJzKd5gYfGBfHX55GyQt/c04E/OMiNfYhdYtEuHoCuxzEtdh4xPHFlgA/v/b1MDf5YN7x74xnOP3fbSvi3nZu6HLPbRfVIsweig0xDk+dyEWyRmaHxVGQ6ddn/JruF8c9fyE5YRyoqr5E/GZfFQI3vAyIM7YgjHmYhyCy/MB5tmERg3refJm8FtphPLb7EikoIIj7R4dulITdoD5JnhNoYkI2Ui5A+c05XHAX908E7T+7cnOM0bcvc4fGw/+LwBqqDY3fSJKkMmig131ulBLEiL8hpZxDpI1XtAI9rUPN/w1DueYyeeNpCnp9mPlHv8IcC0D+HMrg33csjpYtqWWqq7//fxLj6idf26sS7dZZgDIfCk9Q/ruFCx/7CP4VIquVrd1RgRwOiOHf4QQgu6ZkHdZ/0Zb/dG0K647wZWLj/rNkAoSdsrlWnpcTmBmM4LMeXNG3mvrM+SuDldq6cIr8W1R5zCf4sRx5VIwmQppgs4F4v/ugbpaPBYvbRGIJr443VuxTR7vcn7FUWmRP7NPPPdFysycuGQtNTVi44duQMC8WDPYYhdp3+FvtSUL2Vwe20FWJXqOtdGc3TSIbFFseKcYZtzHUhqf4Tt85/xOIGN+QjW7qkbWufKggE7o6GZ+2rUIVisZDsWaN5rXKwCDygWiyPRf1QGS6wkqft/Ty73akODB/BLrl6dpuCfu6GgA4W9uvOPjGyr1W5uExQw74lgVmWpRgE+HQaObox9P/h0022BUU4RND6Zu/NGFv8QweNZOk8LPwP9776KzF7icdW6dHoZAPasdfa91cqDGUggrO/RsX/ExnDwOM4/IvvSuxJ8jlNL4AMZxIe58KI5L3MonoLCgaodUEZtLhDShwsoqpPQ+BuhND0REM0w82M3wSbDZrlZJRyF/DPAcpto3nnX6rfebOYL0gsP93MF8c8I07MztegmpQ9i0y2LsLAtL2XzmaOWG12ThxNZswIz/2fo6VfI83XzCBa0dDivafshqy7IeCmVhJ8mQiP2AfIpGIMosLa9j5ASBaPzttwt2c4YtotP55Mjfi7LYOvtnPz/8dvUXSDzkE6e21e42Ax69Jt/mQR4f/lgNppzG0R/YUJ17oVEGl/8Q+MLxxXFcd/KMcEYZuNyrDDWXxmLUGqPGqCsYxsjJbrD8p+8uq70msz1uIIr2935CgEfE29MORO3MduUPi5f6K0/vHTGLlwp48teX6pC/PN9IHKYpoS2Avx2DuzqqbP5OHvMrQeqTQ5fZXl9v/5jPKI8k6+B5u3GJa2mGm53/yxPBl14QEAaz9RoOvLUX7u3rWAkEh2N8BR/AjHlni5slcFO4rPmfg97H7rZvL3Pn73/JgiXrfFhk7zUNui/OYpu7mwiGhPACpBEZIxr7rYDjWoo57NdTfoCyop3zpzuc/YckkejSeVydTdACqPVDngwcCwfrY4N6ENsAeVRo2dVYdzBpmu+gMzoMTD2/TV1Nf7gfJ3clEwhgVzpmd9nD/0Nau7nefz8WhcC1tY+bt6cJgr+kAAAA">
+  <img class="logo" alt="SV" width="32" height="32" src="data:image/webp;base64,UklGRlgGAABXRUJQVlA4WAoAAAAQAAAAPwAAPwAAQUxQSAgBAAABgB3Jtmpl7cOJBLfU3CEVd3eJxknhvQfcY3vhcvc/FRETIB890D50dN2oQi2rxvXxcAfg5Uvn0L32zJo/b/TCuU8cMPpMply0tiUn8mUCcCLigAUyKWuuiVwG3IclRqVBjVyDE49xRqXNyGl4dFdZabTk0AtsM9Fs4h7aK1U7qqFrlImGEydObGVe3LJYKnxoUC0pW5W18P+ThrWnOxZLhY9nzJYyr8aZLCVOdQZVO6qxB/tMdhKPgN5Q1IrmOACPGUYrgfPw4rDOqBY0chsi4oA1MmndNCk3ASciDpgOZMpFa1tyIuMs0CYCQAT9OxVrHvYGIYIvPdA1fv7wHGr69HAx0Q14fARWUDggKgUAALAZAJ0BKkAAQAA+MRaIQyIhIRUJnXQgAwSzgGAQCceAK991Sdn2ToQfAPqx+LOiW+uP3H8iuQHeI/xb+kfktwQXIf55/hfzM/s3OB8mfqZ/mf+H/LjmBvmP+W9gD+K/0L/Q+kv/i/3Hzd/l397/3f93+AP+Qfzv/H/2n90P8x///C7+3vsR/rCbXw2mpkcF/U6Ekdw3T2Lm5w0wzhw6roh7OeNSuLiun6LNYFAbsJzKd5gYfGBfHX55GyQt/c04E/OMiNfYhdYtEuHoCuxzEtdh4xPHFlgA/v/b1MDf5YN7x74xnOP3fbSvi3nZu6HLPbRfVIsweig0xDk+dyEWyRmaHxVGQ6ddn/JruF8c9fyE5YRyoqr5E/GZfFQI3vAyIM7YgjHmYhyCy/MB5tmERg3refJm8FtphPLb7EikoIIj7R4dulITdoD5JnhNoYkI2Ui5A+c05XHAX908E7T+7cnOM0bcvc4fGw/+LwBqqDY3fSJKkMmig131ulBLEiL8hpZxDpI1XtAI9rUPN/w1DueYyeeNpCnp9mPlHv8IcC0D+HMrg33csjpYtqWWqq7//fxLj6idf26sS7dZZgDIfCk9Q/ruFCx/7CP4VIquVrd1RgRwOiOHf4QQgu6ZkHdZ/0Zb/dG0K647wZWLj/rNkAoSdsrlWnpcTmBmM4LMeXNG3mvrM+SuDldq6cIr8W1R5zCf4sRx5VIwmQppgs4F4v/ugbpaPBYvbRGIJr443VuxTR7vcn7FUWmRP7NPPPdFysycuGQtNTVi44duQMC8WDPYYhdp3+FvtSUL2Vwe20FWJXqOtdGc3TSIbFFseKcYZtzHUhqf4Tt85/xOIGN+QjW7qkbWufKggE7o6GZ+2rUIVisZDsWaN5rXKwCDygWiyPRf1QGS6wkqft/Ty73akODB/BLrl6dpuCfu6GgA4W9uvOPjGyr1W5uExQw74lgVmWpRgE+HQaObox9P/h0022BUU4RND6Zu/NGFv8QweNZOk8LPwP9776KzF7icdW6dHoZAPasdfa91cqDGUggrO/RsX/ExnDwOM4/IvvSuxJ8jlNL4AMZxIe58KI5L3MonoLCgaodUEZtLhDShwsoqpPQ+BuhND0REM0w82M3wSbDZrlZJRyF/DPAcpto3nnX6rfebOYL0gsP93MF8c8I07MztegmpQ9i0y2LsLAtL2XzmaOWG12ThxNZswIz/2fo6VfI83XzCBa0dDivafshqy7IeCmVhJ8mQiP2AfIpGIMosLa9j5ASBaPzttwt2c4YtotP55Mjfi7LYOvtnPz/8dvUXSDzkE6e21e42Ax69Jt/mQR4f/lgNppzG0R/YUJ17oVEGl/8Q+MLxxXFcd/KMcEYZuNyrDDWXxmLUGqPGqCsYxsjJbrD8p+8uq70msz1uIIr2935CgEfE29MORO3MduUPi5f6K0/vHTGLlwp48teX6pC/PN9IHKYpoS2Avx2DuzqqbP5OHvMrQeqTQ5fZXl9v/5jPKI8k6+B5u3GJa2mGm53/yxPBl14QEAaz9RoOvLUX7u3rWAkEh2N8BR/AjHlni5slcFO4rPmfg97H7rZvL3Pn73/JgiXrfFhk7zUNui/OYpu7mwiGhPACpBEZIxr7rYDjWoo57NdTfoCyop3zpzuc/YckkejSeVydTdACqPVDngwcCwfrY4N6ENsAeVRo2dVYdzBpmu+gMzoMTD2/TV1Nf7gfJ3clEwhgVzpmd9nD/0Nau7nefz8WhcC1tY+bt6cJgr+kAAAA">
 </div></header>
 
 <main class="wrap">
 
-  <section class="card" data-c="purple">
-    <div class="head">
-      <div><span class="num">1</span><h2>ЄРДР та ЖЄО</h2></div>
-      <span class="badge"><svg class="i"><use href="#i-book"/></svg>Коди органів</span>
-    </div>
-    <p class="lead">Коди органів для ЄРДР (колонки СВ і СД) та ЖЄО. Натисніть на код — він скопіюється.</p>
+  <section class="sec">
+    <div class="head"><span class="num">01</span><h2>ЄРДР та ЖЄО</h2>
+      <span class="tag"><svg class="i"><use href="#i-book"/></svg>Коди органів</span></div>
     <div class="tw"><table class="tbl">
-      <thead><tr><th rowspan="2">Орган</th><th colspan="2" class="grp">ЄРДР</th><th rowspan="2" data-c="emerald">ЖЄО</th></tr>
+      <thead><tr><th rowspan="2">Орган</th><th colspan="2" class="grp">ЄРДР</th><th rowspan="2" data-c="green">ЖЄО</th></tr>
       <tr class="sub"><th>СВ</th><th>СД</th></tr></thead>
       <tbody>
-        <tr><td>Кам'янське РУ</td><td><button class="v" data-v="04116" title="Скопіювати">04116</button></td><td><button class="v" data-v="04616" title="Скопіювати">04616</button></td><td data-c="emerald"><button class="v" data-v="131240" title="Скопіювати">131240</button></td></tr>
-        <tr><td>Дніпровське ВП № 1</td><td><button class="v" data-v="04179" title="Скопіювати">04179</button></td><td><button class="v" data-v="04679" title="Скопіювати">04679</button></td><td data-c="emerald"><button class="v" data-v="131242" title="Скопіювати">131242</button></td></tr>
-        <tr><td>Південне ВП № 2</td><td><button class="v" data-v="04178" title="Скопіювати">04178</button></td><td><button class="v" data-v="04678" title="Скопіювати">04678</button></td><td data-c="emerald"><button class="v" data-v="131241" title="Скопіювати">131241</button></td></tr>
-        <tr><td>В-дніпровське ВП № 3</td><td><button class="v" data-v="04143" title="Скопіювати">04143</button></td><td><button class="v" data-v="04643" title="Скопіювати">04643</button></td><td data-c="emerald"><button class="v" data-v="131203" title="Скопіювати">131203</button></td></tr>
-        <tr><td>Вільногірське ВП № 4</td><td><button class="v" data-v="04115" title="Скопіювати">04115</button></td><td><button class="v" data-v="04615" title="Скопіювати">04615</button></td><td data-c="emerald"><button class="v" data-v="131238" title="Скопіювати">131238</button></td></tr>
-        <tr><td>Жовтоводське ВП № 5</td><td><button class="v" data-v="04122" title="Скопіювати">04122</button></td><td><button class="v" data-v="04622" title="Скопіювати">04622</button></td><td data-c="emerald"><button class="v" data-v="131230" title="Скопіювати">131230</button></td></tr>
-        <tr><td>Криничанське ВП № 6</td><td><button class="v" data-v="04146" title="Скопіювати">04146</button></td><td><button class="v" data-v="04646" title="Скопіювати">04646</button></td><td data-c="emerald"><button class="v" data-v="131206" title="Скопіювати">131206</button></td></tr>
-        <tr><td>П'ятихатське ВП № 7</td><td><button class="v" data-v="04156" title="Скопіювати">04156</button></td><td><button class="v" data-v="04655" title="Скопіювати">04655</button></td><td data-c="emerald"><button class="v" data-v="131214" title="Скопіювати">131214</button></td></tr>
+        <tr><td>Кам'янське РУ</td><td><button type="button" class="v" data-v="04116" title="Скопіювати">04116</button></td><td><button type="button" class="v" data-v="04616" title="Скопіювати">04616</button></td><td data-c="green"><button type="button" class="v" data-v="131240" title="Скопіювати">131240</button></td></tr>
+        <tr><td>Дніпровське ВП № 1</td><td><button type="button" class="v" data-v="04179" title="Скопіювати">04179</button></td><td><button type="button" class="v" data-v="04679" title="Скопіювати">04679</button></td><td data-c="green"><button type="button" class="v" data-v="131242" title="Скопіювати">131242</button></td></tr>
+        <tr><td>Південне ВП № 2</td><td><button type="button" class="v" data-v="04178" title="Скопіювати">04178</button></td><td><button type="button" class="v" data-v="04678" title="Скопіювати">04678</button></td><td data-c="green"><button type="button" class="v" data-v="131241" title="Скопіювати">131241</button></td></tr>
+        <tr><td>В-дніпровське ВП № 3</td><td><button type="button" class="v" data-v="04143" title="Скопіювати">04143</button></td><td><button type="button" class="v" data-v="04643" title="Скопіювати">04643</button></td><td data-c="green"><button type="button" class="v" data-v="131203" title="Скопіювати">131203</button></td></tr>
+        <tr><td>Вільногірське ВП № 4</td><td><button type="button" class="v" data-v="04115" title="Скопіювати">04115</button></td><td><button type="button" class="v" data-v="04615" title="Скопіювати">04615</button></td><td data-c="green"><button type="button" class="v" data-v="131238" title="Скопіювати">131238</button></td></tr>
+        <tr><td>Жовтоводське ВП № 5</td><td><button type="button" class="v" data-v="04122" title="Скопіювати">04122</button></td><td><button type="button" class="v" data-v="04622" title="Скопіювати">04622</button></td><td data-c="green"><button type="button" class="v" data-v="131230" title="Скопіювати">131230</button></td></tr>
+        <tr><td>Криничанське ВП № 6</td><td><button type="button" class="v" data-v="04146" title="Скопіювати">04146</button></td><td><button type="button" class="v" data-v="04646" title="Скопіювати">04646</button></td><td data-c="green"><button type="button" class="v" data-v="131206" title="Скопіювати">131206</button></td></tr>
+        <tr><td>П'ятихатське ВП № 7</td><td><button type="button" class="v" data-v="04156" title="Скопіювати">04156</button></td><td><button type="button" class="v" data-v="04655" title="Скопіювати">04655</button></td><td data-c="green"><button type="button" class="v" data-v="131214" title="Скопіювати">131214</button></td></tr>
       </tbody></table></div>
   </section>
 
@@ -248,19 +224,65 @@ ol.list li::marker{color:var(--c4);font-weight:700}
 <symbol id="i-moon" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></symbol>
 <symbol id="i-sun" viewBox="0 0 512 512"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></symbol>
 </svg><!--/icons-->
-
-<script>
-/* Общий скрипт всех страниц: копирование, вкладки, сборка «Усі команди», значок вкладки браузера. */
+<!--base-js--><script>
+/* Общий скрипт всех страниц (правка здесь → python tools/build.py): копирование, вкладки, «Усі команди»,
+   оглавление, поиск по вопросам, тема, значок вкладки браузера. */
 (function () {
   var d = document, toastTimer;
-  [].forEach.call(d.querySelectorAll('pre[data-collect]'), function (p) {
-    var src = d.getElementById(p.getAttribute('data-collect')), lines = [];
-    [].forEach.call(src.querySelectorAll('pre'), function (x) { lines.push(x.textContent.trim()); });
+  function all(sel, root) { return [].slice.call((root || d).querySelectorAll(sel)); }
+
+  all('pre[data-collect]').forEach(function (p) {
+    var lines = all('pre', d.getElementById(p.getAttribute('data-collect'))).map(function (x) { return x.textContent.trim(); });
     if (p.getAttribute('data-after')) lines.push(p.getAttribute('data-after'));
     p.textContent = lines.join('\n');
   });
   var logo = d.querySelector('.logo');
   if (logo) d.getElementById('favicon').href = logo.src;
+
+  // оглавление: nav[data-toc] — из заголовков разделов (номер .num + h2); раздел без id получает s1, s2…
+  all('[data-toc]').forEach(function (nav) {
+    var ol = d.createElement('ol');
+    all('main .sec').forEach(function (s, i) {
+      var h = s.querySelector('h2'), n = s.querySelector('.num');
+      if (!h) return;
+      if (!s.id) s.id = 's' + (i + 1);
+      var li = d.createElement('li'), a = d.createElement('a'), a1 = d.createElement('span'), a2 = d.createElement('span');
+      a.href = '#' + s.id; a1.textContent = n ? n.textContent : i + 1; a2.textContent = h.textContent;
+      a.appendChild(a1); a.appendChild(a2); li.appendChild(a); ol.appendChild(li);
+    });
+    nav.appendChild(ol);
+  });
+
+  // поиск: input[data-search] фильтрует вопросы details.q (раскрывает найденные), прячет пустые разделы, .empty — «нічого»
+  function norm(s) { return s.toLowerCase().replace(/[’ʼ`]/g, "'"); }
+  all('input[data-search]').forEach(function (inp) {
+    var items = all('details.q'), empty = d.querySelector('.empty');
+    function run() {
+      var q = norm(inp.value.trim()), n = 0;
+      items.forEach(function (it) {
+        var hit = !q || norm(it.textContent).indexOf(q) >= 0;
+        it.hidden = !hit; if (hit) n++;
+        if (q) it.open = hit;
+      });
+      all('main .sec').forEach(function (s) {
+        var qs = all('details.q', s);
+        if (qs.length) s.hidden = qs.every(function (x) { return x.hidden; });
+      });
+      if (empty) empty.hidden = n > 0;
+    }
+    var m = /[?&]q=([^&]*)/.exec(location.search);
+    if (m) inp.value = decodeURIComponent(m[1].replace(/\+/g, ' '));
+    inp.addEventListener('input', run);
+    run();
+  });
+
+  // #id в адресе открывает этот вопрос / блок
+  function openHash() {
+    var t = location.hash && d.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); }
+  }
+  openHash();
+  window.addEventListener('hashchange', openHash);
 
   function toast(msg) {
     var t = d.getElementById('toast');
@@ -287,13 +309,13 @@ ol.list li::marker{color:var(--c4);font-weight:700}
     var b = e.target.closest('[data-copy]');
     if (b) {
       e.preventDefault(); e.stopPropagation();   // кнопка в <summary> не сворачивает блок
-      var all = b.getAttribute('data-copy') === 'all';
-      var pre = (all ? b.closest('details') : b.closest('.line')).querySelector('pre');
-      copy(pre.textContent.trim() + (all ? '\n' : ''), function () {
+      var every = b.getAttribute('data-copy') === 'all';
+      var pre = (every ? b.closest('details') : b.closest('.line')).querySelector('pre');
+      copy(pre.textContent.trim() + (every ? '\n' : ''), function () {
         var use = b.querySelector('use'), span = b.querySelector('span'), text = span && span.textContent;
         use.setAttribute('href', '#i-check'); b.classList.add('ok');
         if (span) span.textContent = 'Скопійовано!';
-        toast(all ? 'Усі команди скопійовано' : 'Команду скопійовано');
+        toast(every ? 'Усі команди скопійовано' : 'Команду скопійовано');
         setTimeout(function () {
           use.setAttribute('href', '#i-copy'); b.classList.remove('ok');
           if (span) span.textContent = text;
@@ -312,11 +334,12 @@ ol.list li::marker{color:var(--c4);font-weight:700}
     if (t) {
       [].forEach.call(t.parentNode.children, function (x) {
         x.classList.toggle('on', x === t);
+        x.setAttribute('aria-selected', x === t);
         d.getElementById(x.getAttribute('data-tab')).hidden = x !== t;
       });
     }
   });
 })();
-</script>
+</script><!--/base-js-->
 </body>
 </html>
