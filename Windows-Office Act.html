@@ -15,7 +15,7 @@
  * waive: системные шрифты (правило проекта: 0 байт, без CDN) · несколько залитых «Скопіювати» (копирование — главное действие) */
 :root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;--display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;--mono:"Cascadia Mono",Consolas,"Liberation Mono",Menlo,monospace;
 --r:2px;--bar:2px;--dur:.15s;
---paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#b1b8bf;
+--paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#56616b;
 --band:#03080f;--band-ink:#e6ecf2;--band-muted:#9aa6b2;--band-rule:#1f2a35;--band-accent:#67aaed;
 --code:#04080d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25303b;--code-ok:#79ca8b;
 --term:#0c0c0c;--term-ink:#cccccc;--term-g:#16c60c;--term-d:#767676;
@@ -56,10 +56,11 @@ button{font:inherit;color:inherit}
 .theme{width:32px;height:32px;flex:none;display:grid;place-items:center;padding:0;border:1px solid var(--band-rule);border-radius:var(--r);background:none;color:var(--band-muted);font-size:15px;cursor:pointer;transition:color var(--dur),background-color var(--dur)}
 .theme:hover{color:var(--band-ink);background:var(--band-rule)}
 .theme .moon,.light .theme .sun{display:none}.light .theme .moon{display:block}
-main.wrap{flex:1;padding-top:24px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
+main.wrap{flex:1;padding-top:20px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
 /* раздел — лист с жирной линейкой сверху */
 .sec{min-width:0;background:var(--sheet);border-top:var(--bar) solid var(--rule-2);padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
 @media(min-width:640px){.sec{padding:20px 24px 24px}}
+.sec:not(:has(>.head)){padding-top:12px}
 /* шапка раздела: номер | заголовок, подпись — строкой ниже под заголовком */
 .head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:2px 12px}
 .head:not(:has(.num)){grid-template-columns:minmax(0,1fr)}
@@ -93,12 +94,13 @@ main.wrap{flex:1;padding-top:24px;padding-bottom:48px;display:flex;flex-directio
 /* кнопки-ссылки: контурные, .main — одна залитая */
 .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:34rem}
 .btn{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 10px;border:1px solid var(--muted);border-radius:var(--r);color:var(--ink);text-decoration:none;transition:background-color var(--dur),border-color var(--dur)}
-.btn:hover{background:var(--well);border-color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn:hover{background:var(--well);border-color:var(--ink)}
 .btn>.i{font-size:20px;color:var(--tone)}.btn>.ext{margin-left:auto;font-size:14px;color:var(--muted)}
-.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);white-space:nowrap}
+.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
 .btn.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.btn.main:hover{background:var(--accent-2);border-color:var(--accent-2)}
 .btn.main>.i,.btn.main small{color:inherit}
-@media(max-width:420px){.btns{gap:8px}.btn{padding:8px;gap:8px}.btn b{font-size:14px}}
+/* узкий экран: кнопки-ссылки одна под другой; «Скопіювати» в заголовке блока — одной иконкой, чтобы не мять заголовок */
+@media(max-width:480px){.btns{grid-template-columns:minmax(0,1fr);gap:8px}summary .copy{padding:0 10px}summary .copy>span{display:none}}
 /* команды — тёмная консольная полоса в обеих темах */
 .cmd{padding:10px 12px 12px;border-radius:var(--r);background:var(--code);color:var(--code-ink)}
 .cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;color:var(--code-muted)}
@@ -116,7 +118,6 @@ summary::-webkit-details-marker{display:none}
 summary:hover{background:var(--well)}
 summary>span{display:flex;align-items:center;gap:8px;min-width:0}summary>span>.i{color:var(--tone)}
 summary>div{display:flex;align-items:center;gap:10px;flex:none;font-size:13px;font-weight:400;color:var(--muted)}
-.less{display:none}details[open]>summary .more{display:none}details[open]>summary .less{display:inline}
 .chev{font-size:11px;color:var(--muted);transition:transform var(--dur)}
 details[open]>summary .chev{transform:rotate(180deg)}
 .body{display:flex;flex-direction:column;gap:12px;padding:10px 0 16px;font-size:15px}
@@ -174,7 +175,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 .tbl tbody tr:nth-child(even) td{background:var(--well)}
 .tbl tbody tr:hover td{background:var(--hover)}
 .v{min-height:30px;padding:2px 9px;border:0;border-radius:var(--r);background:var(--tint);box-shadow:inset 0 0 0 1px transparent;cursor:pointer;font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone);transition:box-shadow var(--dur)}
-.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}.v:active{transform:scale(.96)}
+.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}
 @media(min-width:481px){.tbl tr:not(.sub)>:first-child{width:1%;white-space:nowrap;padding-right:20px}}
 @media(max-width:480px){.tbl{font-size:14px}.tbl td,.tbl th{padding:4px 3px}.tbl tr:not(.sub)>:first-child{padding-left:6px}.v{padding:2px 5px;font-size:13.5px}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:0s!important;animation-duration:0s!important}}
@@ -207,7 +208,7 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
   <!-- ===== Метод 1: MAS (назавжди) ===== -->
   <section class="sec">
-    <div class="head"><span class="num">01</span><h2>Метод 1: Скрипт MAS (Microsoft Activation Scripts)</h2>
+    <div class="head"><h2>Метод 1: Скрипт MAS (Microsoft Activation Scripts)</h2>
       <span class="tag"><svg class="i"><use href="#i-infinity"/></svg>Назавжди</span></div>
 
     <p class="lead">Відкритий інструмент від спільноти Massgrave для швидкої та вічної активації.</p>
@@ -236,7 +237,7 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
     <details>
       <summary><span><svg class="i"><use href="#i-list-ol"/></svg>Покрокова інструкція</span>
-        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
       <div class="body"><ol class="list">
         <li>Вимкніть антивірус та скачайте <code class="k">MAS_AIO.cmd</code> або запустіть PowerShell команду.</li>
         <li>Запустіть <code class="k">MAS_AIO.cmd</code> у Командному рядку (cmd) від імені адміністратора.</li>
@@ -248,14 +249,14 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
   <!-- ===== Метод 2: KMS (180 днів) ===== -->
   <section class="sec" data-c="teal">
-    <div class="head"><span class="num">02</span><h2>Метод 2: KMS-сервер через Командний рядок (cmd)</h2>
+    <div class="head"><h2>Метод 2: KMS-сервер через Командний рядок (cmd)</h2>
       <span class="tag"><svg class="i"><use href="#i-clock-rotate-left"/></svg>На 180 днів</span></div>
 
     <p class="lead">Активація через Командний рядок (cmd).<br>Антивірус вимикати <strong>не потрібно</strong>.</p>
 
     <details open class="cols-open">
       <summary><span><svg class="i"><use href="#i-terminal"/></svg>Команди та інструкція</span>
-        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
       <div class="body">
       <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
         <div>Запустіть Командний рядок (cmd) від імені адміністратора.</div></div>
@@ -274,7 +275,7 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
         <details>
           <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Windows</span>
-            <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+            <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
           <div class="body" id="kms-win-steps">
             <div class="step"><b>Крок 1: Ключ KMS-клієнта (Windows 10/11 Pro)</b><div class="line"><pre>cscript //nologo %windir%\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</pre>
               <button type="button" class="copy sm" data-copy title="Скопіювати" aria-label="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
@@ -303,7 +304,7 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
         <details>
           <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди Office</span>
-            <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+            <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
           <div class="body" id="kms-office-steps">
             <div class="step"><b>Крок 1: Каталог Office</b><div class="line"><pre>if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (cd /d "%ProgramFiles%\Microsoft Office\Office16") else (cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16")</pre>
               <button type="button" class="copy sm" data-copy title="Скопіювати" aria-label="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
@@ -363,7 +364,12 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
     p.textContent = lines.join('\n');
   });
   var logo = d.querySelector('.logo');
-  if (logo) d.getElementById('favicon').href = logo.src;
+  var fav = d.getElementById('favicon');
+  if (logo && fav) fav.href = logo.src;
+  // вкладки: роли для экранного диктора
+  all('[data-tab]').forEach(function (b) { b.setAttribute('role', 'tab'); });
+  // «Скопіювати» без подписи на узком экране — имя для диктора
+  all('[data-copy]').forEach(function (b) { var s = b.querySelector('span'); if (s && !b.getAttribute('aria-label')) b.setAttribute('aria-label', s.textContent); });
 
   // оглавление: nav[data-toc] — из заголовков разделов (номер .num + h2); раздел без id получает s1, s2…
   all('[data-toc]').forEach(function (nav) {
@@ -426,9 +432,9 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
     return ok;
   }
   function copy(text, done) {
-    if (navigator.clipboard && window.isSecureContext)
-      navigator.clipboard.writeText(text).then(done, function () { if (fallback(text)) done(); });
-    else if (fallback(text)) done();
+    function bad() { if (fallback(text)) done(); else toast('Не вдалося скопіювати — виділіть і Ctrl+C'); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, bad);
+    else bad();
   }
 
   d.addEventListener('click', function (e) {

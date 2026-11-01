@@ -22,7 +22,7 @@
  * waive: системные шрифты (правило проекта: 0 байт, без CDN) · несколько залитых «Скопіювати» (копирование — главное действие) */
 :root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;--display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;--mono:"Cascadia Mono",Consolas,"Liberation Mono",Menlo,monospace;
 --r:2px;--bar:2px;--dur:.15s;
---paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#b1b8bf;
+--paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#56616b;
 --band:#03080f;--band-ink:#e6ecf2;--band-muted:#9aa6b2;--band-rule:#1f2a35;--band-accent:#67aaed;
 --code:#04080d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25303b;--code-ok:#79ca8b;
 --term:#0c0c0c;--term-ink:#cccccc;--term-g:#16c60c;--term-d:#767676;
@@ -63,10 +63,11 @@ button{font:inherit;color:inherit}
 .theme{width:32px;height:32px;flex:none;display:grid;place-items:center;padding:0;border:1px solid var(--band-rule);border-radius:var(--r);background:none;color:var(--band-muted);font-size:15px;cursor:pointer;transition:color var(--dur),background-color var(--dur)}
 .theme:hover{color:var(--band-ink);background:var(--band-rule)}
 .theme .moon,.light .theme .sun{display:none}.light .theme .moon{display:block}
-main.wrap{flex:1;padding-top:24px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
+main.wrap{flex:1;padding-top:20px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
 /* раздел — лист с жирной линейкой сверху */
 .sec{min-width:0;background:var(--sheet);border-top:var(--bar) solid var(--rule-2);padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
 @media(min-width:640px){.sec{padding:20px 24px 24px}}
+.sec:not(:has(>.head)){padding-top:12px}
 /* шапка раздела: номер | заголовок, подпись — строкой ниже под заголовком */
 .head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:2px 12px}
 .head:not(:has(.num)){grid-template-columns:minmax(0,1fr)}
@@ -100,12 +101,13 @@ main.wrap{flex:1;padding-top:24px;padding-bottom:48px;display:flex;flex-directio
 /* кнопки-ссылки: контурные, .main — одна залитая */
 .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:34rem}
 .btn{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 10px;border:1px solid var(--muted);border-radius:var(--r);color:var(--ink);text-decoration:none;transition:background-color var(--dur),border-color var(--dur)}
-.btn:hover{background:var(--well);border-color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn:hover{background:var(--well);border-color:var(--ink)}
 .btn>.i{font-size:20px;color:var(--tone)}.btn>.ext{margin-left:auto;font-size:14px;color:var(--muted)}
-.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);white-space:nowrap}
+.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
 .btn.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.btn.main:hover{background:var(--accent-2);border-color:var(--accent-2)}
 .btn.main>.i,.btn.main small{color:inherit}
-@media(max-width:420px){.btns{gap:8px}.btn{padding:8px;gap:8px}.btn b{font-size:14px}}
+/* узкий экран: кнопки-ссылки одна под другой; «Скопіювати» в заголовке блока — одной иконкой, чтобы не мять заголовок */
+@media(max-width:480px){.btns{grid-template-columns:minmax(0,1fr);gap:8px}summary .copy{padding:0 10px}summary .copy>span{display:none}}
 /* команды — тёмная консольная полоса в обеих темах */
 .cmd{padding:10px 12px 12px;border-radius:var(--r);background:var(--code);color:var(--code-ink)}
 .cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;color:var(--code-muted)}
@@ -123,7 +125,6 @@ summary::-webkit-details-marker{display:none}
 summary:hover{background:var(--well)}
 summary>span{display:flex;align-items:center;gap:8px;min-width:0}summary>span>.i{color:var(--tone)}
 summary>div{display:flex;align-items:center;gap:10px;flex:none;font-size:13px;font-weight:400;color:var(--muted)}
-.less{display:none}details[open]>summary .more{display:none}details[open]>summary .less{display:inline}
 .chev{font-size:11px;color:var(--muted);transition:transform var(--dur)}
 details[open]>summary .chev{transform:rotate(180deg)}
 .body{display:flex;flex-direction:column;gap:12px;padding:10px 0 16px;font-size:15px}
@@ -181,7 +182,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 .tbl tbody tr:nth-child(even) td{background:var(--well)}
 .tbl tbody tr:hover td{background:var(--hover)}
 .v{min-height:30px;padding:2px 9px;border:0;border-radius:var(--r);background:var(--tint);box-shadow:inset 0 0 0 1px transparent;cursor:pointer;font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone);transition:box-shadow var(--dur)}
-.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}.v:active{transform:scale(.96)}
+.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}
 @media(min-width:481px){.tbl tr:not(.sub)>:first-child{width:1%;white-space:nowrap;padding-right:20px}}
 @media(max-width:480px){.tbl{font-size:14px}.tbl td,.tbl th{padding:4px 3px}.tbl tr:not(.sub)>:first-child{padding-left:6px}.v{padding:2px 5px;font-size:13.5px}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:0s!important;animation-duration:0s!important}}
@@ -201,7 +202,8 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
   <!-- Оглавление: собирается само из разделов (.num + h2). Для страниц из 4+ разделов, иначе удалить. -->
   <nav class="toc" data-toc aria-label="Зміст"><b>Зміст</b></nav>
 
-  <!-- ===== Раздел: .head = номер + заголовок + подпись (подпись — обычным регистром, не капсом) ===== -->
+  <!-- ===== Раздел: .head = номер + заголовок + подпись (подпись — обычным регистром, не капсом).
+       Номер .num — только при оглавлении (4+ разделов); подпись .tag — если добавляет смысл, а не повторяет заголовок. ===== -->
   <section class="sec" id="basics">
     <div class="head"><span class="num">01</span><h2>Назва розділу</h2>
       <span class="tag"><svg class="i"><use href="#i-laptop-code"/></svg>Мітка</span></div>
@@ -242,7 +244,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
     <!-- Раскрывающийся блок -->
     <details>
       <summary><span><svg class="i"><use href="#i-list-ol"/></svg>Покрокова інструкція</span>
-        <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+        <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
       <div class="body"><ol class="list">
         <li>Відкрийте <code class="k">cmd</code> від імені адміністратора.</li>
         <li>Виберіть <span class="hl">1</span> у меню.</li>
@@ -271,7 +273,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 
       <details>
         <summary><span><svg class="i"><use href="#i-list-check"/></svg>Окремі команди</span>
-          <div><span class="more">Розгорнути</span><span class="less">Згорнути</span><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
+          <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
         <div class="body" id="steps-a">
           <div class="step"><b>Крок 1: Опис</b><div class="line"><pre>команда 1</pre>
             <button type="button" class="copy sm" data-copy title="Скопіювати" aria-label="Скопіювати"><svg class="i"><use href="#i-copy"/></svg></button></div></div>
@@ -288,7 +290,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 
   <!-- ===== Таблиця даних: назва + значення-«таблетки» (клік копіює). Колонка іншого змісту — data-c на th і всіх td.
        Група колонок: th.grp colspan + рядок tr.sub з підзаголовками; решта th — rowspan="2". Широкі порожні таблиці —
-       ні: одна таблиця на сторінці — .wrap 36rem у стилях сторінки (див. Organ-Codes.html). ===== -->
+       ні: одна таблиця на сторінці — .wrap 36rem у стилях сторінки і розділ без .head: назва вже в шапці (див. Organ-Codes.html). ===== -->
   <section class="sec">
     <div class="head"><span class="num">03</span><h2>Таблиця кодів</h2>
       <span class="tag"><svg class="i"><use href="#i-book"/></svg>Довідка</span></div>
@@ -396,7 +398,12 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
     p.textContent = lines.join('\n');
   });
   var logo = d.querySelector('.logo');
-  if (logo) d.getElementById('favicon').href = logo.src;
+  var fav = d.getElementById('favicon');
+  if (logo && fav) fav.href = logo.src;
+  // вкладки: роли для экранного диктора
+  all('[data-tab]').forEach(function (b) { b.setAttribute('role', 'tab'); });
+  // «Скопіювати» без подписи на узком экране — имя для диктора
+  all('[data-copy]').forEach(function (b) { var s = b.querySelector('span'); if (s && !b.getAttribute('aria-label')) b.setAttribute('aria-label', s.textContent); });
 
   // оглавление: nav[data-toc] — из заголовков разделов (номер .num + h2); раздел без id получает s1, s2…
   all('[data-toc]').forEach(function (nav) {
@@ -459,9 +466,9 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
     return ok;
   }
   function copy(text, done) {
-    if (navigator.clipboard && window.isSecureContext)
-      navigator.clipboard.writeText(text).then(done, function () { if (fallback(text)) done(); });
-    else if (fallback(text)) done();
+    function bad() { if (fallback(text)) done(); else toast('Не вдалося скопіювати — виділіть і Ctrl+C'); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, bad);
+    else bad();
   }
 
   d.addEventListener('click', function (e) {

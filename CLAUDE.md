@@ -18,7 +18,7 @@ HTML-справочники пользователя (Сергій, GitHub Svor8
   между `<!--icons-->…<!--/icons-->`. В самих страницах общий CSS/JS не править. Свой CSS страницы — `<style>` после
   блока base, только `var(--токен)`. В HTML-комментариях не писать `-->` (метка `<!--/base-->` в комментарии его ломает).
 - Новая страница: копия `template.html` (образцы всех блоков), правятся `<title>`, description, заголовок шапки, `<main>`.
-  Блоки: `section.sec` (`data-c="blue|teal|amber|green|red"`, без него — акцент), `.head` (.num «01», h2, .tag),
+  Блоки: `section.sec` (`data-c="blue|teal|amber|green|red"`, без него — акцент), `.head` (.num «01» — только при оглавлении, h2, .tag; страница-таблица — без .head),
   `.lead`, `.prose`, `dl.facts`, `.chips`, `.note` (`.info`, `.bad`), `.btns > a.btn` (`.main`), `.cmd`, `.step`,
   `details` / `details.q` (FAQ), `ol.list`, `ol.how` (шаги инструкции), `code.k`, `.tabs` > `button data-tab` + `.pane`,
   `nav.toc[data-toc]` (оглавление), `.search > input[data-search]` + `.empty` (поиск по вопросам, `?q=`, `#id`).

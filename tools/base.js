@@ -10,7 +10,12 @@
     p.textContent = lines.join('\n');
   });
   var logo = d.querySelector('.logo');
-  if (logo) d.getElementById('favicon').href = logo.src;
+  var fav = d.getElementById('favicon');
+  if (logo && fav) fav.href = logo.src;
+  // вкладки: роли для экранного диктора
+  all('[data-tab]').forEach(function (b) { b.setAttribute('role', 'tab'); });
+  // «Скопіювати» без подписи на узком экране — имя для диктора
+  all('[data-copy]').forEach(function (b) { var s = b.querySelector('span'); if (s && !b.getAttribute('aria-label')) b.setAttribute('aria-label', s.textContent); });
 
   // оглавление: nav[data-toc] — из заголовков разделов (номер .num + h2); раздел без id получает s1, s2…
   all('[data-toc]').forEach(function (nav) {
@@ -73,9 +78,9 @@
     return ok;
   }
   function copy(text, done) {
-    if (navigator.clipboard && window.isSecureContext)
-      navigator.clipboard.writeText(text).then(done, function () { if (fallback(text)) done(); });
-    else if (fallback(text)) done();
+    function bad() { if (fallback(text)) done(); else toast('Не вдалося скопіювати — виділіть і Ctrl+C'); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, bad);
+    else bad();
   }
 
   d.addEventListener('click', function (e) {
