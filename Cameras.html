@@ -319,6 +319,9 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
         <dt>Браузер</dt><dd>Нові прошивки — без плагіна в Chrome / Edge; старі — Internet Explorer з плагіном.</dd>
         <dt>NVR з PoE</dt><dd>Камери в PoE-портах зазвичай отримують внутрішні адреси реєстратора 10.1.1.x.</dd>
         <dt>Програми</dt><dd>ConfigTool — пошук, ініціалізація, зміна IP; SmartPSS / DSS — клієнт; DMSS — телефон (P2P у відомчій мережі вимикати).</dd>
+        <dt>Imou (LeChange)</dt><dd>Побутова лінійка Dahua (у пошуку — виробник «LC»). <strong>Веб-інтерфейсу немає</strong>: порт 80 відкритий, але сторінка
+          не відкривається. Керування — застосунок Imou Life або SmartPSS / DMSS (порт 37777); відео на ПК — VLC за RTSP-посиланням Dahua (розділ 04),
+          пароль — заданий у застосунку Imou.</dd>
       </dl>
     </div>
 
@@ -442,6 +445,12 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
         <summary><span>Забули пароль</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
         <div class="body"><p>Hikvision — питання безпеки, e-mail або GUID-файл, інакше файл скидання через SADP і підтримку; Dahua — QR-код
           і код на e-mail; TVT — питання безпеки («Forget Password?»). Останній засіб — кнопка Reset: скине всі налаштування.</p></div>
+      </details>
+      <details class="q" id="q-imou">
+        <summary><span>Камера в мережі, але веб-сторінка порожня або не відкривається</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Так поводяться камери Imou (колишній LeChange, побутова лінійка Dahua): ping є, порт 80 відкритий, а веб-інтерфейсу
+          немає. SV показує їх як «Imou (Dahua)». Налаштування — застосунком Imou Life або SmartPSS / DMSS, перегляд на ПК — VLC за RTSP
+          (розділ 04).</p></div>
       </details>
       <details class="q" id="q-notfound">
         <summary><span>Камеру не знаходить навіть SV</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
