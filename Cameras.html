@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Відеокамери: вхід і налаштування</title>
+<meta name="description" content="IP-камери й реєстратори Hikvision, Dahua, TVT: заводські адреси й паролі, нові й старі прошивки, перше налаштування, RTSP, порти.">
+<link rel="icon" id="favicon">
+<!--
+  Довідник до утиліти SV «Відеокамери в мережі». Факти — з інструкцій TVT (камери, 2019 і 2023), технічних бюлетенів Hikvision,
+  Dahua Wiki; неперевірене (заводська адреса реєстраторів TVT) не пишемо. Внутрішніх адрес відомчої мережі тут немає (GitHub Pages).
+-->
+<!--base--><script>/* тема до отрисовки: выбор кнопкой в шапке (localStorage) → ?theme=light|dark (так её задаёт SV) → тёмная */
+(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}t=t||(/[?&]theme=(\w+)/.exec(location.search)||[])[1];if(t==='light')document.documentElement.className='light'})();</script>
+<style>
+/* SV Довідники · система: design.md · основа: Hallmark app scope, тема Almanac (офлайн, системні шрифти, синій акцент)
+ * Общие стили всех страниц: правка здесь → python tools/build.py. Цвета и шрифты — только токены ниже.
+ * waive: системные шрифты (правило проекта: 0 байт, без CDN) · несколько залитых «Скопіювати» (копирование — главное действие) */
+:root{--sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;--display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;--mono:"Cascadia Mono",Consolas,"Liberation Mono",Menlo,monospace;
+--r:2px;--bar:2px;--dur:.15s;
+--paper:#0a1015;--sheet:#151b21;--well:#10161c;--hover:#1d252d;--ink:#e7ecf0;--ink-2:#c4cbd2;--muted:#97a0a7;--rule:#2c333a;--rule-2:#56616b;
+--band:#03080f;--band-ink:#e6ecf2;--band-muted:#9aa6b2;--band-rule:#1f2a35;--band-accent:#67aaed;
+--code:#04080d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25303b;--code-ok:#79ca8b;
+--term:#0c0c0c;--term-ink:#cccccc;--term-g:#16c60c;--term-d:#767676;
+--accent:#67aaed;--accent-2:#85bcf5;--accent-ink:#03080f;--focus:#85bcf5;
+--blue:#73b0ee;--teal:#64c3c8;--amber:#e7b369;--green:#79ca8b;--red:#eb817f;
+--t-blue:#1a2d41;--t-teal:#143034;--t-amber:#3a2b16;--t-green:#1c3121;--t-red:#3f2222;
+--tone:var(--accent);--tint:var(--t-blue);color-scheme:dark}
+:root.light{--paper:#d3d9de;--sheet:#f0f3f5;--well:#e4e9ed;--hover:#d9dfe4;--ink:#09131b;--ink-2:#1e2830;--muted:#3e474f;--rule:#c3cad0;--rule-2:#262f37;
+--band:#14283c;--band-ink:#e6ecf2;--band-muted:#a9bacb;--band-rule:#2a4058;--band-accent:#8cc0f0;
+--code:#0b141d;--code-ink:#d6dee6;--code-muted:#8592a0;--code-rule:#25313d;
+--accent:#0058a3;--accent-2:#004587;--accent-ink:#f4f6f8;--focus:#0058a3;
+--blue:#0058a3;--teal:#005b63;--amber:#7a4300;--green:#0b5d2a;--red:#9a2326;
+--t-blue:#cfe0f3;--t-teal:#c8e4e7;--t-amber:#f1dfc0;--t-green:#cee5d2;--t-red:#f5d5d4;
+--tone:var(--accent);--tint:var(--t-blue);color-scheme:light}
+/* тон раздела / колонки / вкладки: маркеры, не заливка */
+[data-c=blue]{--tone:var(--blue);--tint:var(--t-blue)}[data-c=teal]{--tone:var(--teal);--tint:var(--t-teal)}[data-c=amber]{--tone:var(--amber);--tint:var(--t-amber)}
+[data-c=green]{--tone:var(--green);--tint:var(--t-green)}[data-c=red]{--tone:var(--red);--tint:var(--t-red)}
+*,::before,::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{overflow-x:clip;background:var(--paper);-webkit-text-size-adjust:100%;scroll-padding-top:68px}
+body{margin:0;overflow-x:clip;min-height:100vh;display:flex;flex-direction:column;font:16px/1.55 var(--sans);color:var(--ink-2);background:var(--paper);-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:var(--paper)}::-webkit-scrollbar-thumb{background:var(--muted);border:3px solid var(--paper);border-radius:5px}
+a{color:inherit;text-decoration:underline 1px var(--accent);text-underline-offset:.15em}a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3,p,ol,ul,pre,dl,dd{margin:0}
+button{font:inherit;color:inherit}
+.i{width:1em;height:1em;fill:currentColor;flex:none;vertical-align:-.125em}
+.wrap{max-width:56rem;width:100%;margin:0 auto;padding:0 16px}
+@media(min-width:640px){.wrap{padding:0 24px}}
+/* шапка — тёмная полоса */
+.top{position:sticky;top:0;z-index:50;background:var(--band);color:var(--band-ink);border-bottom:1px solid var(--band-rule)}
+.top .wrap{height:52px;display:flex;align-items:center;gap:12px}
+.top h1{flex:1;min-width:0;display:flex;align-items:center;gap:10px;font:600 17px/1.2 var(--display);letter-spacing:-.01em}
+.top h1 .i{color:var(--band-accent);font-size:15px}
+.top h1 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{width:32px;height:32px;flex:none;border-radius:var(--r)}
+.theme{width:32px;height:32px;flex:none;display:grid;place-items:center;padding:0;border:1px solid var(--band-rule);border-radius:var(--r);background:none;color:var(--band-muted);font-size:15px;cursor:pointer;transition:color var(--dur),background-color var(--dur)}
+.theme:hover{color:var(--band-ink);background:var(--band-rule)}
+.theme .moon,.light .theme .sun{display:none}.light .theme .moon{display:block}
+main.wrap{flex:1;padding-top:20px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
+/* раздел — лист с жирной линейкой сверху */
+.sec{min-width:0;background:var(--sheet);border-top:var(--bar) solid var(--rule-2);padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
+@media(min-width:640px){.sec{padding:20px 24px 24px}}
+.sec:not(:has(>.head)){padding-top:12px}
+/* шапка раздела: номер | заголовок, подпись — строкой ниже под заголовком */
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:2px 12px}
+.head:not(:has(.num)){grid-template-columns:minmax(0,1fr)}
+.num{font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone)}
+.head h2{min-width:0;font:600 21px/1.25 var(--display);letter-spacing:-.01em;color:var(--ink);overflow-wrap:break-word}
+.tag{grid-column:-2;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}.tag .i{color:var(--tone)}
+.lead{max-width:70ch;color:var(--ink-2)}.lead strong{color:var(--ink)}
+/* статья и факты */
+.prose{max-width:70ch;display:flex;flex-direction:column;gap:12px;line-height:1.65}
+.prose h3{margin-top:8px;font:600 18px/1.35 var(--display);color:var(--ink)}
+.prose ul,.prose ol{padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.prose li::marker{color:var(--tone)}
+.facts{display:grid;grid-template-columns:minmax(8rem,max-content) minmax(0,1fr)}
+.facts dt,.facts dd{padding:8px 0;border-top:1px solid var(--rule)}
+.facts dt{padding-right:20px;font-weight:600;color:var(--ink)}
+@media(max-width:480px){.facts{grid-template-columns:minmax(0,1fr)}.facts dd{padding-top:0;border-top:0}}
+/* «фишки»: заголовок + ярлыки */
+.chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:12px 14px;background:var(--well);border-left:3px solid var(--tone)}
+.chips b{flex-basis:100%;display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink)}.chips b .i{color:var(--tone)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;white-space:nowrap;border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet);font-size:14px}
+.chip strong{font:500 14px var(--mono);color:var(--tone)}
+.fg-blue{color:var(--blue)}.fg-teal{color:var(--teal)}.fg-amber{color:var(--amber)}.fg-green{color:var(--green)}.fg-red{color:var(--red)}
+/* имитация консоли Windows — чёрная в обеих темах */
+.term{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;padding:8px 12px;border-radius:var(--r);background:var(--term);font:13.5px/1.5 var(--mono);color:var(--term-ink)}
+.term>b{flex-basis:100%;text-align:center;font-weight:400}
+.term span{white-space:nowrap}.term .g{color:var(--term-g)}.term .d{color:var(--term-d)}
+/* примечание: обычное — жёлтое; .info — синее, .bad — красное */
+.note{--tone:var(--amber);--tint:var(--t-amber);display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--tint);border-left:3px solid var(--tone);font-size:15px;line-height:1.5}
+.note.info{--tone:var(--blue);--tint:var(--t-blue)}.note.bad{--tone:var(--red);--tint:var(--t-red)}
+.note>.i{margin-top:3px;color:var(--tone)}.note strong{color:var(--ink)}
+/* кнопки-ссылки: контурные, .main — одна залитая */
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:34rem}
+.btn{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 10px;border:1px solid var(--muted);border-radius:var(--r);color:var(--ink);text-decoration:none;transition:background-color var(--dur),border-color var(--dur)}
+.btn:hover{background:var(--well);border-color:var(--ink)}
+.btn>.i{font-size:20px;color:var(--tone)}.btn>.ext{margin-left:auto;font-size:14px;color:var(--muted)}
+.btn>span{min-width:0}.btn b{display:block;font-size:15px;font-weight:600;overflow-wrap:anywhere}.btn small{display:block;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.btn.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.btn.main:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.main>.i,.btn.main small{color:inherit}
+/* узкий экран: кнопки-ссылки одна под другой; «Скопіювати» в заголовке блока — одной иконкой, чтобы не мять заголовок */
+@media(max-width:480px){.btns{grid-template-columns:minmax(0,1fr);gap:8px}summary .copy{padding:0 10px}summary .copy>span{display:none}}
+/* команды — тёмная консольная полоса в обеих темах */
+.cmd{padding:10px 12px 12px;border-radius:var(--r);background:var(--code);color:var(--code-ink)}
+.cmd-t{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;color:var(--code-muted)}
+.line{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+pre{flex:1;min-width:0;font:14px/1.55 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border:0;border-radius:var(--r);background:var(--accent);color:var(--accent-ink);font:600 14px var(--sans);cursor:pointer;transition:background-color var(--dur),color var(--dur)}
+.copy:hover{background:var(--accent-2)}.copy.ok{background:var(--green)}
+.copy.sm{width:32px;min-height:28px;padding:0;justify-content:center;background:none;color:var(--code-muted);box-shadow:inset 0 0 0 1px var(--code-rule)}
+.copy.sm:hover{background:var(--code-rule);color:var(--code-ink)}.copy.sm.ok{background:none;color:var(--code-ok)}
+/* раскрывающийся блок: линейки сверху и снизу, без рамки */
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+details+details{border-top:0}
+summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;margin:0 -8px;padding:6px 8px;cursor:pointer;user-select:none;list-style:none;font-size:15px;font-weight:600;color:var(--ink);transition:background-color var(--dur)}
+summary::-webkit-details-marker{display:none}
+summary:hover{background:var(--well)}
+summary>span{display:flex;align-items:center;gap:8px;min-width:0}summary>span>.i{color:var(--tone)}
+summary>div{display:flex;align-items:center;gap:10px;flex:none;font-size:13px;font-weight:400;color:var(--muted)}
+.chev{font-size:11px;color:var(--muted);transition:transform var(--dur)}
+details[open]>summary .chev{transform:rotate(180deg)}
+.body{display:flex;flex-direction:column;gap:12px;padding:10px 0 16px;font-size:15px}
+.body>pre{padding:12px;border-radius:var(--r);background:var(--code);color:var(--code-ink);font-size:13.5px}
+/* вопрос FAQ */
+details.q>summary{font-size:16px;line-height:1.4;padding-top:10px;padding-bottom:10px}
+details.q>.body{max-width:70ch;line-height:1.65}
+/* шаги с командами */
+.step{display:flex;flex-direction:column;gap:6px}
+.step>b{font-size:14px;font-weight:600;color:var(--ink-2)}
+.step .line{align-items:center;padding:6px 6px 6px 12px;border-radius:var(--r);background:var(--code)}
+.step pre{font-size:13.5px;color:var(--code-ink)}
+/* списки: нумерованный и шаги инструкции */
+ol.list{padding-left:24px;display:flex;flex-direction:column;gap:6px}
+ol.list li::marker{font:600 15px var(--mono);color:var(--tone)}
+ol.how{list-style:none;padding:0;counter-reset:how}
+ol.how>li{position:relative;counter-increment:how;display:flex;flex-direction:column;gap:6px;padding:14px 0 14px 3rem;border-top:1px solid var(--rule)}
+ol.how>li::before{content:counter(how,decimal-leading-zero);position:absolute;left:0;top:14px;font:500 18px/1.3 var(--mono);color:var(--tone)}
+ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
+.k{padding:1px 6px;border:1px solid var(--rule);border-radius:var(--r);background:var(--well);font:.9em var(--mono);color:var(--ink)}
+.hl{font-weight:600;color:var(--tone)}
+/* вкладки: подчёркивание тоном */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;margin-bottom:-1px;padding:8px 12px;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;font-weight:600;font-size:15px;color:var(--muted);transition:color var(--dur),border-color var(--dur)}
+.tabs button .i{color:var(--tone)}
+.tabs button:hover{color:var(--ink)}.tabs button.on{color:var(--ink);border-bottom-color:var(--tone)}
+.pane{display:flex;flex-direction:column;gap:14px}
+/* оглавление (скрипт собирает из разделов) */
+.toc{padding:14px 16px;background:var(--sheet);border-top:var(--bar) solid var(--rule-2)}
+.toc>b{display:block;margin-bottom:4px;font:600 16px var(--display);color:var(--ink)}
+.toc ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));column-gap:24px}
+.toc a{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink-2);transition:color var(--dur)}
+.toc a:hover{color:var(--ink)}.toc a>span:first-child{font:500 14px/1.6 var(--mono);color:var(--accent)}
+/* поиск */
+.search{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;background:var(--sheet);border:1px solid var(--muted);border-radius:var(--r)}
+.search:focus-within{outline:2px solid var(--focus);outline-offset:1px}
+.search>.i{color:var(--muted)}
+.search input{flex:1;min-width:0;height:42px;border:0;background:none;font:16px var(--sans);color:var(--ink);outline:0}
+.empty{padding:12px 16px;background:var(--sheet);color:var(--muted)}
+/* всплывающее «Скопійовано» */
+#toast{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r);background:var(--band);color:var(--band-ink);border-left:3px solid var(--code-ok);font-size:14px;font-weight:600;opacity:0;transform:translateY(16px);transition:opacity .2s,transform .2s;pointer-events:none}
+#toast.show{opacity:1;transform:none}#toast .i{color:var(--code-ok)}
+/* таблицы данных: зебра без линий, значения — «таблетки» button.v data-v (клик копирует).
+   Первая колонка — название, прижата к данным; колонка другого смысла — data-c на th и td; группа колонок — th.grp + tr.sub */
+.tw{min-width:0;overflow-x:auto}
+.sec>.tw{flex:1}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.tbl th{padding:6px 8px 8px;border-bottom:var(--bar) solid var(--rule-2);font-size:14px;font-weight:600;line-height:1.3;color:var(--muted);text-align:center;white-space:nowrap}
+.tbl th[data-c]{color:var(--tone)}
+.tbl .grp{padding-bottom:4px;border-bottom:1px solid var(--rule);color:var(--ink-2)}
+.tbl .sub th{padding-top:4px}
+.tbl td{padding:4px 8px;text-align:center}
+.tbl tr:not(.sub)>:first-child{text-align:left;padding-left:10px}
+.tbl td:first-child{color:var(--ink)}
+.tbl tbody tr:nth-child(even) td{background:var(--well)}
+.tbl tbody tr:hover td{background:var(--hover)}
+.v{min-height:30px;padding:2px 9px;border:0;border-radius:var(--r);background:var(--tint);box-shadow:inset 0 0 0 1px transparent;cursor:pointer;font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--tone);transition:box-shadow var(--dur)}
+.v:hover{box-shadow:inset 0 0 0 1px var(--tone)}
+@media(min-width:481px){.tbl tr:not(.sub)>:first-child{width:1%;white-space:nowrap;padding-right:20px}}
+@media(max-width:480px){.tbl{font-size:14px}.tbl td,.tbl th{padding:4px 3px}.tbl tr:not(.sub)>:first-child{padding-left:6px}.v{padding:2px 5px;font-size:13.5px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:0s!important;animation-duration:0s!important}}
+@media print{.top,.copy,.theme,.search,#toast{display:none}html,body{background:none}.sec{border-top-color:currentColor}details>.body{display:flex}}
+</style><!--/base-->
+<style>
+/* эта страница: в таблице заводских данных — подпись под таблеткой, адреса в строку */
+.tbl small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.tbl td{vertical-align:top}
+.cmd-t small{margin-left:8px;color:var(--code-muted);font-weight:400}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <button type="button" class="theme" title="Світла / темна тема" aria-label="Світла / темна тема"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+  <h1><svg class="i"><use href="#i-video"/></svg><span>Відеокамери: вхід і налаштування</span></h1>
+  <img class="logo" alt="SV" width="32" height="32" src="data:image/webp;base64,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">
+</div></header>
+
+<main class="wrap">
+
+  <nav class="toc" data-toc aria-label="Зміст"><b>Зміст</b></nav>
+
+  <!-- ===== 01 Заводські налаштування ===== -->
+  <section class="sec" id="defaults">
+    <div class="head"><span class="num">01</span><h2>Заводські налаштування</h2>
+      <span class="tag"><svg class="i"><use href="#i-key"/></svg>Hikvision · Dahua · TVT</span></div>
+
+    <p class="lead">Нова або скинута кнопкою Reset камера стоїть на <strong>заводській адресі</strong> — браузер ПК із відомчої мережі до неї
+      не дістанеться, поки ПК не в тій самій підмережі. Знайти її можна і так: SV → «Інструменти» → «Відеокамери в мережі».
+      Натисніть на значення — воно скопіюється.</p>
+
+    <div class="tw"><table class="tbl">
+      <thead><tr><th>Виробник</th><th>Адреса камери</th><th>Логін</th><th>Стара прошивка</th><th data-c="green">Нова прошивка</th><th>Програма пошуку</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hikvision</b></td>
+          <td><button type="button" class="v" data-v="192.168.1.64" title="Скопіювати">192.168.1.64</button>
+            <small>прошивка 5.2 і старіші: <button type="button" class="v" data-v="192.0.0.64" title="Скопіювати">192.0.0.64</button></small></td>
+          <td><button type="button" class="v" data-v="admin" title="Скопіювати">admin</button></td>
+          <td><button type="button" class="v" data-v="12345" title="Скопіювати">12345</button><small>до прошивки 5.3.0</small></td>
+          <td data-c="green">пароля немає —<br>«Активація»</td>
+          <td>SADP</td></tr>
+        <tr><td><b>Dahua</b></td>
+          <td><button type="button" class="v" data-v="192.168.1.108" title="Скопіювати">192.168.1.108</button>
+            <small>частина нових — DHCP</small></td>
+          <td><button type="button" class="v" data-v="admin" title="Скопіювати">admin</button></td>
+          <td><button type="button" class="v" data-v="admin" title="Скопіювати">admin</button><small>старі DVR: ще 888888 / 666666</small></td>
+          <td data-c="green">пароля немає —<br>«Ініціалізація»</td>
+          <td>ConfigTool</td></tr>
+        <tr><td><b>TVT</b></td>
+          <td><button type="button" class="v" data-v="192.168.226.201" title="Скопіювати">192.168.226.201</button>
+            <small>шлюз 192.168.226.1</small></td>
+          <td><button type="button" class="v" data-v="admin" title="Скопіювати">admin</button></td>
+          <td><button type="button" class="v" data-v="123456" title="Скопіювати">123456</button><small>пропонує змінити</small></td>
+          <td data-c="green">пароля немає —<br>«Device Activation»</td>
+          <td>IPTool</td></tr>
+      </tbody></table></div>
+
+    <div class="note"><svg class="i"><use href="#i-triangle-exclamation"/></svg>
+      <div>Заводський пароль спрацює <strong>лише на старій прошивці</strong>. Нові пристрої пароля не мають: його задають при першому
+        вході, а без нього камера не працює. <strong>Не підбирайте паролі:</strong> після кількох помилок (зазвичай 5) пристрій блокує вхід — до пів години,
+        а для антивіруса ESET перебір паролів — ознака атаки.</div></div>
+    <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+      <div>Маска всюди 255.255.255.0. Реєстратори (NVR) зазвичай мають схему адрес свого виробника, але точну заводську адресу
+        реєстратора дивіться на наклейці або знайдіть програмою пошуку — її видно навіть у чужій підмережі.</div></div>
+  </section>
+
+  <!-- ===== 02 Перше підключення ===== -->
+  <section class="sec" id="first" data-c="blue">
+    <div class="head"><span class="num">02</span><h2>Перше підключення</h2>
+      <span class="tag"><svg class="i"><use href="#i-list-ol"/></svg>7 кроків</span></div>
+    <ol class="how">
+      <li><h3>Знайдіть пристрій</h3><p>SV «Відеокамери в мережі» (або SADP / ConfigTool / IPTool). «Не активована» — пароль ще не задано;
+        «не у вашій підмережі» — камера на заводській адресі.</p></li>
+      <li><h3>Нові камери — по одній</h3><p>Кілька нових Hikvision одночасно мають ту саму 192.168.1.64 (SV покаже «Однакові IP»):
+        підключили одну — змінили адресу — підключаєте наступну.</p></li>
+      <li><h3>Дістаньтеся до заводської підмережі</h3><p>Тимчасово додайте ПК другу адресу в підмережі камери: для Hikvision і Dahua
+        <code class="k">192.168.1.200</code>, для TVT <code class="k">192.168.226.200</code>, маска 255.255.255.0, без шлюзу
+        (Windows: адаптер → IPv4 → «Властивості» → «Додатково» → «Додати»; працює лише зі статичною адресою адаптера).
+        Після налаштування камери адресу приберіть.</p></li>
+      <li><h3>Активуйте</h3><p>Задайте пароль admin (вимоги — у розділі виробника). Одразу заповніть питання безпеки (Hikvision, TVT)
+        або e-mail (Dahua): інакше забутий пароль скидається лише кнопкою Reset разом з усіма налаштуваннями.</p></li>
+      <li><h3>Задайте мережу</h3><p>Статична адреса з відомчої мережі (вільну перевірте в таблиці «Відомча мережа»), маска, шлюз;
+        DHCP вимкніть — адреса камери не повинна змінюватися.</p></li>
+      <li><h3>Налаштуйте час</h3><p>NTP-сервер або синхронізація з ПК, часовий пояс GMT+2 з переходом на літній час — інакше в записах
+        буде неправильний час.</p></li>
+      <li><h3>Перевірте й запишіть</h3><p>Відео — у веб-інтерфейсі та у VLC за RTSP-посиланням (розділ 04). Потім SV → «Відеокамери
+        в мережі» → «Відправити у таблицю».</p></li>
+    </ol>
+  </section>
+
+  <!-- ===== 03 За виробником ===== -->
+  <section class="sec" id="vendors" data-c="teal">
+    <div class="head"><span class="num">03</span><h2>Нові й старі прошивки</h2>
+      <span class="tag"><svg class="i"><use href="#i-gear"/></svg>за виробником</span></div>
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="on" data-tab="t-hik" aria-selected="true"><svg class="i"><use href="#i-video"/></svg>Hikvision</button>
+      <button type="button" data-tab="t-dah" data-c="amber" aria-selected="false"><svg class="i"><use href="#i-video"/></svg>Dahua</button>
+      <button type="button" data-tab="t-tvt" data-c="green" aria-selected="false"><svg class="i"><use href="#i-video"/></svg>TVT</button>
+    </div>
+
+    <div class="pane" id="t-hik">
+      <dl class="facts">
+        <dt>Адреса</dt><dd>Прошивка 5.3 і новіші — 192.168.1.64; 5.2 і старіші — 192.0.0.64.</dd>
+        <dt>Стара прошивка</dt><dd>До 5.3.0: admin / 12345.</dd>
+        <dt>Нова прошивка</dt><dd>З 5.3.0 заводського пароля немає: «Активація» — у SADP, веб-інтерфейсі або iVMS-4200. Пароль —
+          8–16 символів, щонайменше два види з: цифри, малі літери, великі літери, спецсимволи; без слів hik, hkws, hikvision.</dd>
+        <dt>Блокування</dt><dd>«Illegal Login Lock»: після кількох невдалих спроб (зазвичай 5) вхід блокується приблизно на 30 хв;
+          допомагає й перезавантаження. Configuration → System → Security → Security Service.</dd>
+        <dt>Забули пароль</dt><dd>«Forget password» на сторінці входу — питання безпеки, резервний e-mail або GUID-файл (якщо налаштовані
+          заздалегідь). Інакше — SADP → «Forgot Password» → експорт файлу → дилер / підтримка Hikvision → файл скидання (камеру не вимикати).</dd>
+        <dt>ONVIF</dt><dd>З прошивки 5.5.0 <strong>вимкнено</strong>. Configuration → Network → Advanced Settings → Integration Protocol →
+          «Enable ONVIF» → «Add» — окремий користувач ONVIF: його логін і пароль вводять у реєстратор іншого виробника.</dd>
+        <dt>Браузер</dt><dd>Нові прошивки — перегляд без плагіна в Chrome / Edge (частина функцій і H.265 — з плагіном);
+          старі — Internet Explorer з плагіном (у Windows 11 — Edge у режимі IE).</dd>
+        <dt>NVR з PoE</dt><dd>Камери в PoE-портах реєстратора отримують його внутрішні адреси 192.168.254.x і додаються самі;
+          з мережі напряму їх не видно.</dd>
+        <dt>Програми</dt><dd>SADP — пошук, активація, зміна IP; iVMS-4200 — клієнт; Hik-Connect — хмара (у відомчій мережі вимикати).</dd>
+      </dl>
+    </div>
+
+    <div class="pane" id="t-dah" data-c="amber" hidden>
+      <dl class="facts">
+        <dt>Адреса</dt><dd>192.168.1.108. Частина нових камер має ввімкнений DHCP: якщо в мережі є DHCP-сервер, адреса буде іншою —
+          знайдіть камеру ConfigTool або SV.</dd>
+        <dt>Стара прошивка</dt><dd>admin / admin. У старих реєстраторах ще локальні облікові записи 888888 / 888888 (адміністратор, лише з
+          монітора й миші) і 666666 / 666666 (лише перегляд).</dd>
+        <dt>Нова прошивка</dt><dd>«Ініціалізація»: пароль admin і e-mail для скидання. Пароль — 8–32 символи, щонайменше два види з:
+          цифри, літери, спецсимволи. Не ставте <code class="k">#</code> — він ламає RTSP-посилання.</dd>
+        <dt>Блокування</dt><dd>Після 5 невдалих спроб обліковий запис блокується — зазвичай на 30 хв, на деяких моделях на 5 хв;
+          допомагає перезавантаження. Якщо блокується знову — шукайте, хто стукає зі старим паролем (реєстратор, програма).</dd>
+        <dt>Забули пароль</dt><dd>«Forgot password» → QR-код → застосунок DMSS → «Reset Device Password» → код приходить на e-mail,
+          вказаний при ініціалізації. Без e-mail — кнопка Reset (усі налаштування заводські) або сервіс.</dd>
+        <dt>ONVIF</dt><dd>На більшості прошивок увімкнено. Реєстратор іншого виробника не бачить камеру — перевірте
+          Network → Access Platform → ONVIF.</dd>
+        <dt>Браузер</dt><dd>Нові прошивки — без плагіна в Chrome / Edge; старі — Internet Explorer з плагіном.</dd>
+        <dt>NVR з PoE</dt><dd>Камери в PoE-портах зазвичай отримують внутрішні адреси реєстратора 10.1.1.x.</dd>
+        <dt>Програми</dt><dd>ConfigTool — пошук, ініціалізація, зміна IP; SmartPSS / DSS — клієнт; DMSS — телефон (P2P у відомчій мережі вимикати).</dd>
+      </dl>
+    </div>
+
+    <div class="pane" id="t-tvt" data-c="green" hidden>
+      <dl class="facts">
+        <dt>Адреса</dt><dd>192.168.226.201, маска 255.255.255.0, шлюз 192.168.226.1 (інструкції TVT 2019 і 2023 років).</dd>
+        <dt>Стара прошивка</dt><dd>admin / 123456 — після входу пропонує змінити пароль (можна відмовитися — не відмовляйтеся).</dd>
+        <dt>Нова прошивка</dt><dd>«Device Activation»: пароль admin — 8–16 символів, обов'язково цифри, спецсимволи, великі й малі
+          літери. Галочка «Activate Onvif User» — той самий логін і пароль працюватимуть і для ONVIF.</dd>
+        <dt>Питання безпеки</dt><dd>Після першого входу (або при активації) — Config → Security → User → «Safety Question». Саме через них
+          працює «Forget Password?» на сторінці входу.</dd>
+        <dt>Блокування</dt><dd>«Locking once illegal login»: після 5 невдалих спроб вхід блокується на пів години або до перезавантаження камери
+          (Config → Security → Security Management).</dd>
+        <dt>ONVIF</dt><dd>Окремі користувачі — Config → Network → Onvif; реєстратор іншого виробника підключайте саме цим користувачем.</dd>
+        <dt>Браузер</dt><dd>Internet Explorer з плагіном — усі функції; Chrome / Edge / Firefox — без плагіна, перегляд до 1080p.</dd>
+        <dt>Програма</dt><dd>IPTool — пошук і зміна IP (потрібен пароль адміністратора камери).</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== 04 RTSP ===== -->
+  <section class="sec" id="rtsp" data-c="amber">
+    <div class="head"><span class="num">04</span><h2>RTSP: перевірка у VLC</h2>
+      <span class="tag"><svg class="i"><use href="#i-terminal"/></svg>VLC → Медіа → Відкрити мережевий потік</span></div>
+    <p class="lead">Замініть <code class="k">IP</code> на адресу камери. Логін і пароль VLC спитає сам — так спецсимволи в паролі
+      (<code class="k">@</code> <code class="k">#</code> <code class="k">:</code>) не зламають посилання.</p>
+
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Hikvision<small>101 — основний потік, 102 — другий; NVR, канал 3 — 301</small></div>
+      <div class="line"><pre>rtsp://IP:554/Streaming/Channels/101</pre>
+        <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Hikvision, стара прошивка</div>
+      <div class="line"><pre>rtsp://IP:554/h264/ch1/main/av_stream</pre>
+        <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Dahua<small>subtype=1 — другий потік; на NVR channel — номер каналу</small></div>
+      <div class="line"><pre>rtsp://IP:554/cam/realmonitor?channel=1&amp;subtype=0</pre>
+        <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>TVT, камера<small>profile2 — другий потік</small></div>
+      <div class="line"><pre>rtsp://IP:554/profile1</pre>
+        <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+    <div class="cmd">
+      <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>TVT, реєстратор<small>streamType=substream — другий потік</small></div>
+      <div class="line"><pre>rtsp://IP:554/chID=1&amp;streamType=main</pre>
+        <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div>
+    </div>
+    <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+      <div>Формат для реєстраторів TVT — за даними користувачів, не з інструкції. Не працює — у веб-інтерфейсі реєстратора дивіться
+        Мережа → RTSP; у TVT і Hikvision RTSP можна вимкнути, тоді VLC не з'єднається.</div></div>
+  </section>
+
+  <!-- ===== 05 Порти ===== -->
+  <section class="sec" id="ports">
+    <div class="head"><span class="num">05</span><h2>Порти за замовчуванням</h2>
+      <span class="tag"><svg class="i"><use href="#i-network-wired"/></svg>TCP, якщо не сказано інше</span></div>
+    <div class="tw"><table class="tbl">
+      <thead><tr><th>Виробник</th><th>Веб</th><th>Програми, реєстратор</th><th>RTSP</th><th>Інше</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hikvision</b></td><td>80, HTTPS 443</td><td>8000 (SDK, iVMS-4200)</td><td>554</td><td>пошук SADP — UDP 37020</td></tr>
+        <tr><td><b>Dahua</b></td><td>80, HTTPS 443</td><td>37777, UDP 37778 (SmartPSS, DMSS, NVR)</td><td>554</td><td>пошук ConfigTool — UDP 37810</td></tr>
+        <tr><td><b>TVT</b></td><td>80</td><td>9008 (камера), 6036 (реєстратор)</td><td>554</td><td>WebSocket 7681 — перегляд без плагіна</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <!-- ===== 06 Безпека ===== -->
+  <section class="sec" id="security" data-c="red">
+    <div class="head"><span class="num">06</span><h2>Безпека у відомчій мережі</h2>
+      <span class="tag"><svg class="i"><use href="#i-triangle-exclamation"/></svg>після налаштування</span></div>
+    <ol class="list">
+      <li>Заводський пароль змінюйте одразу; пароль — у відповідального за об'єкт, не на наклейці.</li>
+      <li>Операторам — окремий користувач лише з переглядом, не admin.</li>
+      <li>Вимкніть хмару й P2P: Hik-Connect / EZVIZ (Hikvision, «Platform Access»), P2P (Dahua, TVT) — камера не повинна виходити в інтернет.</li>
+      <li>Вимкніть UPnP на камері й реєстраторі — він сам відкриває порти на роутері; порти камер в інтернет не прокидайте.</li>
+      <li>Оновлюйте прошивку лише з офіційного сайту виробника: у старих прошивках Hikvision відомі вразливості входу без пароля
+        (CVE-2017-7921, CVE-2021-36260).</li>
+      <li>Кнопка Reset повертає заводську адресу, а на старій прошивці — і заводський пароль: після скидання налаштуйте камеру знову.</li>
+    </ol>
+  </section>
+
+  <label class="search"><svg class="i"><use href="#i-magnifying-glass"/></svg>
+    <input type="search" data-search placeholder="Пошук у питаннях" aria-label="Пошук у питаннях" autocomplete="off"></label>
+  <p class="empty" hidden>Нічого не знайдено. Спробуйте інше слово.</p>
+
+  <!-- ===== 07 Питання ===== -->
+  <section class="sec" id="faq" data-c="amber">
+    <div class="head"><span class="num">07</span><h2>Часті питання</h2>
+      <span class="tag"><svg class="i"><use href="#i-circle-question"/></svg>FAQ</span></div>
+    <div>
+      <details class="q" id="q-subnet">
+        <summary><span>SV бачить камеру, а браузер її не відкриває</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Камера в іншій підмережі (у SV — «не у вашій підмережі»; зазвичай заводська адреса). Додайте ПК тимчасову
+          адресу в її підмережі (розділ 02, крок 3) або змініть IP камери програмою виробника.</p></div>
+      </details>
+      <details class="q" id="q-locked">
+        <summary><span>«Користувача заблоковано» / «Account locked»</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Зачекайте 30 хв або перезавантажте камеру (вимкніть живлення). Блокується знову — значить, хтось стукає
+          зі старим паролем: реєстратор, клієнт на іншому ПК, телефон. Змініть пароль і там.</p></div>
+      </details>
+      <details class="q" id="q-onvif">
+        <summary><span>Реєстратор не бачить камеру Hikvision через ONVIF</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>З прошивки 5.5.0 ONVIF вимкнено. Увімкніть його й створіть користувача ONVIF (розділ 03, Hikvision) — у
+          реєстраторі вказуйте саме його.</p></div>
+      </details>
+      <details class="q" id="q-black">
+        <summary><span>Чорний екран у браузері, хоча вхід вдався</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Без плагіна браузер не показує H.265 і часто — потоки понад 1080p. Перемкніть перегляд на другий потік, у
+          налаштуваннях відео виберіть H.264 або відкрийте камеру в Edge у режимі IE з плагіном.</p></div>
+      </details>
+      <details class="q" id="q-same">
+        <summary><span>Дві камери з однаковою адресою</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Так буває з новими камерами (усі на заводській адресі) або після Reset. Відключіть одну, змініть адресу іншій,
+          потім підключіть першу. SV показує такі червоним — «Однакові IP».</p></div>
+      </details>
+      <details class="q" id="q-forgot">
+        <summary><span>Забули пароль</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Hikvision — питання безпеки, e-mail або GUID-файл, інакше файл скидання через SADP і підтримку; Dahua — QR-код
+          і код на e-mail; TVT — питання безпеки («Forget Password?»). Останній засіб — кнопка Reset: скине всі налаштування.</p></div>
+      </details>
+      <details class="q" id="q-notfound">
+        <summary><span>Камеру не знаходить навіть SV</span><svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body"><p>Пошук бачить лише свій сегмент мережі (комутатор / VLAN). Перевірте живлення (PoE) і індикатор порту.
+          Частину відповідей камер може відкидати брандмауер ESET — тоді введіть адресу в «Перевірити IP» у SV.</p></div>
+      </details>
+    </div>
+    <div class="note info"><svg class="i"><use href="#i-circle-info"/></svg>
+      <div>Джерела: інструкції камер TVT (2019, 2023), технічні бюлетені Hikvision (паролі з 5.3.0, ONVIF з 5.5.0), Dahua Wiki.
+        Модель і прошивка можуть відрізнятися — перевіряйте на своєму пристрої.</div></div>
+  </section>
+
+</main>
+
+<div id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-circle-check"/></svg><span></span></div>
+
+<!--icons--><svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Font Awesome Free 6.4.0 by @fontawesome, CC BY 4.0 -->
+<symbol id="i-check" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></symbol>
+<symbol id="i-circle-info" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol>
+<symbol id="i-circle-question" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 512 512"><path d="M448 384H256c-35.3 0-64-28.7-64-64V64c0-35.3 28.7-64 64-64H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V320c0 35.3-28.7 64-64 64zM64 128h96v48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H256c8.8 0 16-7.2 16-16V416h48v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 512 512"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></symbol>
+<symbol id="i-key" viewBox="0 0 512 512"><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></symbol>
+<symbol id="i-list-ol" viewBox="0 0 512 512"><path d="M24 56c0-13.3 10.7-24 24-24H80c13.3 0 24 10.7 24 24V176h16c13.3 0 24 10.7 24 24s-10.7 24-24 24H40c-13.3 0-24-10.7-24-24s10.7-24 24-24H56V80H48C34.7 80 24 69.3 24 56zM86.7 341.2c-6.5-7.4-18.3-6.9-24 1.2L51.5 357.9c-7.7 10.8-22.7 13.3-33.5 5.6s-13.3-22.7-5.6-33.5l11.1-15.6c23.7-33.2 72.3-35.6 99.2-4.9c21.3 24.4 20.8 60.9-1.1 84.7L86.8 432H120c13.3 0 24 10.7 24 24s-10.7 24-24 24H32c-9.5 0-18.2-5.6-22-14.4s-2.1-18.9 4.3-25.9l72-78c5.3-5.8 5.4-14.6 .3-20.5zM224 64H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-magnifying-glass" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></symbol>
+<symbol id="i-moon" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></symbol>
+<symbol id="i-network-wired" viewBox="0 0 640 512"><path d="M256 64H384v64H256V64zM240 0c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h48v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H240c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H192V288H448v32H400c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H560c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H512V288h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V192h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H240zM96 448V384H224v64H96zm320-64H544v64H416V384z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 512 512"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 576 512"><path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></symbol>
+<symbol id="i-triangle-exclamation" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></symbol>
+<symbol id="i-video" viewBox="0 0 576 512"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/></symbol>
+</svg><!--/icons-->
+<!--base-js--><script>
+/* Общий скрипт всех страниц (правка здесь → python tools/build.py): копирование, вкладки, «Усі команди»,
+   оглавление, поиск по вопросам, тема, значок вкладки браузера. */
+(function () {
+  var d = document, toastTimer;
+  function all(sel, root) { return [].slice.call((root || d).querySelectorAll(sel)); }
+
+  all('pre[data-collect]').forEach(function (p) {
+    var lines = all('pre', d.getElementById(p.getAttribute('data-collect'))).map(function (x) { return x.textContent.trim(); });
+    if (p.getAttribute('data-after')) lines.push(p.getAttribute('data-after'));
+    p.textContent = lines.join('\n');
+  });
+  var logo = d.querySelector('.logo');
+  var fav = d.getElementById('favicon');
+  if (logo && fav) fav.href = logo.src;
+  // вкладки: роли для экранного диктора
+  all('[data-tab]').forEach(function (b) { b.setAttribute('role', 'tab'); });
+  // «Скопіювати» без подписи на узком экране — имя для диктора
+  all('[data-copy]').forEach(function (b) { var s = b.querySelector('span'); if (s && !b.getAttribute('aria-label')) b.setAttribute('aria-label', s.textContent); });
+
+  // оглавление: nav[data-toc] — из заголовков разделов (номер .num + h2); раздел без id получает s1, s2…
+  all('[data-toc]').forEach(function (nav) {
+    var ol = d.createElement('ol');
+    all('main .sec').forEach(function (s, i) {
+      var h = s.querySelector('h2'), n = s.querySelector('.num');
+      if (!h) return;
+      if (!s.id) s.id = 's' + (i + 1);
+      var li = d.createElement('li'), a = d.createElement('a'), a1 = d.createElement('span'), a2 = d.createElement('span');
+      a.href = '#' + s.id; a1.textContent = n ? n.textContent : i + 1; a2.textContent = h.textContent;
+      a.appendChild(a1); a.appendChild(a2); li.appendChild(a); ol.appendChild(li);
+    });
+    nav.appendChild(ol);
+  });
+
+  // поиск: input[data-search] фильтрует вопросы details.q (раскрывает найденные), прячет пустые разделы, .empty — «нічого»
+  function norm(s) { return s.toLowerCase().replace(/[’ʼ`]/g, "'"); }
+  all('input[data-search]').forEach(function (inp) {
+    var items = all('details.q'), empty = d.querySelector('.empty');
+    function run() {
+      var q = norm(inp.value.trim()), n = 0;
+      items.forEach(function (it) {
+        var hit = !q || norm(it.textContent).indexOf(q) >= 0;
+        it.hidden = !hit; if (hit) n++;
+        if (q) it.open = hit;
+      });
+      all('main .sec').forEach(function (s) {
+        var qs = all('details.q', s);
+        if (qs.length) s.hidden = qs.every(function (x) { return x.hidden; });
+      });
+      if (empty) empty.hidden = n > 0;
+    }
+    var m = /[?&]q=([^&]*)/.exec(location.search);
+    if (m) inp.value = decodeURIComponent(m[1].replace(/\+/g, ' '));
+    inp.addEventListener('input', run);
+    run();
+  });
+
+  // #id в адресе открывает этот вопрос / блок
+  function openHash() {
+    var t = location.hash && d.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); }
+  }
+  openHash();
+  window.addEventListener('hashchange', openHash);
+
+  function toast(msg) {
+    var t = d.getElementById('toast');
+    t.lastChild.textContent = msg;
+    t.className = 'show';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = ''; }, 2500);
+  }
+  function fallback(text) {
+    var ta = d.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    d.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = d.execCommand('copy'); } catch (e) {}
+    d.body.removeChild(ta);
+    return ok;
+  }
+  function copy(text, done) {
+    function bad() { if (fallback(text)) done(); else toast('Не вдалося скопіювати — виділіть і Ctrl+C'); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, bad);
+    else bad();
+  }
+
+  d.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]');
+    if (b) {
+      e.preventDefault(); e.stopPropagation();   // кнопка в <summary> не сворачивает блок
+      var every = b.getAttribute('data-copy') === 'all';
+      var pre = (every ? b.closest('details') : b.closest('.line')).querySelector('pre');
+      copy(pre.textContent.trim() + (every ? '\n' : ''), function () {
+        var use = b.querySelector('use'), span = b.querySelector('span'), text = span && span.textContent;
+        use.setAttribute('href', '#i-check'); b.classList.add('ok');
+        if (span) span.textContent = 'Скопійовано!';
+        toast(every ? 'Усі команди скопійовано' : 'Команду скопійовано');
+        setTimeout(function () {
+          use.setAttribute('href', '#i-copy'); b.classList.remove('ok');
+          if (span) span.textContent = text;
+        }, 2000);
+      });
+      return;
+    }
+    if (e.target.closest('.theme')) {
+      var light = d.documentElement.classList.toggle('light');
+      try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (er) {}
+      return;
+    }
+    var v = e.target.closest('[data-v]');
+    if (v) { copy(v.getAttribute('data-v'), function () { toast('Скопійовано: ' + v.getAttribute('data-v')); }); return; }
+    var t = e.target.closest('[data-tab]');
+    if (t) {
+      [].forEach.call(t.parentNode.children, function (x) {
+        x.classList.toggle('on', x === t);
+        x.setAttribute('aria-selected', x === t);
+        d.getElementById(x.getAttribute('data-tab')).hidden = x !== t;
+      });
+    }
+  });
+})();
+</script><!--/base-js-->
+</body>
+</html>
