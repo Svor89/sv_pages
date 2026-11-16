@@ -267,7 +267,7 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 <main class="wrap" data-groups="1,3">
 
   <section class="sec ctl">
-    <p class="lead">Заліково-екзаменаційна сесія, <b id="period"></b>, групи <b id="grps"></b>. Усі заняття — дистанційно, СУДН «Moodle».</p>
+    <p class="lead">Заліково-екзаменаційна сесія, <b id="period"></b>.</p>
     <div class="seg" role="group" aria-label="Група" id="seg"></div>
     <div class="cal" id="cal"></div>
     <div class="legend" id="legend"></div>
@@ -333,7 +333,6 @@ ol.how h3{font:600 17px/1.35 var(--display);color:var(--ink)}
 
   var first = pd(D.days[0][0]), last = pd(D.days[D.days.length - 1][0]);
   d.getElementById('period').textContent = first.getDate() + (first.getMonth() === last.getMonth() ? '' : ' ' + MON[first.getMonth()]) + '–' + last.getDate() + ' ' + MON[last.getMonth()] + ' ' + last.getFullYear();
-  d.getElementById('grps').textContent = D.groups.join(', ');
   var dayIdx = {}; D.days.forEach(function (x, i) { dayIdx[x[0]] = i; });
 
   // выбранный день: сегодня, до сессии — первый, после — последний
