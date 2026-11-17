@@ -225,8 +225,17 @@ main.wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24p
 
     <details>
       <summary><span><svg class="i"><use href="#i-terminal"/></svg>Альтернатива через PowerShell</span>
-        <div><button type="button" class="copy" data-copy="all"><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button><svg class="i chev"><use href="#i-chevron-down"/></svg></div></summary>
-      <div class="body"><pre>irm https://get.activated.win | iex</pre></div>
+        <svg class="i chev"><use href="#i-chevron-down"/></svg></summary>
+      <div class="body">
+        <div class="cmd">
+          <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Основна команда</div>
+          <div class="line"><pre>irm https://get.activated.win | iex</pre>
+            <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div></div>
+        <div class="cmd">
+          <div class="cmd-t"><svg class="i"><use href="#i-terminal"/></svg>Запасний метод (якщо основна не спрацювала)</div>
+          <div class="line"><pre>iex (curl.exe -s --doh-url https://1.1.1.1/dns-query https://get.activated.win | Out-String)</pre>
+            <button type="button" class="copy" data-copy><svg class="i"><use href="#i-copy"/></svg><span>Скопіювати</span></button></div></div>
+      </div>
     </details>
 
     <div class="term">
